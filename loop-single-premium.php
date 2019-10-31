@@ -37,7 +37,7 @@
                     <div class="listing-attributes">
                         <span class="category"><?php echo osc_premium_category() ; ?></span> -
                         <span class="location"><?php echo osc_premium_city(); ?> <?php if(osc_premium_region()!='') { ?>(<?php echo osc_premium_region(); ?>)<?php } ?></span> <span class="g-hide">-</span> <?php echo osc_format_date(osc_premium_pub_date()); ?>
-                        <?php if( osc_price_enabled_at_items() ) { ?><span class="currency-value"><?php echo osc_format_price(osc_premium_price()); ?></span><?php } ?>
+                        <?php if( osc_price_enabled_at_items() ) { ?><span class="currency-value"><?php echo osc_format_price(osc_premium_price(),osc_premium_currency_symbol()); ?></span><?php } ?>
                     </div>
                     <p><?php echo osc_highlight( osc_premium_description(), 250 ); ?></p>
                 </div>

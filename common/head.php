@@ -73,5 +73,9 @@
     bender.fancybox_next = '<?php echo osc_esc_js( __('Next image','bender')) ?>';
     bender.fancybox_closeBtn = '<?php echo osc_esc_js( __('Close','bender')) ?>';
 </script>
+<?php if(bender_default_direction()=='0') { ?>
 <link href="<?php echo osc_current_web_theme_url('css/main.css') ; ?>" rel="stylesheet" type="text/css" />
+<?php } else { ?>
+<link href="<?php echo osc_current_web_theme_url('css/main-rtl.css') ; ?>" rel="stylesheet" type="text/css" />
+<?php } ?>
 <?php osc_run_hook('header') ; ?>

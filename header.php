@@ -20,7 +20,7 @@
      */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo bender_default_direction()=='0' ? 'ltr': 'rtl'; ?>" lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
     <head>
         <?php osc_current_web_theme_path('common/head.php') ; ?>
     </head>
@@ -80,7 +80,7 @@
                 <button class="ui-button ui-button-big js-submit"><?php _e("Search", 'bender');?></button>
             </div>
         </div>
-        <div id="message-search"></div>
+        <div id="message-seach"></div>
     </form>
     <?php } ?>
 </div>

@@ -24,7 +24,7 @@
 DEFINES
 
 */
-    define('BENDER_THEME_VERSION', '315');
+    define('BENDER_THEME_VERSION', '320');
     if( (string)osc_get_preference('keyword_placeholder', 'bender')=="" ) {
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'bender') ) ;
     }
@@ -37,7 +37,11 @@ DEFINES
     osc_enqueue_script('php-date');
     if(!OC_ADMIN) {
         osc_enqueue_style('fine-uploader-css', osc_assets_url('js/fineuploader/fineuploader.css'));
-        osc_enqueue_style('bender-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader.css'));
+        if(getPreference('rtl','bender')=='0') {
+            osc_enqueue_style('bender-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader.css'));
+        } else {
+            osc_enqueue_style('bender-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader-rtl.css'));
+        }
     }
     osc_enqueue_script('jquery-fineuploader');
 
@@ -58,6 +62,7 @@ FUNCTIONS
             osc_set_preference('defaultShowAs@all', 'list', 'bender');
             osc_set_preference('defaultShowAs@search', 'list');
             osc_set_preference('defaultLocationShowAs', 'dropdown', 'bender'); // dropdown / autocomplete
+            osc_set_preference('rtl', '0', 'bender');
             osc_reset_preferences();
         }
     }
@@ -74,7 +79,7 @@ FUNCTIONS
             $temp_name     = WebThemes::newInstance()->getCurrentThemePath() . 'images/logo.jpg';
             if( file_exists( $temp_name ) && !$logo_prefence) {
 
-                $img = ImageProcessing::fromFile($temp_name);
+                $img = ImageResizer::fromFile($temp_name);
                 $ext = $img->getExt();
                 $logo_name .= '.'.$ext;
                 $img->saveToFile(osc_uploads_path().$logo_name);
@@ -87,7 +92,13 @@ FUNCTIONS
                 osc_set_preference('defaultLocationShowAs', 'dropdown', 'bender');
                 osc_set_preference('version', '313', 'bender');
             }
-            osc_set_preference('version', '315', 'bender');
+            osc_set_preference('version', '314', 'bender');
+            if($current_version<320 ) {
+                // add preferences
+                osc_set_preference('rtl', '0', 'bender');
+                osc_set_preference('version', '320', 'bender');
+            }
+            osc_set_preference('version', '320', 'bender');
             osc_reset_preferences();
         }
     }
@@ -201,6 +212,11 @@ FUNCTIONS
             return $p_sShowAs;
         }
     }
+    if( !function_exists('bender_default_direction') ){
+        function bender_default_direction(){
+            return getPreference('rtl','bender');
+        }
+    }
     if( !function_exists('bender_default_show_as') ){
         function bender_default_show_as(){
             return getPreference('defaultShowAs@all','bender');
@@ -243,7 +259,7 @@ FUNCTIONS
                     $_name      = osc_category_name();
                     $_total_items = osc_category_total_items();
                     if ( osc_count_subcategories() > 0 ) { ?>
-                    <span class="collapse resp-toggle"><i class="fa fa-caret-right fa-lg"></i></span>
+                    <span class="collapse resp-toogle"><i class="fa fa-caret-right fa-lg"></i></span>
                     <?php } ?>
                     <?php if($_total_items > 0) { ?>
                     <a class="category <?php echo $_slug; ?>" href="<?php echo $_url; ?>"><?php echo $_name ; ?></a> <span>(<?php echo $_total_items ; ?>)</span>
@@ -515,13 +531,15 @@ FUNCTIONS
                 osc_set_preference('search-results-top-728x90',     trim(Params::getParam('search-results-top-728x90', false, false, false)),          'bender');
                 osc_set_preference('search-results-middle-728x90',  trim(Params::getParam('search-results-middle-728x90', false, false, false)),       'bender');
 
+                osc_set_preference('rtl', (Params::getParam('rtl') ? '1' : '0'), 'bender');
+
                 osc_add_flash_ok_message(__('Theme settings updated correctly', 'bender'), 'admin');
                 osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/bender/admin/settings.php'));
             break;
             case('upload_logo'):
                 $package = Params::getFiles('logo');
                 if( $package['error'] == UPLOAD_ERR_OK ) {
-                    $img = ImageProcessing::fromFile($package['tmp_name']);
+                    $img = ImageResizer::fromFile($package['tmp_name']);
                     $ext = $img->getExt();
                     $logo_name     = 'bender_logo';
                     $logo_name    .= '.'.$ext;
@@ -747,5 +765,4 @@ if (!function_exists('search_ads_listing_medium_fn')) {
     }
 }
 osc_add_hook('search_ads_listing_medium', 'search_ads_listing_medium_fn');
-
 ?>

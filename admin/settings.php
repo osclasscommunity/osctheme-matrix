@@ -73,6 +73,20 @@
         </div>
     </fieldset>
 
+    <h2 class="render-title"><?php _e('Right-To-Left (RTL)', 'bender'); ?></h2>
+    <fieldset>
+        <div class="form-horizontal">
+            <div class="form-row">
+                <div class="form-label"><?php _e('Enable Right-To-Left', 'bender'); ?></div>
+                <div class="form-controls">
+                    <div class="form-label-checkbox">
+                        <label><input type="checkbox" <?php echo ( (osc_get_preference('rtl', 'bender') != '0') ? 'checked="checked"' : ''); ?> name="rtl" value="1" /> <?php _e('enable/disable', 'bender'); ?></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
     <h2 class="render-title"><?php _e('Location input', 'bender'); ?></h2>
     <fieldset>
         <div class="form-horizontal">

@@ -116,15 +116,10 @@
                             </div>
                             <?php
                             } else {
-                                $aRegions = array();
-                                $_countryCode = '';
                                 $aCountries = osc_get_countries();
-                                if(count($aCountries)>0) {
-                                    $_countryCode = $aCountries[0]['pk_c_code'];
-                                    $aRegions = osc_get_regions($_countryCode);
-                                }
+                                $aRegions = osc_get_regions($aCountries[0]['pk_c_code']);
                                 ?>
-                            <input type="hidden" id="countryId" name="countryId" value="<?php echo osc_esc_html($_countryCode); ?>"/>
+                            <input type="hidden" id="countryId" name="countryId" value="<?php echo osc_esc_html($aCountries[0]['pk_c_code']); ?>"/>
                             <div class="control-group">
                                 <label class="control-label" for="region"><?php _e('Region', 'bender'); ?></label>
                                 <div class="controls">
@@ -228,11 +223,6 @@
             $('#price').bind('show-price', function(){
                 $('.control-group-price').show();
             });
-
-            <?php if ($edit && !osc_item_category_price_enabled(osc_item_category_id())) { ?>
-                $('#price').trigger('hide-price');
-            <?php } ?>
-
 
     <?php if(osc_locale_thousands_sep()!='' || osc_locale_dec_point() != '') { ?>
     $().ready(function(){

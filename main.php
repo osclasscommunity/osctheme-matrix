@@ -61,7 +61,7 @@
 </div>
 </div><!-- main -->
 <div id="sidebar">
-    <?php if( osc_get_preference('sidebar-300x250', 'bender') != '') {?>
+    <?php if( osc_get_preference('sidebar-300x250', 'bender') != '') { ?>
     <!-- sidebar ad 350x250 -->
     <div class="ads_300">
         <?php echo osc_get_preference('sidebar-300x250', 'bender'); ?>
