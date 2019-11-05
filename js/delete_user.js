@@ -8,13 +8,13 @@ $(document).ready(function(){
         modal: true,
         buttons: [
             {
-                text: bender.langs.delete,
+                text: matrix.langs.delete,
                 click: function() {
-                    window.location = bender.base_url + '?page=user&action=delete&id=' + bender.user.id  + '&secret=' + bender.user.secret;
+                    window.location = matrix.base_url + '?page=user&action=delete&id=' + matrix.user.id  + '&secret=' + matrix.user.secret;
                 }
             },
             {
-                text: bender.langs.cancel,
+                text: matrix.langs.cancel,
                 click: function() {
                     $(this).dialog("close");
                 }

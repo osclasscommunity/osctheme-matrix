@@ -1,36 +1,14 @@
 <?php
-    /*
-     *      Osclass – software for creating and publishing online classified
-     *                           advertising platforms
-     *
-     *                        Copyright (C) 2014 OSCLASS
-     *
-     *       This program is free software: you can redistribute it and/or
-     *     modify it under the terms of the GNU Affero General Public License
-     *     as published by the Free Software Foundation, either version 3 of
-     *            the License, or (at your option) any later version.
-     *
-     *     This program is distributed in the hope that it will be useful, but
-     *         WITHOUT ANY WARRANTY; without even the implied warranty of
-     *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *             GNU Affero General Public License for more details.
-     *
-     *      You should have received a copy of the GNU Affero General Public
-     * License along with this program.  If not, see <http://www.gnu.org/licenses/>.
-     */
-?>
+$js_lang = array(
+    'delete' => __('Delete', 'matrix'),
+    'cancel' => __('Cancel', 'matrix')
+);
 
-<?php
-    $js_lang = array(
-        'delete' => __('Delete', 'bender'),
-        'cancel' => __('Cancel', 'bender')
-    );
-
-    osc_enqueue_script('jquery');
-    osc_enqueue_script('jquery-ui');
-    osc_register_script('global-theme-js', osc_current_web_theme_js_url('global.js'), 'jquery');
-    osc_register_script('delete-user-js', osc_current_web_theme_js_url('delete_user.js'), 'jquery-ui');
-    osc_enqueue_script('global-theme-js');
+osc_enqueue_script('jquery');
+osc_enqueue_script('jquery-ui');
+osc_register_script('global-theme-js', osc_current_web_theme_js_url('global.js'), 'jquery');
+osc_register_script('delete-user-js', osc_current_web_theme_js_url('delete_user.js'), 'jquery-ui');
+osc_enqueue_script('global-theme-js');
 ?>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
@@ -66,14 +44,14 @@
 <link href="<?php echo osc_current_web_theme_url('js/jquery-ui/jquery-ui-1.10.2.custom.min.css') ; ?>" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-    var bender = window.bender || {};
-    bender.base_url = '<?php echo osc_base_url(true); ?>';
-    bender.langs = <?php echo json_encode($js_lang); ?>;
-    bender.fancybox_prev = '<?php echo osc_esc_js( __('Previous image','bender')) ?>';
-    bender.fancybox_next = '<?php echo osc_esc_js( __('Next image','bender')) ?>';
-    bender.fancybox_closeBtn = '<?php echo osc_esc_js( __('Close','bender')) ?>';
+    var matrix = window.matrix || {};
+    matrix.base_url = '<?php echo osc_base_url(true); ?>';
+    matrix.langs = <?php echo json_encode($js_lang); ?>;
+    matrix.fancybox_prev = '<?php echo osc_esc_js( __('Previous image','matrix')) ?>';
+    matrix.fancybox_next = '<?php echo osc_esc_js( __('Next image','matrix')) ?>';
+    matrix.fancybox_closeBtn = '<?php echo osc_esc_js( __('Close','matrix')) ?>';
 </script>
-<?php if(bender_default_direction()=='0') { ?>
+<?php if(mtx_default_direction()=='0') { ?>
 <link href="<?php echo osc_current_web_theme_url('css/main.css') ; ?>" rel="stylesheet" type="text/css" />
 <?php } else { ?>
 <link href="<?php echo osc_current_web_theme_url('css/main-rtl.css') ; ?>" rel="stylesheet" type="text/css" />

@@ -1,46 +1,26 @@
 <?php
-    /*
-     *      Osclass – software for creating and publishing online classified
-     *                           advertising platforms
-     *
-     *                        Copyright (C) 2014 OSCLASS
-     *
-     *       This program is free software: you can redistribute it and/or
-     *     modify it under the terms of the GNU Affero General Public License
-     *     as published by the Free Software Foundation, either version 3 of
-     *            the License, or (at your option) any later version.
-     *
-     *     This program is distributed in the hope that it will be useful, but
-     *         WITHOUT ANY WARRANTY; without even the implied warranty of
-     *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *             GNU Affero General Public License for more details.
-     *
-     *      You should have received a copy of the GNU Affero General Public
-     * License along with this program.  If not, see <http://www.gnu.org/licenses/>.
-     */
+osc_add_hook('header', 'mtx_nofollow_construct');
+mtx_add_body_class('user user-items');
 
-    // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+osc_add_hook('before-main', function() {
+    osc_current_web_theme_path('user-sidebar.php');
+});
 
-    bender_add_body_class('user user-items');
-    osc_add_hook('before-main','sidebar');
-    function sidebar(){
-        osc_current_web_theme_path('user-sidebar.php');
-    }
-    osc_current_web_theme_path('header.php') ;
 
-    $listClass = '';
-    $buttonClass = '';
-    if(Params::getParam('ShowAs') == 'gallery'){
-        $listClass = 'listing-grid';
-        $buttonClass = 'active';
-    }
+osc_current_web_theme_path('header.php');
+
+$listClass = '';
+$buttonClass = '';
+if(Params::getParam('ShowAs') == 'gallery'){
+    $listClass = 'listing-grid';
+    $buttonClass = 'active';
+}
 ?>
 <div class="list-header">
     <?php osc_run_hook('search_ads_listing_top'); ?>
-    <h1><?php _e('My listings', 'bender'); ?></h1>
+    <h1><?php _e('My listings', 'matrix'); ?></h1>
     <?php if(osc_count_items() == 0) { ?>
-        <p class="empty" ><?php _e('No listings have been added yet', 'bender'); ?></p>
+        <p class="empty" ><?php _e('No listings have been added yet', 'matrix'); ?></p>
     <?php } else { ?>
         <div class="actions">
             <span class="doublebutton <?php echo $buttonClass; ?>">

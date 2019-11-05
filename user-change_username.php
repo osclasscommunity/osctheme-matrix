@@ -1,42 +1,20 @@
 <?php
-    /*
-     *      Osclass – software for creating and publishing online classified
-     *                           advertising platforms
-     *
-     *                        Copyright (C) 2014 OSCLASS
-     *
-     *       This program is free software: you can redistribute it and/or
-     *     modify it under the terms of the GNU Affero General Public License
-     *     as published by the Free Software Foundation, either version 3 of
-     *            the License, or (at your option) any later version.
-     *
-     *     This program is distributed in the hope that it will be useful, but
-     *         WITHOUT ANY WARRANTY; without even the implied warranty of
-     *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *             GNU Affero General Public License for more details.
-     *
-     *      You should have received a copy of the GNU Affero General Public
-     * License along with this program.  If not, see <http://www.gnu.org/licenses/>.
-     */
+osc_add_hook('header', 'mtx_nofollow_construct');
+mtx_add_body_class('user user-profile');
+osc_enqueue_script('jquery-validate');
 
-    // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+osc_add_hook('before-main', function() {
+    osc_current_web_theme_path('user-sidebar.php');
+});
 
-    osc_enqueue_script('jquery-validate');
+osc_add_filter('meta_title_filter', function($data) {
+    return __('Change username', 'matrix');;
+});
 
-    bender_add_body_class('user user-profile');
-    osc_add_hook('before-main','sidebar');
-    function sidebar(){
-        osc_current_web_theme_path('user-sidebar.php');
-    }
-    osc_add_filter('meta_title_filter','custom_meta_title');
-    function custom_meta_title($data){
-        return __('Change username', 'bender');;
-    }
-    osc_current_web_theme_path('header.php') ;
-    $osc_user = osc_user();
+osc_current_web_theme_path('header.php');
+$osc_user = osc_user();
 ?>
-<h1><?php _e('Change username', 'bender'); ?></h1>
+<h1><?php _e('Change username', 'matrix'); ?></h1>
 <script type="text/javascript">
 $(document).ready(function() {
     $('form#change-username').validate({
@@ -47,7 +25,7 @@ $(document).ready(function() {
         },
         messages: {
             s_username: {
-                required: '<?php echo osc_esc_js(__("Username: this field is required", "bender")); ?>.'
+                required: '<?php echo osc_esc_js(__("Username: this field is required", "matrix")); ?>.'
             }
         },
         errorLabelContainer: "#error_list",
@@ -72,9 +50,9 @@ $(document).ready(function() {
                     function(data){
                         clearInterval(cInterval);
                         if(data.exists==0) {
-                            $("#available").text('<?php echo osc_esc_js(__("The username is available", "bender")); ?>');
+                            $("#available").text('<?php echo osc_esc_js(__("The username is available", "matrix")); ?>');
                         } else {
-                            $("#available").text('<?php echo osc_esc_js(__("The username is NOT available", "bender")); ?>');
+                            $("#available").text('<?php echo osc_esc_js(__("The username is NOT available", "matrix")); ?>');
                         }
                     }
                 );
@@ -91,7 +69,7 @@ $(document).ready(function() {
             <input type="hidden" name="page" value="user" />
             <input type="hidden" name="action" value="change_username_post" />
             <div class="control-group">
-                <label class="control-label" for="s_username"><?php _e('Username', 'bender'); ?></label>
+                <label class="control-label" for="s_username"><?php _e('Username', 'matrix'); ?></label>
                 <div class="controls">
                     <input type="text" name="s_username" id="s_username" value="" />
                     <div id="available"></div>
@@ -99,7 +77,7 @@ $(document).ready(function() {
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'matrix');?></button>
                 </div>
             </div>
         </form>

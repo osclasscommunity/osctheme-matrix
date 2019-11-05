@@ -1,8 +1,8 @@
-bender.extend = function(el, opt) {
+matrix.extend = function(el, opt) {
         for (var name in opt) el[name] = opt[name];
         return el;
 }
-bender.responsive = function(options) {
+matrix.responsive = function(options) {
     defaults = {'selector':'#responsive-trigger'};
     options = $.extend(defaults, options);
     if($(options.selector).is(':visible')){
@@ -10,7 +10,7 @@ bender.responsive = function(options) {
     }
     return false;
 }
-bender.toggleClass = function(element,destination,isObject) {
+matrix.toggleClass = function(element,destination,isObject) {
     var $selector = $('['+element+']');
     $selector.click(function (event) {
         var thatClass  = $(this).attr(element);
@@ -25,22 +25,22 @@ bender.toggleClass = function(element,destination,isObject) {
         return;
     });
 }
-bender.photoUploader = function(selector,options) {
+matrix.photoUploader = function(selector,options) {
     defaults = {'max':4};
     options = $.extend(defaults, options);
-    bender.photoUploaderActions($(selector),options);
+    matrix.photoUploaderActions($(selector),options);
 }
-bender.addPhotoUploader = function(max) {
+matrix.addPhotoUploader = function(max) {
     if(max < $('input[name="'+$(this).attr('name')+'"]').length+$('.photos_div').length){
         var $image = $('<input type="file" name="photos[]">');
-            bender.photoUploaderActions(image);
+            matrix.photoUploaderActions(image);
         $('#post-photos').append($image);
     }
 }
-bender.removePhotoUploader = function() {
+matrix.removePhotoUploader = function() {
     //removeAndAdd
 },
-bender.photoUploaderActions = function($element,options) {
+matrix.photoUploaderActions = function($element,options) {
     $element.on('change',function(){
         var input  = $(this)[0];
         $(this).next('img').remove();
@@ -103,7 +103,7 @@ function selectUi(thatSelect){
 $(document).ready(function(event){
     //OK
     $('.r-list h1 span').click(function(){
-        if(bender.responsive()){
+        if(matrix.responsive()){
             var $parent     = $(this).parent().parent();
             if($parent.hasClass('active')){
                 $parent.removeClass('active');
@@ -123,7 +123,7 @@ $(document).ready(function(event){
         $(this).removeClass('hover');
     })
     //OK
-    bender.toggleClass('data-bclass-toggle','body',true);
+    matrix.toggleClass('data-bclass-toggle','body',true);
     //OK
     /*$('.doublebutton a').click(function (event) {
         var thisParent = $(this).parent();
@@ -204,9 +204,9 @@ $(document).ready(function(event){
                 }
             },
             tpl: {
-                prev: '<a title="'+bender.fancybox_prev+'" class="fancybox-nav fancybox-prev"><span></span></a>',
-                next: '<a title="'+bender.fancybox_next+'" class="fancybox-nav fancybox-next"><span></span></a>',
-                closeBtn : '<a title="'+bender.fancybox_closeBtn+'" class="fancybox-item fancybox-close" href="javascript:;"></a>'
+                prev: '<a title="'+matrix.fancybox_prev+'" class="fancybox-nav fancybox-prev"><span></span></a>',
+                next: '<a title="'+matrix.fancybox_next+'" class="fancybox-nav fancybox-next"><span></span></a>',
+                closeBtn : '<a title="'+matrix.fancybox_closeBtn+'" class="fancybox-item fancybox-close" href="javascript:;"></a>'
             }
         });
 
