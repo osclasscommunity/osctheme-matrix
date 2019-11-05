@@ -26,9 +26,7 @@ $> grunt watch:matrix
 ## Build
 
 ```
-$> grunt dist
+$> grunt dist:matrix
 ```
 
-It generates a `.zip` file per color scheme: blue (default), red, black and purple. The `index.php` and `colors.scss` are generated from the variables in `themes.json`. The screenshots are taken from `screenshot/{color scheme}/screenshot.png`.
-
-![Bender](http://pool.theinfosphere.org/images/1/14/Bender_promo_2.jpg)
+Generates a `.zip` file that you can import in Osclass.
