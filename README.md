@@ -17,7 +17,7 @@ $> npm install
 
 ## Watch changes
 
-You can compile Sass files automatically every time it's changed by executing the following command:
+You can compile Sass files automatically every time they're changed by executing the following command:
 
 ```
 $> grunt watch:matrix
@@ -29,4 +29,4 @@ $> grunt watch:matrix
 $> grunt dist:matrix
 ```
 
-Generates a `.zip` file that you can import in Osclass.
+Generate a `.zip` file that you can import in Osclass.
