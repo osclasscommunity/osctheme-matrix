@@ -1,56 +1,33 @@
 <?php
-    /*
-     *      Osclass – software for creating and publishing online classified
-     *                           advertising platforms
-     *
-     *                        Copyright (C) 2014 OSCLASS
-     *
-     *       This program is free software: you can redistribute it and/or
-     *     modify it under the terms of the GNU Affero General Public License
-     *     as published by the Free Software Foundation, either version 3 of
-     *            the License, or (at your option) any later version.
-     *
-     *     This program is distributed in the hope that it will be useful, but
-     *         WITHOUT ANY WARRANTY; without even the implied warranty of
-     *        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-     *             GNU Affero General Public License for more details.
-     *
-     *      You should have received a copy of the GNU Affero General Public
-     * License along with this program.  If not, see <http://www.gnu.org/licenses/>.
-     */
+if( osc_item_is_spam() || osc_premium_is_spam() ) {
+    osc_add_hook('header', 'mtx_nofollow_construct');
+} else {
+    osc_add_hook('header', 'mtx_follow_construct');
+}
+osc_enqueue_script('fancybox');
+osc_enqueue_style('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.css'));
+osc_enqueue_script('jquery-validate');
+mtx_add_body_class('item');
 
-    // meta tag robots
-    if( osc_item_is_spam() || osc_premium_is_spam() ) {
-        osc_add_hook('header','mtx_nofollow_construct');
-    } else {
-        osc_add_hook('header','mtx_follow_construct');
-    }
+osc_add_hook('after-main', function() {
+    osc_current_web_theme_path('item-sidebar.php');
+});
 
-    osc_enqueue_script('fancybox');
-    osc_enqueue_style('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.css'));
-    osc_enqueue_script('jquery-validate');
+$location = array();
+if( osc_item_city_area() !== '' ) {
+    $location[] = osc_item_city_area();
+}
+if( osc_item_city() !== '' ) {
+    $location[] = osc_item_city();
+}
+if( osc_item_region() !== '' ) {
+    $location[] = osc_item_region();
+}
+if( osc_item_country() !== '' ) {
+    $location[] = osc_item_country();
+}
 
-    mtx_add_body_class('item');
-    osc_add_hook('after-main','sidebar');
-    function sidebar(){
-        osc_current_web_theme_path('item-sidebar.php');
-    }
-
-    $location = array();
-    if( osc_item_city_area() !== '' ) {
-        $location[] = osc_item_city_area();
-    }
-    if( osc_item_city() !== '' ) {
-        $location[] = osc_item_city();
-    }
-    if( osc_item_region() !== '' ) {
-        $location[] = osc_item_region();
-    }
-    if( osc_item_country() !== '' ) {
-        $location[] = osc_item_country();
-    }
-
-    osc_current_web_theme_path('header.php');
+osc_current_web_theme_path('header.php');
 ?>
 <div id="item-content">
         <h1><?php if( osc_price_enabled_at_items() ) { ?><span class="price"><?php echo osc_item_formated_price(); ?></span> <?php } ?><strong><?php echo osc_item_title() . ' ' . osc_item_city(); ?></strong></h1>

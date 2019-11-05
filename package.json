@@ -1,8 +1,8 @@
 {
-  "name": "bender",
-  "version": "3.1.5",
-  "description": "Bender theme",
-  "author": "Osclass",
+  "name": "matrix",
+  "version": "1.0.0",
+  "description": "Matrix - modern open source theme for Osclass",
+  "author": "Osclass Community",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.4.1",
