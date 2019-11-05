@@ -12,7 +12,7 @@ Theme update URI: matrix
 
 function mtx_theme_info() {
     return array(
-        'name'        => 'matrix',
+        'name'        => 'Matrix',
         'version'     => '1.0.0',
         'description' => 'Matrix - modern open source theme for Osclass',
         'author_name' => 'Osclass Community',
