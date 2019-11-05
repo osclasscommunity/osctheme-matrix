@@ -98,7 +98,7 @@ module.exports = function(grunt) {
             overwrite: true,
             replacements: [
                 {
-                    from: 'bender',
+                    from: 'matrix',
                     to: theme.slug
                 },
                 {

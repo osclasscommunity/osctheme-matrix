@@ -20,9 +20,9 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header','mtx_nofollow_construct');
 
-    bender_add_body_class('user user-items');
+    mtx_add_body_class('user user-items');
     osc_add_hook('before-main','sidebar');
     function sidebar(){
         osc_current_web_theme_path('user-sidebar.php');
@@ -38,9 +38,9 @@
 ?>
 <div class="list-header">
     <?php osc_run_hook('search_ads_listing_top'); ?>
-    <h1><?php _e('My listings', 'bender'); ?></h1>
+    <h1><?php _e('My listings', 'matrix'); ?></h1>
     <?php if(osc_count_items() == 0) { ?>
-        <p class="empty" ><?php _e('No listings have been added yet', 'bender'); ?></p>
+        <p class="empty" ><?php _e('No listings have been added yet', 'matrix'); ?></p>
     <?php } else { ?>
         <div class="actions">
             <span class="doublebutton <?php echo $buttonClass; ?>">

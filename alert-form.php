@@ -24,9 +24,9 @@ $(document).ready(function(){
     $(".sub_button").click(function(){
         $.post('<?php echo osc_base_url(true); ?>', {email:$("#alert_email").val(), userid:$("#alert_userId").val(), alert:$("#alert").val(), page:"ajax", action:"alerts"},
             function(data){
-                if(data==1) { alert('<?php echo osc_esc_js(__('You have sucessfully subscribed to the alert', 'bender')); ?>'); }
-                else if(data==-1) { alert('<?php echo osc_esc_js(__('Invalid email address', 'bender')); ?>'); }
-                else { alert('<?php echo osc_esc_js(__('There was a problem with the alert', 'bender')); ?>');
+                if(data==1) { alert('<?php echo osc_esc_js(__('You have sucessfully subscribed to the alert', 'matrix')); ?>'); }
+                else if(data==-1) { alert('<?php echo osc_esc_js(__('Invalid email address', 'matrix')); ?>'); }
+                else { alert('<?php echo osc_esc_js(__('There was a problem with the alert', 'matrix')); ?>');
                 };
         });
         return false;
@@ -58,11 +58,11 @@ $(document).ready(function(){
 <div class="alert_form">
     <?php if(function_exists('osc_search_alert_subscribed') && osc_search_alert_subscribed()) { ?>
         <h3>
-            <strong><?php _e('Already subscribed to this search', 'bender'); ?></strong>
+            <strong><?php _e('Already subscribed to this search', 'matrix'); ?></strong>
         </h3>
     <?php } else { ?>
         <h3>
-            <strong><?php _e('Subscribe to this search', 'bender'); ?></strong>
+            <strong><?php _e('Subscribe to this search', 'matrix'); ?></strong>
         </h3>
         <form action="<?php echo osc_base_url(true); ?>" method="post" name="sub_alert" id="sub_alert" class="nocsrf">
                 <?php AlertForm::page_hidden(); ?>
@@ -77,7 +77,7 @@ $(document).ready(function(){
                     <?php AlertForm::email_text(); ?>
 
                 <?php }; ?>
-                <button type="submit" class="sub_button" ><?php _e('Subscribe now', 'bender'); ?>!</button>
+                <button type="submit" class="sub_button" ><?php _e('Subscribe now', 'matrix'); ?>!</button>
         </form>
     <?php } ?>
 </div>

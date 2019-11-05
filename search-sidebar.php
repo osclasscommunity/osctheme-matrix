@@ -35,13 +35,13 @@
         <input type="hidden" name="sUser[]" value="<?php echo $userId; ?>"/>
         <?php } ?>
         <fieldset class="first">
-            <h3><?php _e('Your search', 'bender'); ?></h3>
+            <h3><?php _e('Your search', 'matrix'); ?></h3>
             <div class="row">
                 <input class="input-text" type="text" name="sPattern"  id="query" value="<?php echo osc_esc_html(osc_search_pattern()); ?>" />
             </div>
         </fieldset>
         <fieldset>
-            <h3><?php _e('City', 'bender'); ?></h3>
+            <h3><?php _e('City', 'matrix'); ?></h3>
             <div class="row">
                 <input class="input-text" type="hidden" id="sRegion" name="sRegion" value="<?php echo osc_esc_html(Params::getParam('sRegion')); ?>" />
                 <input class="input-text" type="text" id="sCity" name="sCity" value="<?php echo osc_esc_html(osc_search_city()); ?>" />
@@ -49,20 +49,20 @@
         </fieldset>
         <?php if( osc_images_enabled_at_items() ) { ?>
         <fieldset>
-            <h3><?php _e('Show only', 'bender') ; ?></h3>
+            <h3><?php _e('Show only', 'matrix') ; ?></h3>
             <div class="row">
                 <input type="checkbox" name="bPic" id="withPicture" value="1" <?php echo (osc_search_has_pic() ? 'checked' : ''); ?> />
-                <label for="withPicture"><?php _e('listings with pictures', 'bender') ; ?></label>
+                <label for="withPicture"><?php _e('listings with pictures', 'matrix') ; ?></label>
             </div>
         </fieldset>
         <?php } ?>
         <?php if( osc_price_enabled_at_items() ) { ?>
         <fieldset>
             <div class="row price-slice">
-                <h3><?php _e('Price', 'bender') ; ?></h3>
-                <span><?php _e('Min', 'bender') ; ?>.</span>
+                <h3><?php _e('Price', 'matrix') ; ?></h3>
+                <span><?php _e('Min', 'matrix') ; ?>.</span>
                 <input class="input-text" type="text" id="priceMin" name="sPriceMin" value="<?php echo osc_esc_html(osc_search_price_min()); ?>" size="6" maxlength="6" />
-                <span><?php _e('Max', 'bender') ; ?>.</span>
+                <span><?php _e('Max', 'matrix') ; ?>.</span>
                 <input class="input-text" type="text" id="priceMax" name="sPriceMax" value="<?php echo osc_esc_html(osc_search_price_max()); ?>" size="6" maxlength="6" />
             </div>
         </fieldset>
@@ -82,13 +82,13 @@
             <input type="hidden" name="sCategory[]" value="<?php echo osc_esc_html($cat_id); ?>"/>
         <?php } ?>
         <div class="actions">
-            <button type="submit"><?php _e('Apply', 'bender') ; ?></button>
+            <button type="submit"><?php _e('Apply', 'matrix') ; ?></button>
         </div>
     </form>
     <fieldset>
         <div class="row ">
-            <h3><?php _e('Refine category', 'bender') ; ?></h3>
-            <?php bender_sidebar_category_search($category['pk_i_id']); ?>
+            <h3><?php _e('Refine category', 'matrix') ; ?></h3>
+            <?php mtx_sidebar_category_search($category['pk_i_id']); ?>
         </div>
     </fieldset>
 </div>

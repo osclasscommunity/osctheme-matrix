@@ -20,23 +20,23 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header','mtx_nofollow_construct');
 
     osc_enqueue_script('jquery-validate');
 
-    bender_add_body_class('user user-profile');
+    mtx_add_body_class('user user-profile');
     osc_add_hook('before-main','sidebar');
     function sidebar(){
         osc_current_web_theme_path('user-sidebar.php');
     }
     osc_add_filter('meta_title_filter','custom_meta_title');
     function custom_meta_title($data){
-        return __('Change username', 'bender');;
+        return __('Change username', 'matrix');;
     }
     osc_current_web_theme_path('header.php') ;
     $osc_user = osc_user();
 ?>
-<h1><?php _e('Change username', 'bender'); ?></h1>
+<h1><?php _e('Change username', 'matrix'); ?></h1>
 <script type="text/javascript">
 $(document).ready(function() {
     $('form#change-username').validate({
@@ -47,7 +47,7 @@ $(document).ready(function() {
         },
         messages: {
             s_username: {
-                required: '<?php echo osc_esc_js(__("Username: this field is required", "bender")); ?>.'
+                required: '<?php echo osc_esc_js(__("Username: this field is required", "matrix")); ?>.'
             }
         },
         errorLabelContainer: "#error_list",
@@ -72,9 +72,9 @@ $(document).ready(function() {
                     function(data){
                         clearInterval(cInterval);
                         if(data.exists==0) {
-                            $("#available").text('<?php echo osc_esc_js(__("The username is available", "bender")); ?>');
+                            $("#available").text('<?php echo osc_esc_js(__("The username is available", "matrix")); ?>');
                         } else {
-                            $("#available").text('<?php echo osc_esc_js(__("The username is NOT available", "bender")); ?>');
+                            $("#available").text('<?php echo osc_esc_js(__("The username is NOT available", "matrix")); ?>');
                         }
                     }
                 );
@@ -91,7 +91,7 @@ $(document).ready(function() {
             <input type="hidden" name="page" value="user" />
             <input type="hidden" name="action" value="change_username_post" />
             <div class="control-group">
-                <label class="control-label" for="s_username"><?php _e('Username', 'bender'); ?></label>
+                <label class="control-label" for="s_username"><?php _e('Username', 'matrix'); ?></label>
                 <div class="controls">
                     <input type="text" name="s_username" id="s_username" value="" />
                     <div id="available"></div>
@@ -99,7 +99,7 @@ $(document).ready(function() {
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'matrix');?></button>
                 </div>
             </div>
         </form>

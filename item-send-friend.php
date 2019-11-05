@@ -20,15 +20,15 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header','mtx_nofollow_construct');
 
     osc_enqueue_script('jquery-validate');
-    bender_add_body_class('contact');
+    mtx_add_body_class('contact');
     osc_current_web_theme_path('header.php');
 ?>
 <div class="form-container form-horizontal form-container-box">
     <div class="header">
-        <h1><?php _e('Send to a friend', 'bender'); ?></h1>
+        <h1><?php _e('Send to a friend', 'matrix'); ?></h1>
     </div>
     <div class="resp-wrapper">
         <ul id="error_list"></ul>
@@ -41,33 +41,33 @@
                             <input type="hidden" name="yourEmail" value="<?php echo osc_logged_user_email();?>" />
             <?php } else { ?>
             <div class="control-group">
-                <label class="control-label" for="yourName"><?php _e("Your name",'bender'); ?></label>
+                <label class="control-label" for="yourName"><?php _e("Your name",'matrix'); ?></label>
                 <div class="controls ">
                     <?php SendFriendForm::your_name(); ?>
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="yourEmail"><?php _e("Your e-mail",'bender'); ?></label>
+                <label class="control-label" for="yourEmail"><?php _e("Your e-mail",'matrix'); ?></label>
                 <div class="controls ">
                     <?php SendFriendForm::your_email(); ?>
                 </div>
             </div>
             <?php } ?>
             <div class="control-group">
-                <label class="control-label" for="friendName"><?php _e("Your friend's name",'bender'); ?></label>
+                <label class="control-label" for="friendName"><?php _e("Your friend's name",'matrix'); ?></label>
                 <div class="controls">
                     <?php SendFriendForm::friend_name(); ?>
                 </div>
             </div>
             <div class="control-group">
-                <label for="friendEmail"><?php _e("Your friend's e-mail address", 'bender'); ?></label> </label>
+                <label for="friendEmail"><?php _e("Your friend's e-mail address", 'matrix'); ?></label> </label>
                 <div class="controls">
                     <?php SendFriendForm::friend_email(); ?>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="subject">
-                    <?php _e('Subject (optional)', 'bender'); ?>
+                    <?php _e('Subject (optional)', 'matrix'); ?>
                 </label>
                 <div class="controls">
                     <?php ContactForm::the_subject(); ?>
@@ -75,7 +75,7 @@
             </div>
             <div class="control-group">
                 <label class="control-label" for="message">
-                    <?php _e('Message', 'bender'); ?></label>
+                    <?php _e('Message', 'matrix'); ?></label>
                 <div class="controls textarea">
                     <?php SendFriendForm::your_message(); ?>
                 </div>
@@ -84,7 +84,7 @@
                 <div class="controls">
                     <?php osc_run_hook('contact_form'); ?>
                     <?php osc_show_recaptcha(); ?>
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Send", 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Send", 'matrix');?></button>
                     <?php osc_run_hook('admin_contact_form'); ?>
                 </div>
             </div>

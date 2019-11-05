@@ -20,7 +20,7 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_follow_construct');
+    osc_add_hook('header','mtx_follow_construct');
 
     $address = '';
     if(osc_user_address()!='') {
@@ -47,7 +47,7 @@
 
     osc_enqueue_script('jquery-validate');
 
-    bender_add_body_class('user-public-profile');
+    mtx_add_body_class('user-public-profile');
     osc_add_hook('after-main','sidebar');
     function sidebar(){
         osc_current_web_theme_path('user-public-sidebar.php');
@@ -72,12 +72,12 @@
         </ul>
     </div>
     <?php if( osc_user_info() !== '' ) { ?>
-    <h2><?php _e('User description', 'bender'); ?></h2>
+    <h2><?php _e('User description', 'matrix'); ?></h2>
     <?php } ?>
     <?php echo nl2br(osc_user_info()); ?>
     <?php if( osc_count_items() > 0 ) { ?>
     <div class="similar_ads">
-        <h2><?php _e('Latest listings', 'bender'); ?></h2>
+        <h2><?php _e('Latest listings', 'matrix'); ?></h2>
         <?php osc_current_web_theme_path('loop.php'); ?>
         <div class="paginate"><?php echo osc_pagination_items(); ?></div>
         <div class="clear"></div>

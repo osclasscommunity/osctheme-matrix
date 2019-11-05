@@ -40,7 +40,7 @@ if(View::newInstance()->_exists('listClass')){
                 if($i%3 == 0){
                     $class = 'first';
                 }
-                bender_draw_item($class);
+                mtx_draw_item($class);
                 $i++;
             }
         } elseif($type == 'premiums'){
@@ -49,7 +49,7 @@ if(View::newInstance()->_exists('listClass')){
                 if($i%3 == 0){
                     $class = 'first';
                 }
-                bender_draw_item($class,false,true);
+                mtx_draw_item($class,false,true);
                 $i++;
                 if($i == 3){
                     break;
@@ -68,13 +68,13 @@ if(View::newInstance()->_exists('listClass')){
                     $admin = true;
                 }
 
-                bender_draw_item($class,$admin);
+                mtx_draw_item($class,$admin);
 
-                if(bender_show_as()=='gallery') {
+                if(mtx_show_as()=='gallery') {
                     if($i%8 == 0){
                         osc_run_hook('search_ads_listing_medium');
                     }
-                } else if(bender_show_as()=='list') {
+                } else if(mtx_show_as()=='list') {
                     if($i%6 == 0){
                         osc_run_hook('search_ads_listing_medium');
                     }

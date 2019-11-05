@@ -20,9 +20,9 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header','mtx_nofollow_construct');
 
-    bender_add_body_class('user user-custom');
+    mtx_add_body_class('user user-custom');
     osc_add_hook('before-main','sidebar');
     function sidebar(){
         osc_current_web_theme_path('user-sidebar.php');

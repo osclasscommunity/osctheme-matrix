@@ -25,8 +25,8 @@ DEFINES
 
 */
     define('BENDER_THEME_VERSION', '320');
-    if( (string)osc_get_preference('keyword_placeholder', 'bender')=="" ) {
-        Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'bender') ) ;
+    if( (string)osc_get_preference('keyword_placeholder', 'matrix')=="" ) {
+        Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'matrix') ) ;
     }
     osc_register_script('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));
     osc_enqueue_style('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.css'));
@@ -37,10 +37,10 @@ DEFINES
     osc_enqueue_script('php-date');
     if(!OC_ADMIN) {
         osc_enqueue_style('fine-uploader-css', osc_assets_url('js/fineuploader/fineuploader.css'));
-        if(getPreference('rtl','bender')=='0') {
-            osc_enqueue_style('bender-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader.css'));
+        if(getPreference('rtl','matrix')=='0') {
+            osc_enqueue_style('matrix-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader.css'));
         } else {
-            osc_enqueue_style('bender-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader-rtl.css'));
+            osc_enqueue_style('matrix-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader-rtl.css'));
         }
     }
     osc_enqueue_script('jquery-fineuploader');
@@ -53,29 +53,29 @@ FUNCTIONS
 */
 
     // install options
-    if( !function_exists('bender_theme_install') ) {
-        function bender_theme_install() {
-            osc_set_preference('keyword_placeholder', Params::getParam('keyword_placeholder'), 'bender');
-            osc_set_preference('version', BENDER_THEME_VERSION, 'bender');
-            osc_set_preference('footer_link', '1', 'bender');
-            osc_set_preference('donation', '0', 'bender');
-            osc_set_preference('defaultShowAs@all', 'list', 'bender');
+    if( !function_exists('mtx_theme_install') ) {
+        function mtx_theme_install() {
+            osc_set_preference('keyword_placeholder', Params::getParam('keyword_placeholder'), 'matrix');
+            osc_set_preference('version', BENDER_THEME_VERSION, 'matrix');
+            osc_set_preference('footer_link', '1', 'matrix');
+            osc_set_preference('donation', '0', 'matrix');
+            osc_set_preference('defaultShowAs@all', 'list', 'matrix');
             osc_set_preference('defaultShowAs@search', 'list');
-            osc_set_preference('defaultLocationShowAs', 'dropdown', 'bender'); // dropdown / autocomplete
-            osc_set_preference('rtl', '0', 'bender');
+            osc_set_preference('defaultLocationShowAs', 'dropdown', 'matrix'); // dropdown / autocomplete
+            osc_set_preference('rtl', '0', 'matrix');
             osc_reset_preferences();
         }
     }
     // update options
-    if( !function_exists('bender_theme_update') ) {
-        function bender_theme_update($current_version) {
+    if( !function_exists('mtx_theme_update') ) {
+        function mtx_theme_update($current_version) {
             if($current_version==0) {
-                bender_theme_install();
+                mtx_theme_install();
             }
-            osc_delete_preference('default_logo', 'bender');
+            osc_delete_preference('default_logo', 'matrix');
 
-            $logo_prefence = osc_get_preference('logo', 'bender');
-            $logo_name     = 'bender_logo';
+            $logo_prefence = osc_get_preference('logo', 'matrix');
+            $logo_name     = 'mtx_logo';
             $temp_name     = WebThemes::newInstance()->getCurrentThemePath() . 'images/logo.jpg';
             if( file_exists( $temp_name ) && !$logo_prefence) {
 
@@ -83,54 +83,54 @@ FUNCTIONS
                 $ext = $img->getExt();
                 $logo_name .= '.'.$ext;
                 $img->saveToFile(osc_uploads_path().$logo_name);
-                osc_set_preference('logo', $logo_name, 'bender');
+                osc_set_preference('logo', $logo_name, 'matrix');
             }
-            osc_set_preference('version', '301', 'bender');
+            osc_set_preference('version', '301', 'matrix');
 
             if($current_version<313 || $current_version=='3.0.1') {
                 // add preferences
-                osc_set_preference('defaultLocationShowAs', 'dropdown', 'bender');
-                osc_set_preference('version', '313', 'bender');
+                osc_set_preference('defaultLocationShowAs', 'dropdown', 'matrix');
+                osc_set_preference('version', '313', 'matrix');
             }
-            osc_set_preference('version', '314', 'bender');
+            osc_set_preference('version', '314', 'matrix');
             if($current_version<320 ) {
                 // add preferences
-                osc_set_preference('rtl', '0', 'bender');
-                osc_set_preference('version', '320', 'bender');
+                osc_set_preference('rtl', '0', 'matrix');
+                osc_set_preference('version', '320', 'matrix');
             }
-            osc_set_preference('version', '320', 'bender');
+            osc_set_preference('version', '320', 'matrix');
             osc_reset_preferences();
         }
     }
-    if(!function_exists('check_install_bender_theme')) {
-        function check_install_bender_theme() {
-            $current_version = osc_get_preference('version', 'bender');
+    if(!function_exists('check_install_mtx_theme')) {
+        function check_install_mtx_theme() {
+            $current_version = osc_get_preference('version', 'matrix');
             //check if current version is installed or need an update<
             if( $current_version=='' ) {
-                bender_theme_update(0);
+                mtx_theme_update(0);
             } else if($current_version < BENDER_THEME_VERSION){
-                bender_theme_update($current_version);
+                mtx_theme_update($current_version);
             }
         }
     }
 
-    if(!function_exists('bender_add_body_class_construct')) {
-        function bender_add_body_class_construct($classes){
-            $benderBodyClass = benderBodyClass::newInstance();
-            $classes = array_merge($classes, $benderBodyClass->get());
+    if(!function_exists('mtx_add_body_class_construct')) {
+        function mtx_add_body_class_construct($classes){
+            $matrixBodyClass = matrixBodyClass::newInstance();
+            $classes = array_merge($classes, $matrixBodyClass->get());
             return $classes;
         }
     }
-    if(!function_exists('bender_body_class')) {
-        function bender_body_class($echo = true){
+    if(!function_exists('mtx_body_class')) {
+        function mtx_body_class($echo = true){
             /**
             * Print body classes.
             *
             * @param string $echo Optional parameter.
             * @return print string with all body classes concatenated
             */
-            osc_add_filter('bender_bodyClass','bender_add_body_class_construct');
-            $classes = osc_apply_filter('bender_bodyClass', array());
+            osc_add_filter('mtx_bodyClass','mtx_add_body_class_construct');
+            $classes = osc_apply_filter('mtx_bodyClass', array());
             if($echo && count($classes)){
                 echo 'class="'.implode(' ',$classes).'"';
             } else {
@@ -138,32 +138,32 @@ FUNCTIONS
             }
         }
     }
-    if(!function_exists('bender_add_body_class')) {
-        function bender_add_body_class($class){
+    if(!function_exists('mtx_add_body_class')) {
+        function mtx_add_body_class($class){
             /**
             * Add new body class to body class array.
             *
             * @param string $class required parameter.
             */
-            $benderBodyClass = benderBodyClass::newInstance();
-            $benderBodyClass->add($class);
+            $matrixBodyClass = matrixBodyClass::newInstance();
+            $matrixBodyClass->add($class);
         }
     }
-    if(!function_exists('bender_nofollow_construct')) {
+    if(!function_exists('mtx_nofollow_construct')) {
         /**
         * Hook for header, meta tags robots nofollos
         */
-        function bender_nofollow_construct() {
+        function mtx_nofollow_construct() {
             echo '<meta name="robots" content="noindex, nofollow, noarchive" />' . PHP_EOL;
             echo '<meta name="googlebot" content="noindex, nofollow, noarchive" />' . PHP_EOL;
 
         }
     }
-    if( !function_exists('bender_follow_construct') ) {
+    if( !function_exists('mtx_follow_construct') ) {
         /**
         * Hook for header, meta tags robots follow
         */
-        function bender_follow_construct() {
+        function mtx_follow_construct() {
             echo '<meta name="robots" content="index, follow" />' . PHP_EOL;
             echo '<meta name="googlebot" content="index, follow" />' . PHP_EOL;
 
@@ -172,8 +172,8 @@ FUNCTIONS
     /* logo */
     if( !function_exists('logo_header') ) {
         function logo_header() {
-             $logo = osc_get_preference('logo','bender');
-             $html = '<a href="'.osc_base_url().'"><img border="0" alt="' . osc_page_title() . '" src="' . bender_logo_url() . '"></a>';
+             $logo = osc_get_preference('logo','matrix');
+             $html = '<a href="'.osc_base_url().'"><img border="0" alt="' . osc_page_title() . '" src="' . mtx_logo_url() . '"></a>';
              if( $logo!='' && file_exists( osc_uploads_path() . $logo ) ) {
                 return $html;
              } else {
@@ -182,17 +182,17 @@ FUNCTIONS
         }
     }
     /* logo */
-    if( !function_exists('bender_logo_url') ) {
-        function bender_logo_url() {
-            $logo = osc_get_preference('logo','bender');
+    if( !function_exists('mtx_logo_url') ) {
+        function mtx_logo_url() {
+            $logo = osc_get_preference('logo','matrix');
             if( $logo ) {
                 return osc_uploads_url($logo);
             }
             return false;
         }
     }
-    if( !function_exists('bender_draw_item') ) {
-        function bender_draw_item($class = false,$admin = false, $premium = false) {
+    if( !function_exists('mtx_draw_item') ) {
+        function mtx_draw_item($class = false,$admin = false, $premium = false) {
             $filename = 'loop-single';
             if($premium){
                 $filename .='-premium';
@@ -200,35 +200,35 @@ FUNCTIONS
             require WebThemes::newInstance()->getCurrentThemePath().$filename.'.php';
         }
     }
-    if( !function_exists('bender_show_as') ){
-        function bender_show_as(){
+    if( !function_exists('mtx_show_as') ){
+        function mtx_show_as(){
 
             $p_sShowAs    = Params::getParam('sShowAs');
             $aValidShowAsValues = array('list', 'gallery');
             if (!in_array($p_sShowAs, $aValidShowAsValues)) {
-                $p_sShowAs = bender_default_show_as();
+                $p_sShowAs = mtx_default_show_as();
             }
 
             return $p_sShowAs;
         }
     }
-    if( !function_exists('bender_default_direction') ){
-        function bender_default_direction(){
-            return getPreference('rtl','bender');
+    if( !function_exists('mtx_default_direction') ){
+        function mtx_default_direction(){
+            return getPreference('rtl','matrix');
         }
     }
-    if( !function_exists('bender_default_show_as') ){
-        function bender_default_show_as(){
-            return getPreference('defaultShowAs@all','bender');
+    if( !function_exists('mtx_default_show_as') ){
+        function mtx_default_show_as(){
+            return getPreference('defaultShowAs@all','matrix');
         }
     }
-    if( !function_exists('bender_default_location_show_as') ){
-        function bender_default_location_show_as(){
-            return osc_get_preference('defaultLocationShowAs','bender');
+    if( !function_exists('mtx_default_location_show_as') ){
+        function mtx_default_location_show_as(){
+            return osc_get_preference('defaultLocationShowAs','matrix');
         }
     }
-    if( !function_exists('bender_draw_categories_list') ) {
-        function bender_draw_categories_list(){ ?>
+    if( !function_exists('mtx_draw_categories_list') ) {
+        function mtx_draw_categories_list(){ ?>
         <?php if(!osc_is_home_page()){ echo '<div class="resp-wrapper">'; } ?>
          <?php
          //cell_3
@@ -291,12 +291,12 @@ FUNCTIONS
         <?php
         }
     }
-    if( !function_exists('bender_search_number') ) {
+    if( !function_exists('mtx_search_number') ) {
         /**
           *
           * @return array
           */
-        function bender_search_number() {
+        function mtx_search_number() {
             $search_from = ((osc_search_page() * osc_default_results_per_page_at_search()) + 1);
             $search_to   = ((osc_search_page() + 1) * osc_default_results_per_page_at_search());
             if( $search_to > osc_search_total_items() ) {
@@ -313,8 +313,8 @@ FUNCTIONS
     /*
      * Helpers used at view
      */
-    if( !function_exists('bender_item_title') ) {
-        function bender_item_title() {
+    if( !function_exists('mtx_item_title') ) {
+        function mtx_item_title() {
             $title = osc_item_title();
             foreach( osc_get_locales() as $locale ) {
                 if( Session::newInstance()->_getForm('title') != "" ) {
@@ -327,8 +327,8 @@ FUNCTIONS
             return $title;
         }
     }
-    if( !function_exists('bender_item_description') ) {
-        function bender_item_description() {
+    if( !function_exists('mtx_item_description') ) {
+        function mtx_item_description() {
             $description = osc_item_description();
             foreach( osc_get_locales() as $locale ) {
                 if( Session::newInstance()->_getForm('description') != "" ) {
@@ -389,26 +389,26 @@ FUNCTIONS
     if( !function_exists('get_breadcrumb_lang') ) {
         function get_breadcrumb_lang() {
             $lang = array();
-            $lang['item_add']               = __('Publish a listing', 'bender');
-            $lang['item_edit']              = __('Edit your listing', 'bender');
-            $lang['item_send_friend']       = __('Send to a friend', 'bender');
-            $lang['item_contact']           = __('Contact publisher', 'bender');
-            $lang['search']                 = __('Search results', 'bender');
-            $lang['search_pattern']         = __('Search results: %s', 'bender');
-            $lang['user_dashboard']         = __('Dashboard', 'bender');
-            $lang['user_dashboard_profile'] = __("%s's profile", 'bender');
-            $lang['user_account']           = __('Account', 'bender');
-            $lang['user_items']             = __('Listings', 'bender');
-            $lang['user_alerts']            = __('Alerts', 'bender');
-            $lang['user_profile']           = __('Update account', 'bender');
-            $lang['user_change_email']      = __('Change email', 'bender');
-            $lang['user_change_username']   = __('Change username', 'bender');
-            $lang['user_change_password']   = __('Change password', 'bender');
-            $lang['login']                  = __('Login', 'bender');
-            $lang['login_recover']          = __('Recover password', 'bender');
-            $lang['login_forgot']           = __('Change password', 'bender');
-            $lang['register']               = __('Create a new account', 'bender');
-            $lang['contact']                = __('Contact', 'bender');
+            $lang['item_add']               = __('Publish a listing', 'matrix');
+            $lang['item_edit']              = __('Edit your listing', 'matrix');
+            $lang['item_send_friend']       = __('Send to a friend', 'matrix');
+            $lang['item_contact']           = __('Contact publisher', 'matrix');
+            $lang['search']                 = __('Search results', 'matrix');
+            $lang['search_pattern']         = __('Search results: %s', 'matrix');
+            $lang['user_dashboard']         = __('Dashboard', 'matrix');
+            $lang['user_dashboard_profile'] = __("%s's profile", 'matrix');
+            $lang['user_account']           = __('Account', 'matrix');
+            $lang['user_items']             = __('Listings', 'matrix');
+            $lang['user_alerts']            = __('Alerts', 'matrix');
+            $lang['user_profile']           = __('Update account', 'matrix');
+            $lang['user_change_email']      = __('Change email', 'matrix');
+            $lang['user_change_username']   = __('Change username', 'matrix');
+            $lang['user_change_password']   = __('Change password', 'matrix');
+            $lang['login']                  = __('Login', 'matrix');
+            $lang['login_recover']          = __('Recover password', 'matrix');
+            $lang['login_forgot']           = __('Change password', 'matrix');
+            $lang['register']               = __('Create a new account', 'matrix');
+            $lang['contact']                = __('Contact', 'matrix');
             return $lang;
         }
     }
@@ -436,37 +436,37 @@ FUNCTIONS
                'class' => 'opt_publicprofile'
             );
             $options[] = array(
-                'name'  => __('Listings', 'bender'),
+                'name'  => __('Listings', 'matrix'),
                 'url'   => osc_user_list_items_url(),
                 'class' => 'opt_items'
             );
             $options[] = array(
-                'name' => __('Alerts', 'bender'),
+                'name' => __('Alerts', 'matrix'),
                 'url' => osc_user_alerts_url(),
                 'class' => 'opt_alerts'
             );
             $options[] = array(
-                'name'  => __('Account', 'bender'),
+                'name'  => __('Account', 'matrix'),
                 'url'   => osc_user_profile_url(),
                 'class' => 'opt_account'
             );
             $options[] = array(
-                'name'  => __('Change email', 'bender'),
+                'name'  => __('Change email', 'matrix'),
                 'url'   => osc_change_user_email_url(),
                 'class' => 'opt_change_email'
             );
             $options[] = array(
-                'name'  => __('Change username', 'bender'),
+                'name'  => __('Change username', 'matrix'),
                 'url'   => osc_change_user_username_url(),
                 'class' => 'opt_change_username'
             );
             $options[] = array(
-                'name'  => __('Change password', 'bender'),
+                'name'  => __('Change password', 'matrix'),
                 'url'   => osc_change_user_password_url(),
                 'class' => 'opt_change_password'
             );
             $options[] = array(
-                'name'  => __('Delete account', 'bender'),
+                'name'  => __('Delete account', 'matrix'),
                 'url'   => '#',
                 'class' => 'opt_delete_account'
             );
@@ -496,20 +496,20 @@ FUNCTIONS
                 View::newInstance()->_exportVariableToView('user', $user);
                 ?>
 <script type="text/javascript">
-    bender.user = {};
-    bender.user.id = '<?php echo osc_user_id(); ?>';
-    bender.user.secret = '<?php echo osc_user_field("s_secret"); ?>';
+    matrix.user = {};
+    matrix.user.id = '<?php echo osc_user_id(); ?>';
+    matrix.user.secret = '<?php echo osc_user_field("s_secret"); ?>';
 </script>
             <?php }
         }
         osc_add_hook('header', 'user_info_js');
     }
 
-    function theme_bender_actions_admin() {
+    function theme_mtx_actions_admin() {
         //if(OC_ADMIN)
-        if( Params::getParam('file') == 'oc-content/themes/bender/admin/settings.php' ) {
+        if( Params::getParam('file') == 'oc-content/themes/matrix/admin/settings.php' ) {
             if( Params::getParam('donation') == 'successful' ) {
-                osc_set_preference('donation', '1', 'bender');
+                osc_set_preference('donation', '1', 'matrix');
                 osc_reset_preferences();
             }
         }
@@ -518,59 +518,59 @@ FUNCTIONS
             case('settings'):
                 $footerLink  = Params::getParam('footer_link');
 
-                osc_set_preference('keyword_placeholder', Params::getParam('keyword_placeholder'), 'bender');
-                osc_set_preference('footer_link', ($footerLink ? '1' : '0'), 'bender');
-                osc_set_preference('defaultShowAs@all', Params::getParam('defaultShowAs@all'), 'bender');
+                osc_set_preference('keyword_placeholder', Params::getParam('keyword_placeholder'), 'matrix');
+                osc_set_preference('footer_link', ($footerLink ? '1' : '0'), 'matrix');
+                osc_set_preference('defaultShowAs@all', Params::getParam('defaultShowAs@all'), 'matrix');
                 osc_set_preference('defaultShowAs@search', Params::getParam('defaultShowAs@all'));
 
-                osc_set_preference('defaultLocationShowAs', Params::getParam('defaultLocationShowAs'), 'bender');
+                osc_set_preference('defaultLocationShowAs', Params::getParam('defaultLocationShowAs'), 'matrix');
 
-                osc_set_preference('header-728x90',         trim(Params::getParam('header-728x90', false, false, false)),                  'bender');
-                osc_set_preference('homepage-728x90',       trim(Params::getParam('homepage-728x90', false, false, false)),                'bender');
-                osc_set_preference('sidebar-300x250',       trim(Params::getParam('sidebar-300x250', false, false, false)),                'bender');
-                osc_set_preference('search-results-top-728x90',     trim(Params::getParam('search-results-top-728x90', false, false, false)),          'bender');
-                osc_set_preference('search-results-middle-728x90',  trim(Params::getParam('search-results-middle-728x90', false, false, false)),       'bender');
+                osc_set_preference('header-728x90',         trim(Params::getParam('header-728x90', false, false, false)),                  'matrix');
+                osc_set_preference('homepage-728x90',       trim(Params::getParam('homepage-728x90', false, false, false)),                'matrix');
+                osc_set_preference('sidebar-300x250',       trim(Params::getParam('sidebar-300x250', false, false, false)),                'matrix');
+                osc_set_preference('search-results-top-728x90',     trim(Params::getParam('search-results-top-728x90', false, false, false)),          'matrix');
+                osc_set_preference('search-results-middle-728x90',  trim(Params::getParam('search-results-middle-728x90', false, false, false)),       'matrix');
 
-                osc_set_preference('rtl', (Params::getParam('rtl') ? '1' : '0'), 'bender');
+                osc_set_preference('rtl', (Params::getParam('rtl') ? '1' : '0'), 'matrix');
 
-                osc_add_flash_ok_message(__('Theme settings updated correctly', 'bender'), 'admin');
-                osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/bender/admin/settings.php'));
+                osc_add_flash_ok_message(__('Theme settings updated correctly', 'matrix'), 'admin');
+                osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/matrix/admin/settings.php'));
             break;
             case('upload_logo'):
                 $package = Params::getFiles('logo');
                 if( $package['error'] == UPLOAD_ERR_OK ) {
                     $img = ImageResizer::fromFile($package['tmp_name']);
                     $ext = $img->getExt();
-                    $logo_name     = 'bender_logo';
+                    $logo_name     = 'mtx_logo';
                     $logo_name    .= '.'.$ext;
                     $path = osc_uploads_path() . $logo_name ;
                     $img->saveToFile($path);
 
-                    osc_set_preference('logo', $logo_name, 'bender');
+                    osc_set_preference('logo', $logo_name, 'matrix');
 
-                    osc_add_flash_ok_message(__('The logo image has been uploaded correctly', 'bender'), 'admin');
+                    osc_add_flash_ok_message(__('The logo image has been uploaded correctly', 'matrix'), 'admin');
                 } else {
-                    osc_add_flash_error_message(__("An error has occurred, please try again", 'bender'), 'admin');
+                    osc_add_flash_error_message(__("An error has occurred, please try again", 'matrix'), 'admin');
                 }
-                osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/bender/admin/header.php'));
+                osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/matrix/admin/header.php'));
             break;
             case('remove'):
-                $logo = osc_get_preference('logo','bender');
+                $logo = osc_get_preference('logo','matrix');
                 $path = osc_uploads_path() . $logo ;
                 if(file_exists( $path ) ) {
                     @unlink( $path );
-                    osc_delete_preference('logo','bender');
+                    osc_delete_preference('logo','matrix');
                     osc_reset_preferences();
-                    osc_add_flash_ok_message(__('The logo image has been removed', 'bender'), 'admin');
+                    osc_add_flash_ok_message(__('The logo image has been removed', 'matrix'), 'admin');
                 } else {
-                    osc_add_flash_error_message(__("Image not found", 'bender'), 'admin');
+                    osc_add_flash_error_message(__("Image not found", 'matrix'), 'admin');
                 }
-                osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/bender/admin/header.php'));
+                osc_redirect_to(osc_admin_render_theme_url('oc-content/themes/matrix/admin/header.php'));
             break;
         }
     }
 
-    function bender_redirect_user_dashboard()
+    function mtx_redirect_user_dashboard()
     {
         if( (Rewrite::newInstance()->get_location() === 'user') && (Rewrite::newInstance()->get_section() === 'dashboard') ) {
             header('Location: ' .osc_user_list_items_url());
@@ -578,33 +578,33 @@ FUNCTIONS
         }
     }
 
-    function bender_delete() {
-        Preference::newInstance()->delete(array('s_section' => 'bender'));
+    function mtx_delete() {
+        Preference::newInstance()->delete(array('s_section' => 'matrix'));
     }
 
-    osc_add_hook('init', 'bender_redirect_user_dashboard', 2);
-    osc_add_hook('init_admin', 'theme_bender_actions_admin');
-    osc_add_hook('theme_delete_bender', 'bender_delete');
-    osc_admin_menu_appearance(__('Header logo', 'bender'), osc_admin_render_theme_url('oc-content/themes/bender/admin/header.php'), 'header_bender');
-    osc_admin_menu_appearance(__('Theme settings', 'bender'), osc_admin_render_theme_url('oc-content/themes/bender/admin/settings.php'), 'settings_bender');
+    osc_add_hook('init', 'mtx_redirect_user_dashboard', 2);
+    osc_add_hook('init_admin', 'theme_mtx_actions_admin');
+    osc_add_hook('theme_delete_matrix', 'mtx_delete');
+    osc_admin_menu_appearance(__('Header logo', 'matrix'), osc_admin_render_theme_url('oc-content/themes/matrix/admin/header.php'), 'header_matrix');
+    osc_admin_menu_appearance(__('Theme settings', 'matrix'), osc_admin_render_theme_url('oc-content/themes/matrix/admin/settings.php'), 'settings_matrix');
 /**
 
 TRIGGER FUNCTIONS
 
 */
-check_install_bender_theme();
+check_install_mtx_theme();
 if(osc_is_home_page()){
-    osc_add_hook('inside-main','bender_draw_categories_list');
+    osc_add_hook('inside-main','mtx_draw_categories_list');
 } else if( osc_is_static_page() || osc_is_contact_page() ){
-    osc_add_hook('before-content','bender_draw_categories_list');
+    osc_add_hook('before-content','mtx_draw_categories_list');
 }
 
 if(osc_is_home_page() || osc_is_search_page()){
-    bender_add_body_class('has-searchbox');
+    mtx_add_body_class('has-searchbox');
 }
 
 
-function bender_sidebar_category_search($catId = null)
+function mtx_sidebar_category_search($catId = null)
 {
     $aCategories = array();
     if($catId==null) {
@@ -625,10 +625,10 @@ function bender_sidebar_category_search($catId = null)
         return "";
     }
 
-    bender_print_sidebar_category_search($aCategories, $catId);
+    mtx_print_sidebar_category_search($aCategories, $catId);
 }
 
-function bender_print_sidebar_category_search($aCategories, $current_category = null, $i = 0)
+function mtx_print_sidebar_category_search($aCategories, $current_category = null, $i = 0)
 {
     $class = '';
     if(!isset($aCategories[$i])) {
@@ -644,7 +644,7 @@ function bender_print_sidebar_category_search($aCategories, $current_category = 
     if(!isset($c['pk_i_id'])) {
         echo '<ul '.$class.'>';
         if($i==1) {
-            echo '<li><a href="'.osc_esc_html(osc_update_search_url(array('sCategory'=>null, 'iPage'=>null))).'">'.__('All categories', 'bender')."</a></li>";
+            echo '<li><a href="'.osc_esc_html(osc_update_search_url(array('sCategory'=>null, 'iPage'=>null))).'">'.__('All categories', 'matrix')."</a></li>";
         }
         foreach($c as $key => $value) {
     ?>
@@ -666,14 +666,14 @@ function bender_print_sidebar_category_search($aCategories, $current_category = 
     ?>
     <ul <?php echo $class;?>>
         <?php if($i==1) { ?>
-        <li><a href="<?php echo osc_esc_html(osc_update_search_url(array('sCategory'=>null, 'iPage'=>null))); ?>"><?php _e('All categories', 'bender'); ?></a></li>
+        <li><a href="<?php echo osc_esc_html(osc_update_search_url(array('sCategory'=>null, 'iPage'=>null))); ?>"><?php _e('All categories', 'matrix'); ?></a></li>
         <?php } ?>
             <li>
                 <a id="cat_<?php echo osc_esc_html($c['pk_i_id']);?>" href="<?php echo osc_esc_html(osc_update_search_url(array('sCategory'=> $c['pk_i_id'], 'iPage'=>null))); ?>">
                 <?php if(isset($current_category) && $current_category == $c['pk_i_id']){ echo '<strong>'.$c['s_name'].'</strong>'; }
                       else{ echo $c['s_name']; } ?>
                 </a>
-                <?php bender_print_sidebar_category_search($aCategories, $current_category, $i); ?>
+                <?php mtx_print_sidebar_category_search($aCategories, $current_category, $i); ?>
             </li>
         <?php if($i==1) { ?>
         <?php } ?>
@@ -687,7 +687,7 @@ function bender_print_sidebar_category_search($aCategories, $current_category = 
 CLASSES
 
 */
-class benderBodyClass
+class matrixBodyClass
 {
     /**
     * Custom Class for add, remove or get body classes.
@@ -729,7 +729,7 @@ HELPERS
 */
 if( !function_exists('osc_uploads_url')) {
     function osc_uploads_url($item = '') {
-        $logo = osc_get_preference('logo', 'bender');
+        $logo = osc_get_preference('logo', 'matrix');
         if ($logo != '' && file_exists(osc_uploads_path() . $logo)) {
             $path = str_replace(ABS_PATH, '', osc_uploads_path() . '/');
             return osc_base_url() . $path . $item;
@@ -744,10 +744,10 @@ if( !function_exists('osc_uploads_url')) {
  */
 if (!function_exists('search_ads_listing_top_fn')) {
     function search_ads_listing_top_fn() {
-        if(osc_get_preference('search-results-top-728x90', 'bender')!='') {
+        if(osc_get_preference('search-results-top-728x90', 'matrix')!='') {
             echo '<div class="clear"></div>' . PHP_EOL;
             echo '<div class="ads_728">' . PHP_EOL;
-            echo osc_get_preference('search-results-top-728x90', 'bender');
+            echo osc_get_preference('search-results-top-728x90', 'matrix');
             echo '</div>' . PHP_EOL;
         }
     }
@@ -756,10 +756,10 @@ if (!function_exists('search_ads_listing_top_fn')) {
 
 if (!function_exists('search_ads_listing_medium_fn')) {
     function search_ads_listing_medium_fn() {
-        if(osc_get_preference('search-results-middle-728x90', 'bender')!='') {
+        if(osc_get_preference('search-results-middle-728x90', 'matrix')!='') {
             echo '<div class="clear"></div>' . PHP_EOL;
             echo '<div class="ads_728">' . PHP_EOL;
-            echo osc_get_preference('search-results-middle-728x90', 'bender');
+            echo osc_get_preference('search-results-middle-728x90', 'matrix');
             echo '</div>' . PHP_EOL;
         }
     }

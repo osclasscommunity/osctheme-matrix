@@ -20,19 +20,19 @@
      */
 
 /*
-Theme Name: bender
+Theme Name: matrix
 Theme URI: http://osclass.org/
 Description: Bender theme
 Version: 3.2.0
 Author: Osclass
 Author URI: http://osclass.org/
 Widgets:  header, footer
-Theme update URI: bender
+Theme update URI: matrix
 */
 
-    function bender_theme_info() {
+    function mtx_theme_info() {
         return array(
-             'name'        => 'bender'
+             'name'        => 'matrix'
             ,'version'     => '3.2.0'
             ,'description' => 'Bender theme'
             ,'author_name' => 'Osclass'

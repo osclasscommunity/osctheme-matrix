@@ -20,14 +20,14 @@
      */
 
     // meta tag robots
-    osc_add_hook('header','bender_nofollow_construct');
+    osc_add_hook('header','mtx_nofollow_construct');
 
-    bender_add_body_class('forgot');
+    mtx_add_body_class('forgot');
     osc_current_web_theme_path('header.php');
 ?>
 <div class="form-container form-horizontal form-container-box">
     <div class="header">
-        <h1><?php _e('Recover your password', 'bender'); ?></h1>
+        <h1><?php _e('Recover your password', 'matrix'); ?></h1>
     </div>
     <div class="resp-wrapper">
         <form action="<?php echo osc_base_url(true); ?>" method="post" >
@@ -36,20 +36,20 @@
             <input type="hidden" name="userId" value="<?php echo osc_esc_html(Params::getParam('userId')); ?>" />
             <input type="hidden" name="code" value="<?php echo osc_esc_html(Params::getParam('code')); ?>" />
             <div class="control-group">
-                <label class="control-label" for="new_password"><?php _e('New password', 'bender'); ?></label>
+                <label class="control-label" for="new_password"><?php _e('New password', 'matrix'); ?></label>
                 <div class="controls">
                     <input type="password" name="new_password" value="" autocomplete="off" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="new_password2"><?php _e('Repeat new password', 'bender'); ?></label>
+                <label class="control-label" for="new_password2"><?php _e('Repeat new password', 'matrix'); ?></label>
                 <div class="controls">
                     <input type="password" name="new_password2" value="" autocomplete="off" />
                 </div>
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Change password", 'bender');?></button>
+                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Change password", 'matrix');?></button>
                 </div>
             </div>
         </form>

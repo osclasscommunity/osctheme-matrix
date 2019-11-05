@@ -22,8 +22,8 @@
 
 <?php
     $js_lang = array(
-        'delete' => __('Delete', 'bender'),
-        'cancel' => __('Cancel', 'bender')
+        'delete' => __('Delete', 'matrix'),
+        'cancel' => __('Cancel', 'matrix')
     );
 
     osc_enqueue_script('jquery');
@@ -66,14 +66,14 @@
 <link href="<?php echo osc_current_web_theme_url('js/jquery-ui/jquery-ui-1.10.2.custom.min.css') ; ?>" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-    var bender = window.bender || {};
-    bender.base_url = '<?php echo osc_base_url(true); ?>';
-    bender.langs = <?php echo json_encode($js_lang); ?>;
-    bender.fancybox_prev = '<?php echo osc_esc_js( __('Previous image','bender')) ?>';
-    bender.fancybox_next = '<?php echo osc_esc_js( __('Next image','bender')) ?>';
-    bender.fancybox_closeBtn = '<?php echo osc_esc_js( __('Close','bender')) ?>';
+    var matrix = window.matrix || {};
+    matrix.base_url = '<?php echo osc_base_url(true); ?>';
+    matrix.langs = <?php echo json_encode($js_lang); ?>;
+    matrix.fancybox_prev = '<?php echo osc_esc_js( __('Previous image','matrix')) ?>';
+    matrix.fancybox_next = '<?php echo osc_esc_js( __('Next image','matrix')) ?>';
+    matrix.fancybox_closeBtn = '<?php echo osc_esc_js( __('Close','matrix')) ?>';
 </script>
-<?php if(bender_default_direction()=='0') { ?>
+<?php if(mtx_default_direction()=='0') { ?>
 <link href="<?php echo osc_current_web_theme_url('css/main.css') ; ?>" rel="stylesheet" type="text/css" />
 <?php } else { ?>
 <link href="<?php echo osc_current_web_theme_url('css/main-rtl.css') ; ?>" rel="stylesheet" type="text/css" />
