@@ -4,6 +4,10 @@
 
 This is a *WIP* Osclass theme that's based on Bender 3.2.0.
 
+## Current progress
+
+![Current progress](https://i.postimg.cc/4yRQGcdb/some-progress-html-css.jpg)
+
 ## Dependencies
 
 * [Node.js](http://nodejs.org/)
