@@ -4,12 +4,43 @@ mtx_add_body_class('home');
 
 $buttonClass = '';
 $listClass   = '';
-if(mtx_show_as() == 'gallery'){
-      $listClass = 'listing-grid';
-      $buttonClass = 'active';
+if(mtx_show_as() == 'gallery') {
+    $listClass = 'listing-grid';
+    $buttonClass = 'active';
 }
 ?>
-<?php osc_current_web_theme_path('header.php') ; ?>
+<?php osc_current_web_theme_path('header.php'); ?>
+
+<section class="categories bg-lighter">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Categories', 'matrix'); ?></h2>
+            <p class="text-center cl-darker mb-5 col-12"><?php _e('Browse our selection of ads through various categories.', 'matrix'); ?></p>
+            <?php while(osc_has_categories()) { ?>
+                <div class="col-md-3">
+                    <div class="categories-item bg-lighty">
+                        <span class="categories-count badge bg-accent text-white p-2 col-3"><?php echo osc_category_total_items(); ?> ads</span>
+                        <div class="categories-icon mt-2 mb-4">
+                            <i class="fa fa-group cl-accent"></i>
+                        </div>
+                        <p class="categories-title"><?php echo osc_category_name(); ?></p>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
 <div class="clear"></div>
 <div class="latest_ads">
 <h1><strong><?php _e('Latest Listings', 'matrix') ; ?></strong></h1>

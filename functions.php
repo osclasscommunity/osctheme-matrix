@@ -150,14 +150,14 @@ FUNCTIONS
         }
     }
     /* logo */
-    if( !function_exists('logo_header') ) {
-        function logo_header() {
+    if( !function_exists('mtx_logo') ) {
+        function mtx_logo($position = 'header') {
              $logo = osc_get_preference('logo','matrix');
-             $html = '<a href="'.osc_base_url().'"><img border="0" alt="' . osc_page_title() . '" src="' . mtx_logo_url() . '"></a>';
+             $html = '<img border="0" alt="' . osc_page_title() . '" src="' . mtx_logo_url() . '">';
              if( $logo!='' && file_exists( osc_uploads_path() . $logo ) ) {
                 return $html;
              } else {
-                return '<a href="'.osc_base_url().'">'.osc_page_title().'</a>';
+                return osc_page_title();
             }
         }
     }
@@ -205,70 +205,6 @@ FUNCTIONS
     if( !function_exists('mtx_default_location_show_as') ){
         function mtx_default_location_show_as(){
             return osc_get_preference('defaultLocationShowAs','matrix');
-        }
-    }
-    if( !function_exists('mtx_draw_categories_list') ) {
-        function mtx_draw_categories_list(){ ?>
-        <?php if(!osc_is_home_page()){ echo '<div class="resp-wrapper">'; } ?>
-         <?php
-         //cell_3
-        $total_categories   = osc_count_categories();
-        $col1_max_cat       = ceil($total_categories/3);
-
-         osc_goto_first_category();
-         $i      = 0;
-
-         while ( osc_has_categories() ) {
-         ?>
-        <?php
-            if($i%$col1_max_cat == 0){
-                if($i > 0) { echo '</div>'; }
-                if($i == 0) {
-                   echo '<div class="cell_3 first_cel">';
-                } else {
-                    echo '<div class="cell_3">';
-                }
-            }
-        ?>
-        <ul class="r-list">
-             <li>
-                 <h1>
-                    <?php
-                    $_slug      = osc_category_slug();
-                    $_url       = osc_search_category_url();
-                    $_name      = osc_category_name();
-                    $_total_items = osc_category_total_items();
-                    if ( osc_count_subcategories() > 0 ) { ?>
-                    <span class="collapse resp-toogle"><i class="fa fa-caret-right fa-lg"></i></span>
-                    <?php } ?>
-                    <?php if($_total_items > 0) { ?>
-                    <a class="category <?php echo $_slug; ?>" href="<?php echo $_url; ?>"><?php echo $_name ; ?></a> <span>(<?php echo $_total_items ; ?>)</span>
-                    <?php } else { ?>
-                    <a class="category <?php echo $_slug; ?>" href="#"><?php echo $_name ; ?></a> <span>(<?php echo $_total_items ; ?>)</span>
-                    <?php } ?>
-                 </h1>
-                 <?php if ( osc_count_subcategories() > 0 ) { ?>
-                   <ul>
-                         <?php while ( osc_has_subcategories() ) { ?>
-                             <li>
-                             <?php if( osc_category_total_items() > 0 ) { ?>
-                                 <a class="category sub-category <?php echo osc_category_slug() ; ?>" href="<?php echo osc_search_category_url() ; ?>"><?php echo osc_category_name() ; ?></a> <span>(<?php echo osc_category_total_items() ; ?>)</span>
-                             <?php } else { ?>
-                                 <a class="category sub-category <?php echo osc_category_slug() ; ?>" href="#"><?php echo osc_category_name() ; ?></a> <span>(<?php echo osc_category_total_items() ; ?>)</span>
-                             <?php } ?>
-                             </li>
-                         <?php } ?>
-                   </ul>
-                 <?php } ?>
-             </li>
-        </ul>
-        <?php
-                $i++;
-            }
-            echo '</div>';
-        ?>
-        <?php if(!osc_is_home_page()){ echo '</div>'; } ?>
-        <?php
         }
     }
     if( !function_exists('mtx_search_number') ) {
@@ -573,11 +509,6 @@ TRIGGER FUNCTIONS
 
 */
 check_install_mtx_theme();
-if(osc_is_home_page()){
-    osc_add_hook('inside-main','mtx_draw_categories_list');
-} else if( osc_is_static_page() || osc_is_contact_page() ){
-    osc_add_hook('before-content','mtx_draw_categories_list');
-}
 
 if(osc_is_home_page() || osc_is_search_page()){
     mtx_add_body_class('has-searchbox');
@@ -745,4 +676,43 @@ if (!function_exists('search_ads_listing_medium_fn')) {
     }
 }
 osc_add_hook('search_ads_listing_medium', 'search_ads_listing_medium_fn');
+
+function mtx_category_has_sub($category) {
+    if(array_key_exists('categories', $category)) {
+        if(is_array($category['categories'])) {
+            if(count($category['categories'])) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function mtx_search_category_select($selected = null) {
+    ?>
+    <select name="sCategory" id="sCategory" class="form-control">
+        <option value=""><?php _e('Select a category', 'matrix'); ?></option>
+        <?php foreach(Category::newInstance()->toTree() as $category) { ?>
+            <option value="<?php echo $category['pk_i_id']; ?>" <?php echo ($category['pk_i_id'] == $selected) ? 'selected' : ''; ?> class="categoryselect-parent"><?php echo $category['s_name']; ?></option>
+            <?php mtx_search_category_select_sub($category, $selected, 1); ?>
+        <?php } ?>
+    </select>
+    <?php
+}
+
+function mtx_search_category_select_sub($category, $selected, $deep) {
+    if(mtx_category_has_sub($category)) {
+        $deep_string = '';
+        for($n = 0; $n < $deep; $n++) {
+            $deep_string .= '&nbsp;&nbsp;';
+        }
+        $deep++;
+
+        foreach($category['categories'] as $category) { ?>
+            <option value="<?php echo $category['pk_i_id']; ?>" <?php echo ($category['pk_i_id'] == $selected) ? 'selected' : ''; ?>><?php echo $deep_string.$category['s_name']; ?></option>
+            <?php mtx_search_category_select_sub($category, $selected, $deep); ?>
+        <?php }
+    }
+}
 ?>

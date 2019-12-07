@@ -1,84 +1,111 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="<?php echo mtx_default_direction()=='0' ? 'ltr': 'rtl'; ?>" lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
     <head>
-        <?php osc_current_web_theme_path('common/head.php') ; ?>
+        <?php osc_current_web_theme_path('head.php') ; ?>
     </head>
-<body <?php mtx_body_class(); ?>>
-<div id="header">
-    <!-- header ad 728x60-->
-    <div class="ads_header">
-    <?php echo osc_get_preference('header-728x90', 'matrix'); ?>
-    <!-- /header ad 728x60-->
-    </div>
-    <div class="clear"></div>
-    <div class="wrapper">
-        <div id="logo">
-            <?php echo logo_header(); ?>
-            <span id="description"><?php echo osc_page_description(); ?></span>
-        </div>
-        <ul class="nav">
-            <?php if( osc_is_static_page() || osc_is_contact_page() ){ ?>
-                <li class="search"><a class="ico-search icons" data-bclass-toggle="display-search"></a></li>
-                <li class="cat"><a class="ico-menu icons" data-bclass-toggle="display-cat"></a></li>
-            <?php } ?>
-            <?php if( osc_users_enabled() ) { ?>
-            <?php if( osc_is_web_user_logged_in() ) { ?>
-                <li class="first logged">
-                    <span><?php echo sprintf(__('Hi %s', 'matrix'), osc_logged_user_name() . '!'); ?>  &middot;</span>
-                    <strong><a href="<?php echo osc_user_dashboard_url(); ?>"><?php _e('My account', 'matrix'); ?></a></strong> &middot;
-                    <a href="<?php echo osc_user_logout_url(); ?>"><?php _e('Logout', 'matrix'); ?></a>
-                </li>
-            <?php } else { ?>
-                <li><a id="login_open" href="<?php echo osc_user_login_url(); ?>"><?php _e('Login', 'matrix') ; ?></a></li>
-                <?php if(osc_user_registration_enabled()) { ?>
-                    <li><a href="<?php echo osc_register_account_url() ; ?>"><?php _e('Register for a free account', 'matrix'); ?></a></li>
-                <?php }; ?>
-            <?php } ?>
-            <?php } ?>
-            <?php if( osc_users_enabled() || ( !osc_users_enabled() && !osc_reg_user_post() )) { ?>
-            <li class="publish"><a href="<?php echo osc_item_post_url_in_category() ; ?>"><?php _e("Publish your ad for free", 'matrix');?></a></li>
-            <?php } ?>
-        </ul>
+    <body <?php mtx_body_class(); ?>>
+        <header class="header">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-accent">
+                <div class="container">
+                    <a class="navbar-brand" href="#"><?php echo mtx_logo('header'); ?></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-    </div>
-    <?php if( osc_is_home_page() || osc_is_static_page() || osc_is_contact_page() ) { ?>
-    <form action="<?php echo osc_base_url(true); ?>" method="get" class="search nocsrf" <?php /* onsubmit="javascript:return doSearch();"*/ ?>>
-        <input type="hidden" name="page" value="search"/>
-        <div class="main-search">
-            <div class="cell">
-                <input type="text" name="sPattern" id="query" class="input-text" value="" placeholder="<?php echo osc_esc_html(__(osc_get_preference('keyword_placeholder', 'matrix'), 'matrix')); ?>" />
-            </div>
-            <?php  if ( osc_count_categories() ) { ?>
-                <div class="cell selector">
-                    <?php osc_categories_select('sCategory', null, __('Select a category', 'matrix')) ; ?>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#"><?php _e('Home', 'matrix'); ?> <span class="sr-only">(<?php _e('current', 'matrix'); ?>)</span></a>
+                            </li>
+
+                            <li class="nav-item nav-contact">
+                                <a class="nav-link" href="<?php echo osc_contact_url(); ?>"><?php _e('Contact', 'matrix'); ?></a>
+                            </li>
+
+                            <?php if(osc_users_enabled() || (!osc_users_enabled() && !osc_reg_user_post())) { ?>
+                                <li class="nav-item nav-publish">
+                                    <a class="nav-link" href="<?php echo osc_item_post_url_in_category(); ?>"><?php _e('Post an ad', 'matrix'); ?></a>
+                                </li>
+                            <?php } ?>
+                        </ul>
+                        <ul class="navbar-nav my-2 my-lg-0">
+                            <?php if(osc_users_enabled()) { ?>
+                                <?php if(osc_is_web_user_logged_in()) { ?>
+                                    <li class="nav-item nav-welcome">
+                                        <?php echo sprintf(__('Hi %s', 'matrix'), osc_logged_user_name() . '!'); ?>
+                                    </li>
+                                    <li class="nav-item nav-account">
+                                        <a href="<?php echo osc_user_dashboard_url(); ?>" class="nav-link"><?php _e('My account', 'matrix'); ?></a>
+                                    </li>
+                                    <li class="nav-item nav-logout">
+                                        <a href="<?php echo osc_user_logout_url(); ?>" class="nav-link"><?php _e('Logout', 'matrix'); ?></a>
+                                    </li>
+                                <?php } else { ?>
+                                    <li class="nav-item nav-login">
+                                        <a href="<?php echo osc_user_login_url(); ?>" class="nav-link text-white"><?php _e('Login', 'matrix'); ?></a>
+                                    </li>
+                                    <?php if(osc_user_registration_enabled()) { ?>
+                                        <li class="nav-item nav-register">
+                                            <a href="<?php echo osc_register_account_url(); ?>" class="nav-link text-white"><?php _e('Register', 'matrix'); ?></a>
+                                        </li>
+                                    <?php } ?>
+                                <?php } ?>
+                            <?php } ?>
+                        </ul>
+                    </div>
                 </div>
-                <div class="cell reset-padding">
-            <?php  } else { ?>
-                <div class="cell">
-            <?php  } ?>
-                <button class="ui-button ui-button-big js-submit"><?php _e("Search", 'matrix');?></button>
+            </nav>
+        </header>
+
+        <section class="jumbo">
+            <div class="jumbotron bg-darker text-white mb-0">
+                <div class="container">
+                    <div class="row">
+                        <div class="jumbo-text col-md-8">
+                            <h1 class="display-4"><?php _e('Modern & open-source', 'matrix'); ?></h1>
+                            <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
+                            <hr class="my-4">
+                            <p><?php _e('What are you waiting for?', 'matrix'); ?></p>
+                            <p class="lead">
+                                <a class="btn btn-lg btn-mtx bg-accent text-white" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
+                            </p>
+                        </div>
+                        <div class="jumbo-search col-md-4">
+                            <form action="<?php echo osc_base_url(1); ?>" method="GET" class="nocsrf text-white bg-accent">
+                                <input type="hidden" name="page" value="search"/>
+                                <div class="p-4">
+                                    <div class="form-group">
+                                        <label for="sPattern"><?php _e('Query', 'matrix'); ?></label>
+                                        <input type="text" class="form-control" id="sPattern" name="sPattern" placeholder="<?php echo osc_esc_html(osc_get_preference('keyword_placeholder', 'matrix')); ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sCategory"><?php _e('Category', 'matrix'); ?></label>
+                                        <?php mtx_search_category_select(); ?>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-mtx bg-accent-dark text-white w-100"><?php _e('Search', 'matrix'); ?></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <?php osc_show_widgets('header'); ?>
+
+        <div class="wrapper wrapper-flash">
+            <?php $breadcrumb = osc_breadcrumb('&raquo;', false, get_breadcrumb_lang()); ?>
+            <?php if($breadcrumb !== '') { ?>
+                <div class="breadcrumb">
+                    <?php echo $breadcrumb; ?>
+                    <div class="clear"></div>
+                </div>
+            <?php } ?>
+            <?php osc_show_flash_message(); ?>
         </div>
-        <div id="message-seach"></div>
-    </form>
-    <?php } ?>
-</div>
-<?php osc_show_widgets('header'); ?>
-<div class="wrapper wrapper-flash">
-    <?php
-        $breadcrumb = osc_breadcrumb('&raquo;', false, get_breadcrumb_lang());
-        if( $breadcrumb !== '') { ?>
-        <div class="breadcrumb">
-            <?php echo $breadcrumb; ?>
-            <div class="clear"></div>
-        </div>
-    <?php
-        }
-    ?>
-    <?php osc_show_flash_message(); ?>
-</div>
-<?php osc_run_hook('before-content'); ?>
-<div class="wrapper" id="content">
-    <?php osc_run_hook('before-main'); ?>
-    <div id="main">
-        <?php osc_run_hook('inside-main'); ?>
+
+        <?php osc_run_hook('before-main'); ?>
+        <main>
+            <?php osc_run_hook('inside-main'); ?>
