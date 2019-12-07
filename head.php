@@ -52,11 +52,7 @@ osc_enqueue_script('global-theme-js');
     matrix.fancybox_closeBtn = '<?php echo osc_esc_js( __('Close','matrix')) ?>';
 </script>
 
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<?php // osc_run_hook('header') ; ?>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<?php osc_run_hook('header') ; ?>
 
 <!-- temporary -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Proza+Libre|Righteous&display=swap" rel="stylesheet">

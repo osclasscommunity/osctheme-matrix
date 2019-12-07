@@ -5,24 +5,27 @@ DEFINES
 
 */
     define('MTX_VERSION', '100');
-    if( (string)osc_get_preference('keyword_placeholder', 'matrix')=="" ) {
+    if((string) osc_get_preference('keyword_placeholder', 'matrix') == "") {
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'matrix') ) ;
     }
+
+    osc_register_script('jquery', 'https://code.jquery.com/jquery-3.4.1.slim.min.js');
+    osc_register_script('popper', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'));
+    osc_register_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery'));
     osc_register_script('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));
+    osc_enqueue_script('jquery');
+    osc_enqueue_script('popper');
+    osc_enqueue_script('bootstrap');
+    osc_enqueue_script('fancybox');
+
+    osc_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
+    osc_enqueue_style('font-awesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
     osc_enqueue_style('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.css'));
     osc_enqueue_script('fancybox');
 
-    osc_enqueue_style('font-awesome', osc_current_web_theme_url('css/font-awesome-4.1.0/css/font-awesome.min.css'));
     // used for date/dateinterval custom fields
     osc_enqueue_script('php-date');
-    if(!OC_ADMIN) {
-        osc_enqueue_style('fine-uploader-css', osc_assets_url('js/fineuploader/fineuploader.css'));
-        if(getPreference('rtl','matrix')=='0') {
-            osc_enqueue_style('matrix-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader.css'));
-        } else {
-            osc_enqueue_style('matrix-fine-uploader-css', osc_current_web_theme_url('css/ajax-uploader-rtl.css'));
-        }
-    }
     osc_enqueue_script('jquery-fineuploader');
 
 

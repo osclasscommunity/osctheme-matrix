@@ -58,48 +58,6 @@ matrix.photoUploaderActions = function($element,options) {
     });
 }
 
-function createPlaceHolder($element){
-  var $wrapper = $('<div class="has-placeholder '+$element.attr('class')+'" />');
-  $element.wrap($wrapper);
-  var $label = $('<label/>');
-      $label.append($element.attr('placeholder').replace(/^\s*/gm, ''));
-      $element.removeAttr('placeholder');
-
-  $element.before($label);
-  $element.bind('remove', function() {
-        $wrapper.remove();
-    });
-}
-
-function selectUi(thatSelect){
-    var uiSelect = $('<a href="#" class="select-box-trigger"></a>');
-    var uiSelectIcon = $('<span class="select-box-icon">0</span>');
-    var uiSelected = $('<span class="select-box-label">'+thatSelect.find("option:selected").text().replace(/^\s*/gm, '')+'</span>');
-    var uiWrap = $('<div class="select-box '+thatSelect.attr('class')+'" />');
-
-    thatSelect.css('filter', 'alpha(opacity=40)').css('opacity', '0');
-    thatSelect.wrap(uiWrap);
-
-
-    uiSelect.append(uiSelected).append(uiSelectIcon);
-    thatSelect.parent().append(uiSelect);
-    uiSelect.click(function(){
-        return false;
-    });
-    thatSelect.on('focus',function(){
-        thatSelect.parent().addClass('select-box-focus');
-    });
-    thatSelect.on('blur',function(){
-        thatSelect.parent().removeClass('select-box-focus');
-    });
-    thatSelect.change(function(){
-        str = thatSelect.find('option:selected').text().replace(/^\s*/gm, '');
-        uiSelected.text(str);
-    });
-    thatSelect.bind('removed', function() {
-        thatSelect.parent().remove();
-    });
-}
 $(document).ready(function(event){
     //OK
     $('.r-list h1 span').click(function(){
@@ -169,18 +127,6 @@ $(document).ready(function(event){
             placeholder.hide();
             thatInput.focus();
         }
-    });
-
-    $('input[placeholder]').each(function(){
-      createPlaceHolder($(this));
-    });
-
-    $('body').on("created", '[name^="select_"]',function(evt) {
-        selectUi($(this));
-    });
-
-    $('select').each(function(){
-        selectUi($(this));
     });
 
     $('.flashmessage .ico-close').click(function(){
