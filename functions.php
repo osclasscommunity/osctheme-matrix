@@ -20,6 +20,7 @@ DEFINES
 
     osc_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
     osc_enqueue_style('font-awesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    osc_enqueue_style('matrix', osc_current_web_theme_url('css/main.css'));
 
     osc_enqueue_style('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.css'));
     osc_enqueue_script('fancybox');

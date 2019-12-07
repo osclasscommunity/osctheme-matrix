@@ -1,11 +1,31 @@
-$text-color-contrasted: false;
-$maincolor: #35C3D9;
-$text-color-contrasted: #fff;
-$buttonDarken: 5%;
-$textcolor:#333;
-$linkcolor:#069;
-$contrasted-default-dark:   #000;
-$contrasted-default-light:  #fff;
-$contrasted-default-extremelight: #35c3d9;
-$widgetbackground: #f7f7f7;
-$widgetbordercolor: darken($widgetbackground,5%);
+.cl-accent {
+    color: #575FCF;
+}
+
+.cl-accent-dark {
+    color: #3C40C6;
+}
+
+.cl-darker {
+    color: #485460;
+}
+
+.bg-accent {
+    background: #575FCF;
+}
+
+.bg-accent-dark {
+    background: #3C40C6;
+}
+
+.bg-darker {
+    background: #485460;
+}
+
+.bg-lighty {
+    background: #E3E3E3;
+}
+
+.bg-lighter {
+    background: #EEEEEE;
+}

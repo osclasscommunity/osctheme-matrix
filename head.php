@@ -56,4 +56,3 @@ osc_enqueue_script('global-theme-js');
 
 <!-- temporary -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans|Proza+Libre|Righteous&display=swap" rel="stylesheet">
-<link href="<?php echo osc_current_web_theme_url('css/style.css') ; ?>" rel="stylesheet" type="text/css" />
