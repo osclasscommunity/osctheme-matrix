@@ -1,10 +1,21 @@
-.categories-item {
+.category {
     text-align: center;
     position: relative;
     padding: 1.5rem;
     margin: 1.5rem 0 1.5rem 0;
+
+    .category-icon {
+        font-size: 3rem;
+    }
 }
 
-.categories-icon {
-    font-size: 3rem;
+.ribbon {
+    .ribbon-stat {
+        text-align: center;
+        color: $white;
+
+        .ribbon-count {
+            font-size: 3rem;
+        }
+    }
 }

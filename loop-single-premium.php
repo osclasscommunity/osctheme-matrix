@@ -8,9 +8,12 @@
                 <img src="<?php echo osc_current_web_theme_url('images/nophoto.svg'); ?>" class="card-img-top" alt="<?php echo osc_esc_html(osc_premium_title()) ; ?>">
             <?php } ?>
         <?php } ?>
-        <div class="card-body">
+        <div class="card-body text-center">
             <h5 class="card-title"><a href="<?php echo osc_premium_url(); ?>" class="cl-darker"><?php echo osc_highlight(osc_premium_title(), 100); ?></a></h5>
-            <p class="card-text"><?php echo osc_highlight(osc_premium_description(), 250); ?></p>
+            <div class="card-text">
+                <p class="ad-location"><?php echo mtx_loop_item_location(1); ?></p>
+                <p class="ad-price"><?php echo osc_premium_formated_price(); ?></p>
+            </div>
         </div>
         <div class="card-footer ad-actions">
             <a href="<?php echo osc_premium_url(); ?>" class="btn btn-mtx bg-accent text-white w-50 h-100"><?php _e('More info', 'matrix'); ?></a>

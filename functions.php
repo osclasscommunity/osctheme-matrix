@@ -721,9 +721,55 @@ function mtx_search_category_select_sub($category, $selected, $deep) {
 }
 
 function mtx_loop_item($premium = false) {
-  $file = 'loop-single';
-  $file .= ($premium) ? '-premium' : '';
+    $file = 'loop-single';
+    $file .= ($premium) ? '-premium' : '';
 
-  require WebThemes::newInstance()->getCurrentThemePath().$file.'.php';
+    require WebThemes::newInstance()->getCurrentThemePath().$file.'.php';
+}
+
+function mtx_loop_item_location($premium = false) {
+    if(!$premium) {
+        $country = osc_item_country();
+        $region = osc_item_region();
+        $city = osc_item_city();
+    } else {
+        $country = osc_premium_country();
+        $region = osc_premium_region();
+        $city = osc_premium_city();
+    }
+
+    if($country != '') {
+        if(strlen($country) == 2) {
+            $country = Country::newInstance()->findByCode($country)['s_name'];
+        }
+
+        if($region != '') {
+            if($city != '') {
+                return $city. ' '.__('in', 'matrix').' '.$region.' ('.$country.')';
+            } else {
+                return $region.' ('.$country.')';
+            }
+        } else {
+            if($city != '') {
+                return $city.' ('.$country.')';
+            } else {
+                return $country;
+            }
+        }
+    } else {
+        if($region != '') {
+            if($city != '') {
+                return $city.' '.__('in', 'matrix').' '.$region;
+            } else {
+                return $region;
+            }
+        } else {
+            if($city != '') {
+                return $city;
+            } else {
+                return __('Unknown location', 'matrix');
+            }
+        }
+    }
 }
 ?>

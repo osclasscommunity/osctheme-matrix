@@ -18,12 +18,12 @@ if(mtx_show_as() == 'gallery') {
             <p class="text-center cl-darker mb-5 col-12"><?php _e('Browse our selection of ads through various categories.', 'matrix'); ?></p>
             <?php while(osc_has_categories()) { ?>
                 <div class="col-md-3">
-                    <div class="categories-item bg-lighty">
-                        <span class="categories-count badge bg-accent text-white p-2"><?php echo osc_category_total_items(); ?> ads</span>
-                        <div class="categories-icon mt-2 mb-4">
+                    <div class="category bg-lighty">
+                        <span class="category-count badge bg-accent text-white p-2"><?php echo osc_category_total_items(); ?> ads</span>
+                        <div class="category-icon mt-2 mb-4">
                             <i class="fa fa-group cl-accent"></i>
                         </div>
-                        <p class="categories-title"><?php echo osc_category_name(); ?></p>
+                        <p class="category-title"><?php echo osc_category_name(); ?></p>
                     </div>
                 </div>
             <?php } ?>
@@ -45,6 +45,39 @@ if(mtx_show_as() == 'gallery') {
         </div>
     </section>
 <?php } ?>
+
+<section class="ribbon bg-darker">
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center text-white mt-5 col-12"><?php _e('Ribbon', 'matrix'); ?></h2>
+            <p class="text-center cl-lighty mb-5 col-12"><?php _e('Because what\'s a modern theme without one?.', 'matrix'); ?></p>
+            <div class="col-md-3 mb-10">
+                <div class="ribbon-stat text-center text-white">
+                    <span class="ribbon-count">61989</span>
+                    <p class="ribbon-text">total ads</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-10">
+                <div class="ribbon-stat text-center text-white">
+                    <span class="ribbon-count">79128</span>
+                    <p class="ribbon-text">total users</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-10">
+                <div class="ribbon-stat text-center text-white">
+                    <span class="ribbon-count">589</span>
+                    <p class="ribbon-text">premium ads</p>
+                </div>
+            </div>
+            <div class="col-md-3 mb-10">
+                <div class="ribbon-stat text-center text-white">
+                    <span class="ribbon-count">250000</span>
+                    <p class="ribbon-text">monthly views</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php if(osc_count_latest_items() > 0) { ?>
     <section class="latest">
