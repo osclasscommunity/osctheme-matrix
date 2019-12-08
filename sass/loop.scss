@@ -25,9 +25,23 @@
             }
         }
     }
-    
+
     .card-title:hover a::after {
         width: 90%;
         transition: 0.5s ease all;
+    }
+
+    .ad-actions {
+        align-items: center;
+        padding: 0;
+        border: 0;
+        display: flex;
+
+        a {
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }

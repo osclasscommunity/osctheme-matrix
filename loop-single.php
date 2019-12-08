@@ -14,8 +14,9 @@
             <h5 class="card-title"><a href="<?php echo osc_item_url(); ?>"><?php echo osc_highlight(osc_item_title(), 100); ?></a></h5>
             <p class="card-text"><?php echo osc_highlight(osc_item_description(), 250); ?></p>
         </div>
-        <div class="card-footer">
-            <small class="text-muted"><?php echo osc_format_date(osc_item_pub_date()); ?></small>
+        <div class="card-footer ad-actions">
+            <a href="<?php echo osc_item_url(); ?>" class="btn btn-mtx bg-accent text-white w-50 h-100"><?php _e('More info', 'matrix'); ?></a>
+            <a href="<?php echo osc_item_url(); ?>" class="btn btn-mtx bg-accent text-white w-50 h-100"><?php _e('Add to favorites', 'matrix'); ?></a>
         </div>
     </div>
 </div>

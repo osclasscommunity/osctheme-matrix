@@ -15,9 +15,15 @@
     text-transform: lowercase;
     transition: .5s ease all;
 
-    &:hover {
+    &.bg-accent:hover {
         background: #fff;
         color: $accent !important;
+        transition: .5s ease all;
+    }
+
+    &.bg-accent-dark:hover {
+        background: #fff;
+        color: $accent-dark !important;
         transition: .5s ease all;
     }
 }
