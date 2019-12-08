@@ -719,4 +719,11 @@ function mtx_search_category_select_sub($category, $selected, $deep) {
         <?php }
     }
 }
+
+function mtx_loop_item($premium = false) {
+  $file = 'loop-single';
+  $file .= ($premium) ? '-premium' : '';
+
+  require WebThemes::newInstance()->getCurrentThemePath().$file.'.php';
+}
 ?>

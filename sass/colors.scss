@@ -1,31 +1,37 @@
+$accent: #575FCF;
+$accent-dark: #3C40C6;
+$darker: #485460;
+$light: #E3E3E3;
+$lighter: #EEEEEE;
+
 .cl-accent {
-    color: #575FCF;
+    color: $accent;
 }
 
 .cl-accent-dark {
-    color: #3C40C6;
+    color: $accent-dark;
 }
 
 .cl-darker {
-    color: #485460;
+    color: $darker;
 }
 
 .bg-accent {
-    background: #575FCF;
+    background: $accent;
 }
 
 .bg-accent-dark {
-    background: #3C40C6;
+    background: $accent-dark;
 }
 
 .bg-darker {
-    background: #485460;
+    background: $darker;
 }
 
 .bg-lighty {
-    background: #E3E3E3;
+    background: $light;
 }
 
 .bg-lighter {
-    background: #EEEEEE;
+    background: $lighter;
 }

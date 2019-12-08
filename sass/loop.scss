@@ -1,0 +1,33 @@
+.ad {
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        word-break: break-all;
+        text-overflow: ellipsis;
+        text-align: center;
+
+        a {
+            position: relative;
+
+            &::after {
+                content: '';
+                height: 3px;
+                background-color: $accent;
+                transition: 0.4s ease-out all .1s;
+                display: block;
+                width: 50%;
+                margin: 0.5rem auto 0;
+            }
+
+            &:hover {
+                color: initial;
+                text-decoration: none;
+            }
+        }
+    }
+    
+    .card-title:hover a::after {
+        width: 90%;
+        transition: 0.5s ease all;
+    }
+}

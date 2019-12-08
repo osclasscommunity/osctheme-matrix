@@ -1,12 +1,24 @@
-<?php $size = explode('x', osc_thumbnail_dimensions()); ?>
-<li class="listing-card <?php echo $class; ?> premium">
-    <?php if( osc_images_enabled_at_items() ) { ?>
-        <?php if(osc_count_premium_resources()) { ?>
-            <a class="listing-thumb" href="<?php echo osc_premium_url() ; ?>" title="<?php echo osc_esc_html(osc_premium_title()) ; ?>"><img src="<?php echo osc_resource_thumbnail_url(); ?>" title="" alt="<?php echo osc_esc_html(osc_premium_title()) ; ?>" width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>"></a>
-        <?php } else { ?>
-            <a class="listing-thumb" href="<?php echo osc_premium_url() ; ?>" title="<?php echo osc_esc_html(osc_premium_title()) ; ?>"><img src="<?php echo osc_current_web_theme_url('images/no_photo.gif'); ?>" title="" alt="<?php echo osc_esc_html(osc_premium_title()) ; ?>" width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>"></a>
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-3">
+    <div class="card ad premium <?php osc_run_hook('highlight_class'); ?> mb-3 h-100">
+        <span class="ad-premium badge bg-accent text-white p-2"><?php _e('Premium', 'matrix'); ?></span>
+        <?php if(osc_images_enabled_at_items()) { ?>
+            <?php if(osc_count_premium_resources()) { ?>
+                <img src="<?php echo osc_resource_thumbnail_url(); ?>" class="card-img-top" alt="<?php echo osc_esc_html(osc_premium_title()) ; ?>">
+            <?php } else { ?>
+                <img src="<?php echo osc_current_web_theme_url('images/nophoto.svg'); ?>" class="card-img-top" alt="<?php echo osc_esc_html(osc_premium_title()) ; ?>">
+            <?php } ?>
         <?php } ?>
-    <?php } ?>
+        <div class="card-body">
+            <h5 class="card-title"><a href="<?php echo osc_premium_url(); ?>" class="cl-darker"><?php echo osc_highlight(osc_premium_title(), 100); ?></a></h5>
+            <p class="card-text"><?php echo osc_highlight(osc_premium_description(), 250); ?></p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted"><?php echo osc_format_date(osc_premium_pub_date()); ?></small>
+        </div>
+    </div>
+</div>
+
+<!-- <li class="listing-card <?php echo $class; ?> premium">
     <div class="listing-detail">
         <div class="listing-cell">
             <div class="listing-data">
@@ -33,4 +45,4 @@
             </div>
         </div>
     </div>
-</li>
+</li> -->

@@ -1,3 +1,23 @@
 .btn-mtx {
+
+}
+
+.badge {
+    position: absolute;
+    top: 1em;
+    left: 1em;
+    font-weight: normal;
     text-transform: lowercase;
+    display: inline-table;
+}
+
+.btn-mtx, .badge {
+    text-transform: lowercase;
+    transition: .5s ease all;
+
+    &:hover {
+        background: #fff;
+        color: $accent !important;
+        transition: .5s ease all;
+    }
 }

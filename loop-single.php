@@ -1,12 +1,27 @@
-<?php $size = explode('x', osc_thumbnail_dimensions()); ?>
-<li class="<?php osc_run_hook("highlight_class"); ?>listing-card <?php echo $class; if(osc_item_is_premium()){ echo ' premium'; } ?>">
-    <?php if( osc_images_enabled_at_items() ) { ?>
-        <?php if(osc_count_item_resources()) { ?>
-    <a class="listing-thumb" href="<?php echo osc_item_url() ; ?>" title="<?php echo osc_esc_html(osc_item_title()) ; ?>"><img src="<?php echo osc_resource_thumbnail_url(); ?>" title="" alt="<?php echo osc_esc_html(osc_item_title()) ; ?>" width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>"></a>
-        <?php } else { ?>
-            <a class="listing-thumb" href="<?php echo osc_item_url() ; ?>" title="<?php echo osc_esc_html(osc_item_title()) ; ?>"><img src="<?php echo osc_current_web_theme_url('images/no_photo.gif'); ?>" title="" alt="<?php echo osc_esc_html(osc_item_title()) ; ?>" width="<?php echo $size[0]; ?>" height="<?php echo $size[1]; ?>"></a>
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 mb-3">
+    <div class="card ad <?php osc_run_hook('highlight_class'); ?> mb-3 h-100">
+        <?php if(osc_item_is_premium()) { ?>
+            <span class="ad-premium badge bg-accent text-white p-2"><?php _e('Premium', 'matrix'); ?></span>
         <?php } ?>
-    <?php } ?>
+        <?php if(osc_images_enabled_at_items()) { ?>
+            <?php if(osc_count_item_resources()) { ?>
+                <img src="<?php echo osc_resource_thumbnail_url(); ?>" class="card-img-top" alt="<?php echo osc_esc_html(osc_item_title()) ; ?>">
+            <?php } else { ?>
+                <img src="<?php echo osc_current_web_theme_url('images/nophoto.svg'); ?>" class="card-img-top" alt="<?php echo osc_esc_html(osc_item_title()) ; ?>">
+            <?php } ?>
+        <?php } ?>
+        <div class="card-body">
+            <h5 class="card-title"><a href="<?php echo osc_item_url(); ?>"><?php echo osc_highlight(osc_item_title(), 100); ?></a></h5>
+            <p class="card-text"><?php echo osc_highlight(osc_item_description(), 250); ?></p>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted"><?php echo osc_format_date(osc_item_pub_date()); ?></small>
+        </div>
+    </div>
+</div>
+
+<!--
+<li>
     <div class="listing-detail">
         <div class="listing-cell">
             <div class="listing-data">
@@ -17,7 +32,6 @@
                         <span class="location"><?php echo osc_item_city(); ?> <?php if( osc_item_region()!='' ) { ?> (<?php echo osc_item_region(); ?>)<?php } ?></span> <span class="g-hide">-</span> <?php echo osc_format_date(osc_item_pub_date()); ?>
                         <?php if( osc_price_enabled_at_items() ) { ?><span class="currency-value"><?php echo osc_format_price(osc_item_price()); ?></span><?php } ?>
                     </div>
-                    <p><?php echo osc_highlight( osc_item_description() ,250) ; ?></p>
                 </div>
                 <?php if($admin){ ?>
                     <span class="admin-options">
@@ -33,4 +47,4 @@
             </div>
         </div>
     </div>
-</li>
+</li> -->
