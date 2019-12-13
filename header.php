@@ -7,7 +7,7 @@
         <header class="header">
             <nav class="navbar navbar-expand-lg navbar-dark bg-accent">
                 <div class="container">
-                    <a class="navbar-brand" href="#"><?php echo mtx_logo('header'); ?></a>
+                    <a class="navbar-brand" href="<?php echo osc_base_url(); ?>"><?php echo mtx_logo('header'); ?></a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -15,7 +15,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#"><?php _e('Home', 'matrix'); ?> <span class="sr-only">(<?php _e('current', 'matrix'); ?>)</span></a>
+                                <a class="nav-link" href="<?php echo osc_base_url(); ?>"><?php _e('Home', 'matrix'); ?> <span class="sr-only">(<?php _e('current', 'matrix'); ?>)</span></a>
                             </li>
 
                             <li class="nav-item nav-contact">
@@ -55,43 +55,43 @@
                     </div>
                 </div>
             </nav>
-        </header>
 
-        <section class="jumbo">
-            <div class="jumbotron bg-darker text-white mb-0">
-                <div class="container">
-                    <div class="row">
-                        <div class="jumbo-text col-md-8">
-                            <h1 class="display-4"><?php _e('Modern & open-source', 'matrix'); ?></h1>
-                            <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
-                            <hr class="my-4">
-                            <p><?php _e('What are you waiting for?', 'matrix'); ?></p>
-                            <p class="lead">
-                                <a class="btn btn-lg btn-mtx bg-accent text-white" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
-                            </p>
-                        </div>
-                        <div class="jumbo-search col-md-4">
-                            <form action="<?php echo osc_base_url(1); ?>" method="GET" class="nocsrf text-white bg-accent">
-                                <input type="hidden" name="page" value="search"/>
-                                <div class="p-4">
-                                    <div class="form-group">
-                                        <label for="sPattern"><?php _e('Query', 'matrix'); ?></label>
-                                        <input type="text" class="form-control" id="sPattern" name="sPattern" placeholder="<?php echo osc_esc_html(osc_get_preference('keyword_placeholder', 'matrix')); ?>">
+            <section class="jumbo">
+                <div class="jumbotron bg-darker text-white mb-0" style="background: url('http://wallpaperswide.com/download/space_colors_blue_purple_stars-wallpaper-1920x1080.jpg')">
+                    <div class="container">
+                        <div class="row">
+                            <div class="jumbo-text col-md-8">
+                                <h1 class="display-4"><?php _e('Modern & open-source', 'matrix'); ?></h1>
+                                <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
+                                <hr class="my-4">
+                                <p><?php _e('What are you waiting for?', 'matrix'); ?></p>
+                                <p class="lead">
+                                    <a class="btn btn-lg btn-mtx bg-accent text-white" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
+                                </p>
+                            </div>
+                            <div class="jumbo-search col-md-4">
+                                <form action="<?php echo osc_base_url(1); ?>" method="GET" class="nocsrf text-white bg-accent">
+                                    <input type="hidden" name="page" value="search"/>
+                                    <div class="p-4">
+                                        <div class="form-group">
+                                            <label for="sPattern"><?php _e('Query', 'matrix'); ?></label>
+                                            <input type="text" class="form-control" id="sPattern" name="sPattern" placeholder="<?php echo osc_esc_html(osc_get_preference('keyword_placeholder', 'matrix')); ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sCategory"><?php _e('Category', 'matrix'); ?></label>
+                                            <?php mtx_search_category_select(); ?>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="sCategory"><?php _e('Category', 'matrix'); ?></label>
-                                        <?php mtx_search_category_select(); ?>
+                                        <button type="submit" class="btn btn-mtx bg-accent-dark text-white w-100"><?php _e('Search', 'matrix'); ?></button>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-mtx bg-accent-dark text-white w-100"><?php _e('Search', 'matrix'); ?></button>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </header>
 
         <?php osc_show_widgets('header'); ?>
 
@@ -107,5 +107,5 @@
         </div>
 
         <?php osc_run_hook('before-main'); ?>
-        <main>
+        <main class="main">
             <?php osc_run_hook('inside-main'); ?>

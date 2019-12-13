@@ -8,7 +8,8 @@ if(View::newInstance()->_exists('listClass')){
     $loopClass = View::newInstance()->_get('listClass');
 }
 ?>
-<ul class="listing-card-list <?php echo $loopClass; ?>" id="listing-card-list">
+<div class="container">
+<div class="row">
     <?php
         $i = 0;
 
@@ -60,4 +61,5 @@ if(View::newInstance()->_exists('listClass')){
           }
         }
     ?>
-</ul>
+</div>
+</div>

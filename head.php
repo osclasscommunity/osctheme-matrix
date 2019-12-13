@@ -25,8 +25,6 @@ osc_enqueue_script('global-theme-js');
 <link rel="canonical" href="<?php echo osc_get_canonical(); ?>"/>
 <!-- /canonical -->
 <?php } ?>
-<meta http-equiv="Cache-Control" content="no-cache" />
-<meta http-equiv="Expires" content="Fri, Jan 01 1970 00:00:00 GMT" />
 
 <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
 

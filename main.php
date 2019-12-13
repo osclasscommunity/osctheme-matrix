@@ -18,7 +18,7 @@ if(mtx_show_as() == 'gallery') {
             <p class="text-center cl-darker mb-5 col-12"><?php _e('Browse our selection of ads through various categories.', 'matrix'); ?></p>
             <?php while(osc_has_categories()) { ?>
                 <div class="col-md-3">
-                    <div class="category bg-lighty">
+                    <div class="category bg-lighty" onclick="window.location.href='<?php echo osc_search_url(['sCategory' => osc_category_id()]); ?>';">
                         <span class="category-count badge bg-accent text-white p-2"><?php echo osc_category_total_items(); ?> ads</span>
                         <div class="category-icon mt-2 mb-4">
                             <i class="fa fa-group cl-accent"></i>
@@ -93,5 +93,4 @@ if(mtx_show_as() == 'gallery') {
     </section>
 <?php } ?>
 
-</main>
-<?php osc_current_web_theme_path('footer.php') ; ?>
+<?php osc_current_web_theme_path('footer.php'); ?>

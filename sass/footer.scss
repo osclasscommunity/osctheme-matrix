@@ -1,0 +1,48 @@
+.footer {
+    .footer-col {
+        color: $white;
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: lowercase;
+        }
+
+        .footer-text p {
+            margin-bottom: 0;
+            font-size: .9rem;
+
+            a {
+                color: inherit;
+            }
+        }
+    }
+
+    .footer-bar {
+        display: flex;
+        width: 100%;
+
+        .footer-left, .footer-center, .footer-right {
+            display: flex;
+            flex: 1;
+            align-items: center;
+
+            p {
+                color: $white;
+                margin: 0;
+            }
+        }
+
+        .footer-left {
+            justify-content: flex-end;
+        }
+
+        .footer-center {
+            justify-content: center;
+        }
+
+        .footer-right {
+            justify-content: flex-start;
+        }
+    }
+}
