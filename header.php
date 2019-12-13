@@ -57,7 +57,7 @@
             </nav>
 
             <section class="jumbo">
-                <div class="jumbotron bg-darker text-white mb-0" style="background: url('http://wallpaperswide.com/download/space_colors_blue_purple_stars-wallpaper-1920x1080.jpg')">
+                <div class="jumbotron bg-darker text-white mb-0">
                     <div class="container">
                         <div class="row">
                             <div class="jumbo-text col-md-8">
