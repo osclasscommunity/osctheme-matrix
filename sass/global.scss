@@ -12,3 +12,9 @@
 .mb-10 {
     margin-bottom: 6rem;
 }
+
+@media (min-width: 767.98px) {
+    .mb-md-10 {
+        margin-bottom: 6rem !important;
+    }
+}

@@ -1,6 +1,10 @@
 .footer {
+    text-align: center;
+
     .footer-col {
         color: $white;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
 
         .footer-title {
             font-size: 1.2rem;
@@ -43,6 +47,36 @@
 
         .footer-right {
             justify-content: flex-start;
+        }
+    }
+}
+
+@media (max-width: 767.98px) {
+    .footer {
+        .footer-col {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-bar {
+            display: block;
+
+            .footer-left, .footer-center, .footer-right {
+                display: block;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .footer {
+        text-align: center;
+
+        .footer-col {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
         }
     }
 }

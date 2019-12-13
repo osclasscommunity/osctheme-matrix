@@ -7,7 +7,7 @@
     <section class="footer footer-top bg-accent">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 mt-5 mb-10">
+                <div class="col-md-3 col-sm-6 col-12">
                     <div class="footer-col text-white">
                         <h3 class="footer-title"><?php _e('Info', 'matrix'); ?></h3>
                         <div class="footer-text">
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mt-5 mb-10">
+                <div class="col-md-3 col-sm-6 col-12">
                     <div class="footer-col text-white">
                         <h3 class="footer-title"><?php _e('Menu', 'matrix'); ?></h3>
                         <div class="footer-text">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mt-5 mb-10">
+                <div class="col-md-3 col-sm-6 col-12">
                     <div class="footer-col text-white">
                         <h3 class="footer-title"><?php _e('Popular categories', 'matrix'); ?></h3>
                         <div class="footer-text">
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mt-5 mb-10">
+                <div class="col-md-3 col-sm-6 col-12">
                     <div class="footer-col text-white">
                         <h3 class="footer-title"><?php _e('Popular locations', 'matrix'); ?></h3>
                         <div class="footer-text">
@@ -80,13 +80,13 @@
         <div class="container">
             <div class="row">
                 <div class="footer-bar">
-                    <div class="footer-left d-flex">
+                    <div class="footer-left">
                         <p class="text-white m-0">©<?php echo date('Y'); ?> <?php _e('All rights reserved.', 'matrix'); ?></p>
                     </div>
-                    <div class="footer-center d-flex">
+                    <div class="footer-center">
                         <a class="navbar-brand text-white mr-2" href="#"><?php echo mtx_logo('footer'); ?></a>
                     </div>
-                    <div class="footer-right d-flex">
+                    <div class="footer-right">
                         <p class="text-white m-0"><?php _e('Powered by Osclass Community | WEBmods', 'matrix'); ?></p>
                     </div>
                 </div>
