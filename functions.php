@@ -9,17 +9,17 @@ DEFINES
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'matrix') ) ;
     }
 
-    osc_register_script('jquery', 'https://code.jquery.com/jquery-3.4.1.slim.min.js');
-    osc_register_script('popper', 'https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js', array('jquery'));
-    osc_register_script('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js', array('jquery'));
+    osc_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js');
+    osc_register_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js', array('jquery'));
+    osc_register_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js', array('jquery'));
     osc_register_script('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));
     osc_enqueue_script('jquery');
     osc_enqueue_script('popper');
     osc_enqueue_script('bootstrap');
     osc_enqueue_script('fancybox');
 
-    osc_enqueue_style('bootstrap', 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css');
-    osc_enqueue_style('font-awesome', 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    osc_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css');
+    osc_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css');
     osc_enqueue_style('matrix', osc_current_web_theme_url('css/main.css'));
 
     osc_enqueue_style('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.css'));
@@ -771,5 +771,35 @@ function mtx_loop_item_location($premium = false) {
             }
         }
     }
+}
+
+function mtx_flash($section = 'pubMessages', $class = 'flashmessage') {
+	$messages = Session::newInstance()->_getMessage($section);
+	if(is_array($messages)) {
+        require WebThemes::newInstance()->getCurrentThemePath().'flash.php';
+	}
+
+	Session::newInstance()->_dropMessage($section);
+}
+
+function mtx_flash_icon($message) {
+    if(isset($message['type'])) {
+        switch($message['type']) {
+            case 'error':
+                return '<i class="fa fa-fw fa-exclamation-circle"></i>';
+            break;
+            case 'ok':
+                return '<i class="fa fa-fw fa-check-circle"></i>';
+            break;
+            case 'info':
+                return '<i class="fa fa-fw fa-info-circle"></i>';
+            break;
+            case 'warning':
+                return '<i class="fa fa-fw fa-exclamation-triangle"></i>';
+            break;
+        }
+    }
+
+    return '<i class="fa fa-fw fa-info-circle"></i>';
 }
 ?>

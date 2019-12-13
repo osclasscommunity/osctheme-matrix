@@ -8,11 +8,11 @@
             <nav class="navbar navbar-expand-lg navbar-dark bg-accent">
                 <div class="container">
                     <a class="navbar-brand" href="<?php echo osc_base_url(); ?>"><?php echo mtx_logo('header'); ?></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="<?php _e('Toggle navigation', 'matrix'); ?>">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div class="collapse navbar-collapse" id="mainNav">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
                                 <a class="nav-link" href="<?php echo osc_base_url(); ?>"><?php _e('Home', 'matrix'); ?> <span class="sr-only">(<?php _e('current', 'matrix'); ?>)</span></a>
@@ -56,6 +56,8 @@
                 </div>
             </nav>
 
+            <?php mtx_flash(); ?>
+
             <section class="jumbo">
                 <div class="jumbotron bg-darker text-white mb-0">
                     <div class="container">
@@ -63,8 +65,7 @@
                             <div class="jumbo-text col-md-8">
                                 <h1 class="display-4"><?php _e('Modern & open-source', 'matrix'); ?></h1>
                                 <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
-                                <hr class="my-4">
-                                <p><?php _e('What are you waiting for?', 'matrix'); ?></p>
+                                <p class="mt-5"><?php _e('What are you waiting for?', 'matrix'); ?></p>
                                 <p class="lead">
                                     <a class="btn btn-lg btn-mtx bg-accent text-white" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
                                 </p>
@@ -94,17 +95,6 @@
         </header>
 
         <?php osc_show_widgets('header'); ?>
-
-        <div class="wrapper wrapper-flash">
-            <?php $breadcrumb = osc_breadcrumb('&raquo;', false, get_breadcrumb_lang()); ?>
-            <?php if($breadcrumb !== '') { ?>
-                <div class="breadcrumb">
-                    <?php echo $breadcrumb; ?>
-                    <div class="clear"></div>
-                </div>
-            <?php } ?>
-            <?php osc_show_flash_message(); ?>
-        </div>
 
         <?php osc_run_hook('before-main'); ?>
         <main class="main">

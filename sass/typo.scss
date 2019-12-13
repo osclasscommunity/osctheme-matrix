@@ -14,3 +14,11 @@ h1, h2, h3, .btn-mtx {
 h1, h2 {
     text-transform: uppercase;
 }
+
+a {
+    color: inherit;
+
+    &:hover {
+        color: inherit;
+    }
+}

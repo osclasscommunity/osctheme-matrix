@@ -28,6 +28,17 @@
     }
 }
 
+.flashmessage {
+    i {
+        font-size: 1.4rem;
+        vertical-align: top;
+    }
+
+    span {
+        word-break: break-all;
+    }
+}
+
 @media (max-width: 575px) {
     .badge {
         top: 0;
