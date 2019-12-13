@@ -21,7 +21,7 @@ if(mtx_show_as() == 'gallery') {
                     <div class="category bg-lighty" onclick="window.location.href='<?php echo osc_search_url(['sCategory' => osc_category_id()]); ?>';">
                         <span class="category-count badge bg-accent text-white p-2"><?php echo osc_category_total_items(); ?> ads</span>
                         <div class="category-icon mt-4 mt-sm-2 mb-4">
-                            <i class="fa fa-group cl-accent"></i>
+                            <i class="fa fa-users cl-accent"></i>
                         </div>
                         <p class="category-title"><?php echo osc_category_name(); ?></p>
                     </div>
