@@ -1,8 +1,5 @@
 </main>
 <?php osc_run_hook('after-main'); ?>
-<div class="clear"></div>
-<?php osc_show_widgets('footer');?>
-
 <footer class="footer">
     <section class="footer footer-top bg-accent">
         <div class="container">
@@ -73,6 +70,8 @@
                         </div>
                     </div>
                 </div>
+
+                <?php osc_show_widgets('footer'); ?>
             </div>
         </div>
     </section>
