@@ -5,6 +5,8 @@ DEFINES
 
 */
     define('MTX_VERSION', '100');
+    require 'classes/ModelMatrix.php';
+
     if((string) osc_get_preference('keyword_placeholder', 'matrix') == "") {
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'matrix') ) ;
     }
@@ -681,6 +683,13 @@ if (!function_exists('search_ads_listing_medium_fn')) {
 }
 osc_add_hook('search_ads_listing_medium', 'search_ads_listing_medium_fn');
 
+/**
+ * Does the defined category have subcategories?
+ *
+ * @param array $category Category.
+ *
+ * @return boolean Has categories.
+ */
 function mtx_category_has_sub($category) {
     if(array_key_exists('categories', $category)) {
         if(is_array($category['categories'])) {
@@ -693,6 +702,13 @@ function mtx_category_has_sub($category) {
     return false;
 }
 
+/**
+ * Shows search category select.
+ *
+ * @param int $selected Selected category ID.
+ *
+ * @return string Formatted item location.
+ */
 function mtx_search_category_select($selected = null) {
     ?>
     <select name="sCategory" id="sCategory" class="form-control">
@@ -705,6 +721,15 @@ function mtx_search_category_select($selected = null) {
     <?php
 }
 
+/**
+ * Shows search subcategory select.
+ *
+ * @param array $category Parent category.
+ * @param int $selected Selected category ID.
+ * @param int $deep Subcategory level.
+ *
+ * @return string Formatted item location.
+ */
 function mtx_search_category_select_sub($category, $selected, $deep) {
     if(mtx_category_has_sub($category)) {
         $deep_string = '';
@@ -720,6 +745,11 @@ function mtx_search_category_select_sub($category, $selected, $deep) {
     }
 }
 
+/**
+ * Shows a single item in a loop.
+ *
+ * @param boolean $premium Is item premium.
+ */
 function mtx_loop_item($premium = false) {
     $file = 'loop-single';
     $file .= ($premium) ? '-premium' : '';
@@ -727,6 +757,13 @@ function mtx_loop_item($premium = false) {
     require WebThemes::newInstance()->getCurrentThemePath().$file.'.php';
 }
 
+/**
+ * Gets formatted item location.
+ *
+ * @param boolean $premium Is item premium.
+ *
+ * @return string Formatted item location.
+ */
 function mtx_loop_item_location($premium = false) {
     if(!$premium) {
         $country = osc_item_country();
@@ -773,6 +810,12 @@ function mtx_loop_item_location($premium = false) {
     }
 }
 
+/**
+ * Shows flash message (modified HTML).
+ *
+ * @param string $section Message section (Osclass default param).
+ * @param string $class HTML class (Osclass default param).
+ */
 function mtx_flash($section = 'pubMessages', $class = 'flashmessage') {
 	$messages = Session::newInstance()->_getMessage($section);
 	if(is_array($messages)) {
@@ -782,6 +825,13 @@ function mtx_flash($section = 'pubMessages', $class = 'flashmessage') {
 	Session::newInstance()->_dropMessage($section);
 }
 
+/**
+ * Gets HTML for flash message icon.
+ *
+ * @param array $message Message array. Required for type.
+ *
+ * @return string Icon HTML.
+ */
 function mtx_flash_icon($message) {
     if(isset($message['type'])) {
         switch($message['type']) {
@@ -801,5 +851,66 @@ function mtx_flash_icon($message) {
     }
 
     return '<i class="fa fa-fw fa-info-circle"></i>';
+}
+
+/**
+ * Gets most popular locations.
+ *
+ * Are there any regions? Return the most popular ones. Are there any cities? Return the most popular ones. Are there any countries? Return the most popular ones.
+ * Otherwise return 'empty' array.
+ *
+ * @return array
+ */
+function mtx_popular_locations() {
+    $data = RegionStats::newInstance()->listRegions('%%%%', '>', 'i_num_items DESC');
+    if(count($data)) {
+        return array('type' => 'region', 'data' => $data);
+    }
+
+    $data = CityStats::newInstance()->listCities(null, '>', 'i_num_items DESC');
+    if(count($data)) {
+        return array('type' => 'city', 'data' => $data);
+    }
+
+    $data = CountryStats::newInstance()->listCountries('>', 'i_num_items DESC');
+    if(count($data)) {
+        return array('type' => 'country', 'data' => $data);
+    }
+
+    return array('type' => null, 'data' => array(array('null' => null)));
+}
+
+/**
+ * Parses a popular location.
+ *
+ * Returns name and URL of a popular location in popular locations loop.
+ *
+ * @param array $location Location data.
+ * @param string $type Type of location. Can be sCountry, sRegion, sCity or null if there are no locations.
+ *
+ * @return array
+ */
+function mtx_popular_locations_parse($location, $type) {
+    $data = array();
+    switch($type) {
+        case 'country':
+            $data['s_name'] = $location['country_name'];
+            $data['s_url'] = osc_search_url(array('sCountry' => $location['country_code']));
+        break;
+        case 'region':
+            $data['s_name'] = $location['region_name'];
+            $data['s_url'] = osc_search_url(array('sRegion' => $location['region_id']));
+        break;
+        case 'city':
+            $data['s_name'] = $location['city_name'];
+            $data['s_url'] = osc_search_url(array('sCity' => $location['city_id']));
+        break;
+        default:
+            $data['s_name'] = __('No locations', 'matrix');
+            $data['s_url'] = osc_search_url();
+        break;
+    }
+
+    return $data;
 }
 ?>

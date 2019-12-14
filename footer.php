@@ -62,9 +62,10 @@
                     <div class="footer-col text-white">
                         <h3 class="footer-title"><?php _e('Popular locations', 'matrix'); ?></h3>
                         <div class="footer-text">
-                            <?php $i = 1; ?>
-                            <?php while(osc_has_regions()) { ?>
-                                <p><a href="<?php echo osc_region_url(); ?>"><?php echo osc_region_name(); ?></a></p>
+                            <?php $i = 1; $locations = mtx_popular_locations(); ?>
+                            <?php foreach($locations['data'] as $location) { ?>
+                                <?php $data = mtx_popular_locations_parse($location, $locations['type']); ?>
+                                <p><a href="<?php echo $data['s_url']; ?>"><?php echo $data['s_name']; ?></a></p>
                                 <?php if($i > 5) break; else $i++; ?>
                             <?php } ?>
                         </div>
