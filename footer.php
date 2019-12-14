@@ -49,8 +49,8 @@
                     <div class="footer-col text-white">
                         <h3 class="footer-title"><?php _e('Popular categories', 'matrix'); ?></h3>
                         <div class="footer-text">
-                            <?php $i = 1; $categories = mtx_popular_categories(); ?>
-                            <?php foreach($categories as $data) { ?>
+                            <?php $i = 1; ?>
+                            <?php foreach(mtx_popular_categories() as $data) { ?>
                                 <p><a href="<?php echo osc_search_url(array('sCategory' => $data['category_id'])); ?>"><?php echo $data['category_name']; ?></a></p>
                                 <?php if($i > 5) break; else $i++; ?>
                             <?php } ?>
