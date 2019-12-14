@@ -68,7 +68,7 @@
                                     <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
                                     <p class="mt-5"><?php _e('What are you waiting for?', 'matrix'); ?></p>
                                     <p class="lead">
-                                        <a class="btn btn-lg btn-mtx bg-accent text-white" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
+                                        <a class="btn btn-lg btn-mtx bg-accent" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
                                     </p>
                                 </div>
                                 <div class="jumbo-search col-md-4">
@@ -85,7 +85,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <button type="submit" class="btn btn-mtx bg-accent-dark text-white w-100"><?php _e('Search', 'matrix'); ?></button>
+                                            <button type="submit" class="btn btn-mtx bg-accent-dark w-100"><?php _e('Search', 'matrix'); ?></button>
                                         </div>
                                     </form>
                                 </div>
