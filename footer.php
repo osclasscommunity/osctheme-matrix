@@ -49,10 +49,9 @@
                     <div class="footer-col text-white">
                         <h3 class="footer-title"><?php _e('Popular categories', 'matrix'); ?></h3>
                         <div class="footer-text">
-                            <?php View::newInstance()->_reset('categories'); ?>
-                            <?php $i = 1; ?>
-                            <?php while(osc_has_categories()) { ?>
-                                <p><a href="<?php echo osc_search_url(['sCategory' => osc_category_id()]); ?>"><?php echo osc_category_name(); ?></a></p>
+                            <?php $i = 1; $categories = mtx_popular_categories(); ?>
+                            <?php foreach($categories as $data) { ?>
+                                <p><a href="<?php echo osc_search_url(array('sCategory' => $data['category_id'])); ?>"><?php echo $data['category_name']; ?></a></p>
                                 <?php if($i > 5) break; else $i++; ?>
                             <?php } ?>
                         </div>

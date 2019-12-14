@@ -913,4 +913,18 @@ function mtx_popular_locations_parse($location, $type) {
 
     return $data;
 }
+
+/**
+ * Gets most popular categories.
+ *
+ * @return array
+ */
+function mtx_popular_categories() {
+    $data = ModelMatrix_Helper::newInstance()->popularCategories();
+    if(count($data)) {
+        return $data;
+    }
+
+    return array();
+}
 ?>
