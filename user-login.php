@@ -4,39 +4,40 @@ mtx_add_body_class('login');
 
 osc_current_web_theme_path('header.php');
 ?>
-<div class="form-container form-horizontal form-container-box">
-    <div class="header">
-        <h1><?php _e('Access to your account', 'matrix'); ?></h1>
-    </div>
-    <div class="resp-wrapper">
-        <form action="<?php echo osc_base_url(true); ?>" method="post" >
-            <input type="hidden" name="page" value="login" />
-            <input type="hidden" name="action" value="login_post" />
+<section class="login bg-lighter">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Login', 'matrix'); ?></h1>
+            <p class="text-center cl-darker mb-5 col-12"><?php _e('Login to get access to much more features.', 'matrix'); ?></p>
+            <div class="col-md-6 col-12 bg-lighty p-5 ml-auto mr-auto mb-5">
+                <form action="<?php echo osc_base_url(1); ?>" method="POST">
+                    <input type="hidden" name="page" value="login" />
+                    <input type="hidden" name="action" value="login_post" />
 
-            <div class="control-group">
-                <label class="control-label" for="email"><?php _e('E-mail', 'matrix'); ?></label>
-                <div class="controls">
-                    <?php UserForm::email_login_text(); ?>
-                </div>
+                    <div class="form-group">
+                        <label for="mail"><?php _e('E-mail', 'matrix'); ?></label>
+                        <input type="email" name="email" class="form-control" id="mail" placeholder="<?php _e('Email for your account.', 'matrix'); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><?php _e('Password', 'matrix'); ?></label>
+                        <input type="password" name="password" class="form-control" id="pass" placeholder="<?php _e('Password for your account.', 'matrix'); ?>" required>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" name="remember" class="form-check-input" id="remember">
+                        <label class="form-check-label" for="remember"><?php _e('Stay logged in', 'matrix'); ?></label>
+                    </div>
+                    <div class="form-group form-submit">
+                        <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Login', 'matrix'); ?></button>
+                    </div>
+                    <div class="form-group">
+                        <a href="<?php echo osc_register_account_url(); ?>"><?php _e('Register', 'matrix'); ?></a>
+                    </div>
+                    <div class="form-group">
+                        <a href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgotten password?', 'matrix'); ?></a>
+                    </div>
+                </form>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="password"><?php _e('Password', 'matrix'); ?></label>
-                <div class="controls">
-                    <?php UserForm::password_login_text(); ?>
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls checkbox">
-                    <?php UserForm::rememberme_login_checkbox();?> <label for="remember"><?php _e('Remember me', 'matrix'); ?></label>
-                </div>
-                <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Log in", 'matrix');?></button>
-                </div>
-            </div>
-            <div class="actions">
-                <a href="<?php echo osc_register_account_url(); ?>"><?php _e("Register for a free account", 'matrix'); ?></a><br /><a href="<?php echo osc_recover_user_password_url(); ?>"><?php _e("Forgot password?", 'matrix'); ?></a>
-            </div>
-        </form>
+        </div>
     </div>
-</div>
+</section>
 <?php osc_current_web_theme_path('footer.php') ; ?>

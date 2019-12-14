@@ -1,5 +1,7 @@
 .btn-mtx {
-
+    &.bg-accent, &.bg-accent-dark {
+        color: $white;
+    }
 }
 
 .badge {

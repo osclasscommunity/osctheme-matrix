@@ -58,40 +58,42 @@
 
             <?php mtx_flash(); ?>
 
-            <section class="jumbo">
-                <div class="jumbotron bg-darker text-white mb-0">
-                    <div class="container">
-                        <div class="row">
-                            <div class="jumbo-text col-md-8">
-                                <h1 class="display-4"><?php _e('Modern & open-source', 'matrix'); ?></h1>
-                                <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
-                                <p class="mt-5"><?php _e('What are you waiting for?', 'matrix'); ?></p>
-                                <p class="lead">
-                                    <a class="btn btn-lg btn-mtx bg-accent text-white" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
-                                </p>
-                            </div>
-                            <div class="jumbo-search col-md-4">
-                                <form action="<?php echo osc_base_url(1); ?>" method="GET" class="nocsrf text-white bg-accent">
-                                    <input type="hidden" name="page" value="search"/>
-                                    <div class="p-4">
-                                        <div class="form-group">
-                                            <label for="sPattern"><?php _e('Query', 'matrix'); ?></label>
-                                            <input type="text" class="form-control" id="sPattern" name="sPattern" placeholder="<?php echo osc_esc_html(osc_get_preference('keyword_placeholder', 'matrix')); ?>">
+            <?php if(osc_is_home_page()) { ?>
+                <section class="jumbo">
+                    <div class="jumbotron bg-darker text-white mb-0">
+                        <div class="container">
+                            <div class="row">
+                                <div class="jumbo-text col-md-8">
+                                    <h1 class="display-4"><?php _e('Modern & open-source', 'matrix'); ?></h1>
+                                    <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
+                                    <p class="mt-5"><?php _e('What are you waiting for?', 'matrix'); ?></p>
+                                    <p class="lead">
+                                        <a class="btn btn-lg btn-mtx bg-accent text-white" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
+                                    </p>
+                                </div>
+                                <div class="jumbo-search col-md-4">
+                                    <form action="<?php echo osc_base_url(1); ?>" method="GET" class="nocsrf text-white bg-accent">
+                                        <input type="hidden" name="page" value="search"/>
+                                        <div class="p-4">
+                                            <div class="form-group">
+                                                <label for="sPattern"><?php _e('Query', 'matrix'); ?></label>
+                                                <input type="text" class="form-control" id="sPattern" name="sPattern" placeholder="<?php echo osc_esc_html(osc_get_preference('keyword_placeholder', 'matrix')); ?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="sCategory"><?php _e('Category', 'matrix'); ?></label>
+                                                <?php mtx_search_category_select(); ?>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="sCategory"><?php _e('Category', 'matrix'); ?></label>
-                                            <?php mtx_search_category_select(); ?>
+                                            <button type="submit" class="btn btn-mtx bg-accent-dark text-white w-100"><?php _e('Search', 'matrix'); ?></button>
                                         </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-mtx bg-accent-dark text-white w-100"><?php _e('Search', 'matrix'); ?></button>
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            <?php } ?>
         </header>
 
         <?php osc_show_widgets('header'); ?>
