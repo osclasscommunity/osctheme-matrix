@@ -333,68 +333,6 @@ FUNCTIONS
         }
     }
 
-    if(!function_exists('user_dashboard_redirect')) {
-        function user_dashboard_redirect() {
-            $page   = Params::getParam('page');
-            $action = Params::getParam('action');
-            if($page=='user' && $action=='dashboard') {
-                if(ob_get_length()>0) {
-                    ob_end_flush();
-                }
-                header("Location: ".osc_user_list_items_url(), TRUE,301);
-            }
-        }
-        osc_add_hook('init', 'user_dashboard_redirect');
-    }
-
-    if( !function_exists('get_user_menu') ) {
-        function get_user_menu() {
-            $options   = array();
-            $options[] = array(
-                'name' => __('Public Profile'),
-                 'url' => osc_user_public_profile_url(),
-               'class' => 'opt_publicprofile'
-            );
-            $options[] = array(
-                'name'  => __('Listings', 'matrix'),
-                'url'   => osc_user_list_items_url(),
-                'class' => 'opt_items'
-            );
-            $options[] = array(
-                'name' => __('Alerts', 'matrix'),
-                'url' => osc_user_alerts_url(),
-                'class' => 'opt_alerts'
-            );
-            $options[] = array(
-                'name'  => __('Account', 'matrix'),
-                'url'   => osc_user_profile_url(),
-                'class' => 'opt_account'
-            );
-            $options[] = array(
-                'name'  => __('Change email', 'matrix'),
-                'url'   => osc_change_user_email_url(),
-                'class' => 'opt_change_email'
-            );
-            $options[] = array(
-                'name'  => __('Change username', 'matrix'),
-                'url'   => osc_change_user_username_url(),
-                'class' => 'opt_change_username'
-            );
-            $options[] = array(
-                'name'  => __('Change password', 'matrix'),
-                'url'   => osc_change_user_password_url(),
-                'class' => 'opt_change_password'
-            );
-            $options[] = array(
-                'name'  => __('Delete account', 'matrix'),
-                'url'   => '#',
-                'class' => 'opt_delete_account'
-            );
-
-            return $options;
-        }
-    }
-
     if( !function_exists('delete_user_js') ) {
         function delete_user_js() {
             $location = Rewrite::newInstance()->get_location();
@@ -490,19 +428,10 @@ FUNCTIONS
         }
     }
 
-    function mtx_redirect_user_dashboard()
-    {
-        if( (Rewrite::newInstance()->get_location() === 'user') && (Rewrite::newInstance()->get_section() === 'dashboard') ) {
-            header('Location: ' .osc_user_list_items_url());
-            exit;
-        }
-    }
-
     function mtx_delete() {
         Preference::newInstance()->delete(array('s_section' => 'matrix'));
     }
 
-    osc_add_hook('init', 'mtx_redirect_user_dashboard', 2);
     osc_add_hook('init_admin', 'theme_mtx_actions_admin');
     osc_add_hook('theme_delete_matrix', 'mtx_delete');
     osc_admin_menu_appearance(__('Header logo', 'matrix'), osc_admin_render_theme_url('oc-content/themes/matrix/admin/header.php'), 'header_matrix');
@@ -935,16 +864,15 @@ function mtx_popular_categories() {
  *
  * @return array
  */
-function mtx_user_menu_items($menu = null) {
-    if($menu == null) {
-        $menu = array();
-        $menu[] = array('name' => __('Public Profile'), 'url' => osc_user_public_profile_url(osc_logged_user_id()), 'class' => 'opt_publicprofile');
-        $menu[] = array('name' => __('Dashboard'), 'url' => osc_user_dashboard_url(), 'class' => 'opt_dashboard');
-        $menu[] = array('name' => __('Manage your listings'), 'url' => osc_user_list_items_url(), 'class' => 'opt_items');
-        $menu[] = array('name' => __('Manage your alerts'), 'url' => osc_user_alerts_url(), 'class' => 'opt_alerts');
-        $menu[] = array('name' => __('My profile'), 'url' => osc_user_profile_url(), 'class' => 'opt_account');
-        $menu[] = array('name' => __('Logout'), 'url' => osc_user_logout_url(), 'class' => 'opt_logout');
-    }
+function mtx_user_menu_items() {
+    $menu = array();
+    $menu[] = array('name' => __('Public Profile'), 'url' => osc_user_public_profile_url(osc_logged_user_id()), 'class' => 'opt_publicprofile');
+    $menu[] = array('name' => __('Dashboard'), 'url' => osc_user_dashboard_url(), 'class' => 'opt_dashboard');
+    $menu[] = array('name' => __('Ads'), 'url' => osc_user_list_items_url(), 'class' => 'opt_items');
+    $menu[] = array('name' => __('Alerts'), 'url' => osc_user_alerts_url(), 'class' => 'opt_alerts');
+    $menu[] = array('name' => __('Account'), 'url' => osc_user_profile_url(), 'class' => 'opt_account');
+    $menu[] = array('name' => __('Delete account'), 'url' => osc_user_profile_url(), 'class' => 'opt_delete_account');
+    $menu[] = array('name' => __('Logout'), 'url' => osc_user_logout_url(), 'class' => 'opt_logout');
 
     $menu = osc_apply_filter('user_menu_filter', $menu);
 
