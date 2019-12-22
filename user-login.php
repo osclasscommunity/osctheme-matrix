@@ -8,7 +8,7 @@ osc_current_web_theme_path('header.php');
     <div class="container">
         <div class="row">
             <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Login', 'matrix'); ?></h1>
-            <p class="text-center cl-darker mb-5 col-12"><?php _e('Login to get access to much more features.', 'matrix'); ?></p>
+            <p class="text-center cl-darker mb-5 col-12"><?php _e('Login to see your ads and account.', 'matrix'); ?></p>
             <div class="small-container col-md-6 col-12 bg-lighty">
                 <form action="<?php echo osc_base_url(1); ?>" method="POST">
                     <input type="hidden" name="page" value="login" />

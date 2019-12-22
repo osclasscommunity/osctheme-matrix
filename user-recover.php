@@ -4,27 +4,31 @@ mtx_add_body_class('recover');
 
 osc_current_web_theme_path('header.php');
 ?>
-<div class="form-container form-horizontal form-container-box">
-    <div class="header">
-        <h1><?php _e('Recover your password', 'matrix'); ?></h1>
-    </div>
-    <div class="resp-wrapper">
-        <form action="<?php echo osc_base_url(true); ?>" method="post" >
-        <input type="hidden" name="page" value="login" />
-        <input type="hidden" name="action" value="recover_post" />
-        <div class="control-group">
-            <label class="control-label" for="email"><?php _e('E-mail', 'matrix'); ?></label>
-            <div class="controls">
-                <?php UserForm::email_text(); ?>
-                <?php osc_show_recaptcha('recover_password'); ?>
+
+<section class="recover bg-lighter">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Recover password', 'matrix'); ?></h1>
+            <p class="text-center cl-darker mb-5 col-12"><?php _e('Request a new password for your account.', 'matrix'); ?></p>
+            <div class="small-container col-md-6 col-12 bg-lighty">
+                <form action="<?php echo osc_base_url(1); ?>" method="POST">
+                    <input type="hidden" name="page" value="login" />
+                    <input type="hidden" name="action" value="recover_post" />
+
+                    <div class="form-group">
+                        <label for="mail"><?php _e('E-mail', 'matrix'); ?></label>
+                        <input type="email" name="email" class="form-control" id="mail" placeholder="<?php _e('Email for your account.', 'matrix'); ?>" required>
+                    </div>
+                    <div class="form-group form-submit">
+                        <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Submit', 'matrix'); ?></button>
+                    </div>
+
+                    <div class="form-group text-center">
+                        <p><a href="<?php echo osc_user_login_url(); ?>"><?php _e('Login', 'matrix'); ?></a></p>
+                    </div>
+                </form>
             </div>
         </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Send me a new password", 'matrix');?></button>
-                </div>
-            </div>
-        </form>
     </div>
-</div>
-<?php osc_current_web_theme_path('footer.php') ; ?>
+</section>
+<?php osc_current_web_theme_path('footer.php'); ?>

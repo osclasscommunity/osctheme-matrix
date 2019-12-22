@@ -45,9 +45,10 @@ osc_enqueue_script('global-theme-js');
     var matrix = window.matrix || {};
     matrix.base_url = '<?php echo osc_base_url(true); ?>';
     matrix.langs = <?php echo json_encode($js_lang); ?>;
-    matrix.fancybox_prev = '<?php echo osc_esc_js( __('Previous image','matrix')) ?>';
-    matrix.fancybox_next = '<?php echo osc_esc_js( __('Next image','matrix')) ?>';
-    matrix.fancybox_closeBtn = '<?php echo osc_esc_js( __('Close','matrix')) ?>';
+    matrix.fancybox_prev = '<?php echo osc_esc_js(__('Previous image', 'matrix')); ?>';
+    matrix.fancybox_next = '<?php echo osc_esc_js(__('Next image', 'matrix')); ?>';
+    matrix.fancybox_closeBtn = '<?php echo osc_esc_js(__('Close', 'matrix')); ?>';
+    matrix.repeat_password = '<?php echo osc_esc_js(__('Passwords aren\'t matching.', 'matrix')); ?>';
 </script>
 
 <?php osc_run_hook('header') ; ?>

@@ -164,3 +164,19 @@ $(document).ready(function(event){
 
     }
 });
+
+$(function() {
+    function validatePass() {
+        var pass = document.querySelector('#pass.repeat');
+        var pass2 = document.querySelector('#pass2.repeat');
+
+        if(pass.value != pass2.value) {
+            pass2.setCustomValidity(matrix.repeat_password);
+        } else {
+            pass2.setCustomValidity('');
+        }
+    }
+
+    document.querySelector('#pass.repeat').onchange = validatePass;
+    document.querySelector('#pass2.repeat').onkeyup = validatePass;
+});
