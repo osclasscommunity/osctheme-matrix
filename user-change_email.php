@@ -1,71 +1,51 @@
 <?php
 osc_add_hook('header', 'mtx_nofollow_construct');
 mtx_add_body_class('user user-profile');
-osc_enqueue_script('jquery-validate');
-
-osc_add_hook('before-main', function() {
-    osc_current_web_theme_path('user-sidebar.php');
-});
-
-osc_add_filter('meta_title_filter', function($data) {
-    return __('Change e-mail', 'matrix');;
-});
 
 osc_current_web_theme_path('header.php');
-$osc_user = osc_user();
 ?>
-<h1><?php _e('Change e-mail', 'matrix'); ?></h1>
-<div class="form-container form-horizontal">
-    <div class="resp-wrapper">
-        <ul id="error_list"></ul>
-        <form id="change-email" action="<?php echo osc_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="user" />
-            <input type="hidden" name="action" value="change_email_post" />
-            <div class="control-group">
-                <label for="email"><?php _e('Current e-mail', 'matrix'); ?></label>
-                <div class="controls">
-                    <?php echo osc_logged_user_email(); ?>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="new_email"><?php _e('New e-mail', 'matrix'); ?> *</label>
-                <div class="controls">
-                    <input type="text" name="new_email" id="new_email" value="" />
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'matrix');?></button>
-                </div>
-            </div>
-        </form>
+<div class="container-fluid">
+    <div class="row">
+        <?php osc_current_web_theme_path('user-sidebar.php'); ?>
+        <div class="col-md-9 col-xl-10 bg-lighter">
+            <section class="container user-account">
+                <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('My account', 'matrix'); ?></h1>
+                <p class="text-center cl-darker mb-5 col-12"><?php _e('Manage your account information.', 'matrix'); ?></p>
+
+                <ul class="user-subnav nav nav-pills flex-column flex-lg-row mb-4">
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_user_profile_url(); ?>"><?php _e('My account', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent-dark text-white" href="#"><?php _e('Change email', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_change_user_password_url(); ?>"><?php _e('Change password', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_change_user_username_url(); ?>"><?php _e('Change username', 'matrix'); ?></a>
+                    </li>
+                </ul>
+
+                <form action="<?php echo osc_base_url(1); ?>" method="POST">
+                    <input type="hidden" name="page" value="user" />
+                    <input type="hidden" name="action" value="change_email_post" />
+
+                    <div class="form-group">
+                        <label for="email1"><?php _e('Current e-mail', 'matrix'); ?></label>
+                        <input type="email" class="form-control" id="email1" value="<?php echo osc_user()['s_email']; ?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="email2"><?php _e('New e-mail', 'matrix'); ?></label>
+                        <input type="email" name="new_email" class="form-control" id="email2" placeholder="<?php _e('Your new email.', 'matrix'); ?>" required>
+                    </div>
+
+                    <div class="form-group form-submit">
+                        <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Update', 'matrix'); ?></button>
+                    </div>
+                </form>
+            </section>
+        </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('form#change-email').validate({
-            rules: {
-                new_email: {
-                    required: true,
-                    email: true
-                }
-            },
-            messages: {
-                new_email: {
-                    required: '<?php echo osc_esc_js(__("Email: this field is required", "matrix")); ?>.',
-                    email: '<?php echo osc_esc_js(__("Invalid email address", "matrix")); ?>.'
-                }
-            },
-            errorLabelContainer: "#error_list",
-            wrapper: "li",
-            invalidHandler: function(form, validator) {
-                $('html,body').animate({ scrollTop: $('h1').offset().top }, { duration: 250, easing: 'swing'});
-            },
-            submitHandler: function(form){
-                $('button[type=submit], input[type=submit]').attr('disabled', 'disabled');
-                form.submit();
-            }
-        });
-    });
-</script>
-<?php osc_current_web_theme_path('footer.php') ; ?>
+<?php osc_current_web_theme_path('footer.php'); ?>

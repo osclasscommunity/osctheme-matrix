@@ -16,6 +16,10 @@
     }
 }
 
+.form-row {
+    margin-bottom: 1rem;
+}
+
 .custom-control-input:checked~.custom-control-label::before {
     border-color: $accent !important;
     background-color: $accent !important;

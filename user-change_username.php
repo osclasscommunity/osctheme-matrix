@@ -1,86 +1,79 @@
 <?php
 osc_add_hook('header', 'mtx_nofollow_construct');
 mtx_add_body_class('user user-profile');
-osc_enqueue_script('jquery-validate');
-
-osc_add_hook('before-main', function() {
-    osc_current_web_theme_path('user-sidebar.php');
-});
-
-osc_add_filter('meta_title_filter', function($data) {
-    return __('Change username', 'matrix');;
-});
 
 osc_current_web_theme_path('header.php');
-$osc_user = osc_user();
 ?>
-<h1><?php _e('Change username', 'matrix'); ?></h1>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('form#change-username').validate({
-        rules: {
-            s_username: {
-                required: true
-            }
-        },
-        messages: {
-            s_username: {
-                required: '<?php echo osc_esc_js(__("Username: this field is required", "matrix")); ?>.'
-            }
-        },
-        errorLabelContainer: "#error_list",
-        wrapper: "li",
-        invalidHandler: function(form, validator) {
-            $('html,body').animate({ scrollTop: $('h1').offset().top }, { duration: 250, easing: 'swing'});
-        },
-        submitHandler: function(form){
-            $('button[type=submit], input[type=submit]').attr('disabled', 'disabled');
-            form.submit();
-        }
-    });
+<div class="container-fluid">
+    <div class="row">
+        <?php osc_current_web_theme_path('user-sidebar.php'); ?>
+        <div class="col-md-9 col-xl-10 bg-lighter">
+            <section class="container user-account">
+                <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('My account', 'matrix'); ?></h1>
+                <p class="text-center cl-darker mb-5 col-12"><?php _e('Manage your account information.', 'matrix'); ?></p>
 
+                <ul class="user-subnav nav nav-pills flex-column flex-lg-row mb-4">
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_user_profile_url(); ?>"><?php _e('My account', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_change_user_email_url(); ?>"><?php _e('Change email', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_change_user_password_url(); ?>"><?php _e('Change password', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent-dark text-white" href="#"><?php _e('Change username', 'matrix'); ?></a>
+                    </li>
+                </ul>
+
+                <form action="<?php echo osc_base_url(1); ?>" method="POST">
+                    <input type="hidden" name="page" value="user" />
+                    <input type="hidden" name="action" value="change_username_post" />
+
+                    <div class="form-group">
+                        <label for="currusername"><?php _e('Current username', 'matrix'); ?></label>
+                        <input type="text" class="form-control" id="currusername" value="<?php echo osc_user()['s_username']; ?>" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="username"><?php _e('New username', 'matrix'); ?></label>
+                        <input type="text" name="s_username" class="form-control" id="username" placeholder="<?php _e('Your new username.', 'matrix'); ?>" required>
+                        <small class="form-text text-muted" id="available"><?php _e('Username availability checker.', 'matrix'); ?></small>
+                    </div>
+
+                    <div class="form-group form-submit">
+                        <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Update', 'matrix'); ?></button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+<?php osc_current_web_theme_path('footer.php'); ?>
+
+<script>
+$(function() {
     var cInterval;
-    $("#s_username").keydown(function(event) {
-        if($("#s_username").attr("value")!='') {
+    $('#username').keydown(function(event) { console.info('test');
+        if($('#username').val() != '') {
             clearInterval(cInterval);
-            cInterval = setInterval(function(){
+            cInterval = setInterval(function() {
                 $.getJSON(
-                    "<?php echo osc_base_url(true); ?>?page=ajax&action=check_username_availability",
-                    {"s_username": $("#s_username").attr("value")},
+                    '<?php echo osc_base_url(true); ?>?page=ajax&action=check_username_availability',
+                    {'s_username': $('#username').val()},
                     function(data){
                         clearInterval(cInterval);
-                        if(data.exists==0) {
-                            $("#available").text('<?php echo osc_esc_js(__("The username is available", "matrix")); ?>');
+                        if(data.exists == 0) {
+                            $("#available").text('<?php echo osc_esc_js(__('The username is available.','matrix')); ?>');
+                            document.querySelector('#username').setCustomValidity('');
                         } else {
-                            $("#available").text('<?php echo osc_esc_js(__("The username is NOT available", "matrix")); ?>');
+                            $("#available").text('<?php echo osc_esc_js(__('The username is <strong>not</strong> available.', 'matrix')); ?>');
+                            document.querySelector('#username').setCustomValidity('<?php echo osc_esc_js(__('The username is <strong>not</strong> available.', 'matrix')); ?>')
                         }
                     }
                 );
-            }, 1000);
+            }, 500);
         }
     });
-
 });
 </script>
-<div class="form-container form-horizontal">
-    <div class="resp-wrapper">
-        <ul id="error_list"></ul>
-        <form action="<?php echo osc_base_url(true); ?>" method="post" id="change-username">
-            <input type="hidden" name="page" value="user" />
-            <input type="hidden" name="action" value="change_username_post" />
-            <div class="control-group">
-                <label class="control-label" for="s_username"><?php _e('Username', 'matrix'); ?></label>
-                <div class="controls">
-                    <input type="text" name="s_username" id="s_username" value="" />
-                    <div id="available"></div>
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'matrix');?></button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-<?php osc_current_web_theme_path('footer.php') ; ?>

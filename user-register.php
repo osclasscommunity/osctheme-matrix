@@ -1,5 +1,4 @@
 <?php
-osc_enqueue_script('jquery-validate'); // DEPRECATED! HTML5 validation used.
 osc_add_hook('header', 'mtx_follow_construct');
 mtx_add_body_class('register');
 

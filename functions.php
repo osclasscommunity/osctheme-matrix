@@ -12,7 +12,7 @@ DEFINES
     }
 
     if(!OC_ADMIN) {
-        osc_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js');
+        osc_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js');
         osc_register_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/popper.min.js', array('jquery'));
         osc_register_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js', array('jquery'));
         osc_register_script('fancybox', osc_current_web_theme_url('js/fancybox/jquery.fancybox.pack.js'), array('jquery'));
@@ -705,7 +705,7 @@ function mtx_category_has_sub($category) {
 }
 
 /**
- * Shows search category select.
+ * Renders search category select.
  *
  * @param int $selected Selected category ID.
  *
@@ -724,7 +724,7 @@ function mtx_search_category_select($selected = null) {
 }
 
 /**
- * Shows search subcategory select.
+ * Renders search subcategory select.
  *
  * @param array $category Parent category.
  * @param int $selected Selected category ID.
@@ -748,7 +748,7 @@ function mtx_search_category_select_sub($category, $selected, $deep) {
 }
 
 /**
- * Shows a single item in a loop.
+ * Renders a single item in a loop.
  *
  * @param boolean $premium Is item premium.
  */
@@ -813,7 +813,7 @@ function mtx_loop_item_location($premium = false) {
 }
 
 /**
- * Shows flash message (modified HTML).
+ * Renders flash message (modified HTML).
  *
  * @param string $section Message section (Osclass default param).
  * @param string $class HTML class (Osclass default param).
@@ -958,12 +958,12 @@ function mtx_user_menu_items($menu = null) {
 /**
  * Returns classes of user menu items that should be hidden/removed.
  *
- * For hiding "Change email, Change username and Change password".
+ * For hiding "Change email, Change username, Change password and Delete account" - replaced in theme.
  *
  * @return array
  */
 function mtx_user_menu_skip() {
-    $skip = array('opt_change_email', 'opt_change_username', 'opt_change_password');
+    $skip = array('opt_change_email', 'opt_change_username', 'opt_change_password', 'opt_delete_account');
 
     return $skip;
 }
@@ -977,4 +977,3 @@ function mtx_user_items_perpage() {
     }
 }
 osc_add_hook('init_user', 'mtx_user_items_perpage');
-?>

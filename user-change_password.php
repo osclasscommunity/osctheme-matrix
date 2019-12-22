@@ -2,48 +2,54 @@
 osc_add_hook('header', 'mtx_nofollow_construct');
 mtx_add_body_class('user user-profile');
 
-osc_add_hook('before-main', function() {
-    osc_current_web_theme_path('user-sidebar.php');
-});
-
-osc_add_filter('meta_title_filter', function($data) {
-    return __('Change password', 'matrix');;
-});
-
 osc_current_web_theme_path('header.php');
-$osc_user = osc_user();
 ?>
-<h1><?php _e('Change password', 'matrix'); ?></h1>
-<div class="form-container form-horizontal">
-    <div class="resp-wrapper">
-        <ul id="error_list"></ul>
-        <form action="<?php echo osc_base_url(true); ?>" method="post">
-            <input type="hidden" name="page" value="user" />
-            <input type="hidden" name="action" value="change_password_post" />
-            <div class="control-group">
-                <label class="control-label" for="password"><?php _e('Current password', 'matrix'); ?> *</label>
-                <div class="controls">
-                    <input type="password" name="password" id="password" value="" autocomplete="off" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="new_password"><?php _e('New password', 'matrix'); ?> *</label>
-                <div class="controls">
-                    <input type="password" name="new_password" id="new_password" value="" autocomplete="off" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="new_password2"><?php _e('Repeat new password', 'matrix'); ?> *</label>
-                <div class="controls">
-                    <input type="password" name="new_password2" id="new_password2" value="" autocomplete="off" />
-                </div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Update", 'matrix');?></button>
-                </div>
-            </div>
-        </form>
+<div class="container-fluid">
+    <div class="row">
+        <?php osc_current_web_theme_path('user-sidebar.php'); ?>
+        <div class="col-md-9 col-xl-10 bg-lighter">
+            <section class="container user-account">
+                <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('My account', 'matrix'); ?></h1>
+                <p class="text-center cl-darker mb-5 col-12"><?php _e('Manage your account information.', 'matrix'); ?></p>
+
+                <ul class="user-subnav nav nav-pills flex-column flex-lg-row mb-4">
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_user_profile_url(); ?>"><?php _e('My account', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_change_user_email_url(); ?>"><?php _e('Change email', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent-dark text-white" href="#"><?php _e('Change password', 'matrix'); ?></a>
+                    </li>
+                    <li class="flex-sm-fill text-center nav-link">
+                        <a class="nav-link btn-mtx bg-accent text-white" href="<?php echo osc_change_user_username_url(); ?>"><?php _e('Change username', 'matrix'); ?></a>
+                    </li>
+                </ul>
+
+                <form action="<?php echo osc_base_url(1); ?>" method="POST">
+                    <input type="hidden" name="page" value="user" />
+                    <input type="hidden" name="action" value="change_password_post" />
+
+                    <div class="form-group">
+                        <label for="currpass"><?php _e('Current password', 'matrix'); ?></label>
+                        <input type="password" name="password" class="form-control" id="currpass" placeholder="<?php _e('Your current password.', 'matrix'); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pass"><?php _e('Password', 'matrix'); ?></label>
+                        <input type="password" name="new_password" class="repeat form-control" id="pass" placeholder="<?php _e('Your new password.', 'matrix'); ?>" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="pass2"><?php _e('Repeat password', 'matrix'); ?></label>
+                        <input type="password" name="new_password2" class="repeat form-control" id="pass2" placeholder="<?php _e('Repeat your new password.', 'matrix'); ?>" required minlength="8">
+                    </div>
+
+                    <div class="form-group form-submit">
+                        <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Update', 'matrix'); ?></button>
+                    </div>
+                </form>
+            </section>
+        </div>
     </div>
 </div>
-<?php osc_current_web_theme_path('footer.php') ; ?>
+<?php osc_current_web_theme_path('footer.php'); ?>

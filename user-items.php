@@ -15,11 +15,10 @@ View::newInstance()->_exportVariableToView('listAdmin', 1);
                 <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('My ads', 'matrix'); ?></h1>
                 <p class="text-center cl-darker mb-5 col-12"><?php _e('Manage the ads you have posted.', 'matrix'); ?></p>
                 <?php osc_current_web_theme_path('loop.php'); ?>
+                <div class="paginate">
+                    <?php echo osc_pagination_items(); ?>
+                </div>
             </section>
-
-            <div class="paginate">
-                <?php echo osc_pagination_items(); ?>
-            </div>
         </div>
     </div>
 </div>
