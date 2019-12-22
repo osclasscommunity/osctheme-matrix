@@ -15,3 +15,8 @@
         width: 100%;
     }
 }
+
+.custom-control-input:checked~.custom-control-label::before {
+    border-color: $accent !important;
+    background-color: $accent !important;
+}

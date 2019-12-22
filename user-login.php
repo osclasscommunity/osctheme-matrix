@@ -9,7 +9,7 @@ osc_current_web_theme_path('header.php');
         <div class="row">
             <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Login', 'matrix'); ?></h1>
             <p class="text-center cl-darker mb-5 col-12"><?php _e('Login to get access to much more features.', 'matrix'); ?></p>
-            <div class="col-md-6 col-12 bg-lighty p-5 ml-auto mr-auto mb-5">
+            <div class="small-container col-md-6 col-12 bg-lighty">
                 <form action="<?php echo osc_base_url(1); ?>" method="POST">
                     <input type="hidden" name="page" value="login" />
                     <input type="hidden" name="action" value="login_post" />
@@ -22,9 +22,9 @@ osc_current_web_theme_path('header.php');
                         <label for="pass"><?php _e('Password', 'matrix'); ?></label>
                         <input type="password" name="password" class="form-control" id="pass" placeholder="<?php _e('Password for your account.', 'matrix'); ?>" required>
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" name="remember" class="form-check-input" id="remember">
-                        <label class="form-check-label" for="remember"><?php _e('Stay logged in', 'matrix'); ?></label>
+                    <div class="form-group custom-control custom-checkbox">
+                        <input type="checkbox" name="remember" class="custom-control-input" id="remember">
+                        <label class="custom-control-label" for="remember"><?php _e('Stay logged in', 'matrix'); ?></label>
                     </div>
                     <div class="form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Login', 'matrix'); ?></button>
