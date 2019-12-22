@@ -53,8 +53,8 @@ $u = osc_user();
                         <?php $countries = osc_get_countries(); ?>
                         <?php if(count($countries) > 1) { ?>
                             <div class="col">
-                                <label for="country"><?php _e('Country', 'matrix'); ?></label>
-                                <select name="countryId" class="form-control" id="country">
+                                <label for="countryId"><?php _e('Country', 'matrix'); ?></label>
+                                <select name="countryId" id="countryId" class="form-control" id="country">
                                     <option value=""><?php _e('Select a country', 'matrix'); ?></option>
                                     <?php foreach($countries as $country) { ?>
                                         <option value="<?php echo $country['pk_c_code']; ?>" <?php echo ($u['fk_c_country_code'] == $country['pk_c_code']) ? 'selected' : ''; ?>><?php echo $country['s_name']; ?></option>
@@ -62,7 +62,7 @@ $u = osc_user();
                                 </select>
                             </div>
                         <?php } else { ?>
-                            <input type="hidden" name="countryId" value="" />
+                            <input type="hidden" name="countryId" id="countryId" value="" />
                             <div class="col">
                                 <label for="country"><?php _e('Country', 'matrix'); ?></label>
                                 <input type="text" name="country" class="form-control" id="country" placeholder="<?php _e('Your country, visible on public profile.', 'matrix'); ?>" value="<?php echo ($u['s_country'] != '') ? $u['s_country'] : $countries[0]['s_name']; ?>">
@@ -72,8 +72,8 @@ $u = osc_user();
                         <?php $regions = osc_get_regions(); ?>
                         <?php if(count($regions) >= 1) { ?>
                             <div class="col">
-                                <label for="region"><?php _e('Region', 'matrix'); ?></label>
-                                <select name="regionId" class="form-control" id="region">
+                                <label for="regionId"><?php _e('Region', 'matrix'); ?></label>
+                                <select name="regionId" class="form-control" id="regionId">
                                     <option value=""><?php _e('Select a region', 'matrix'); ?></option>
                                     <?php foreach($regions as $region) { ?>
                                         <option value="<?php echo $region['pk_i_id']; ?>" <?php echo ($u['fk_i_region_id'] == $region['pk_i_id']) ? 'selected' : ''; ?>><?php echo $region['s_name']; ?></option>
@@ -82,8 +82,8 @@ $u = osc_user();
                             </div>
                         <?php } else { ?>
                             <div class="col">
-                                <label for="region"><?php _e('Region', 'matrix'); ?></label>
-                                <input type="text" name="region" class="form-control" id="region" placeholder="<?php _e('Your region, visible on public profile.', 'matrix'); ?>" value="<?php echo $u['s_country']; ?>">
+                                <label for="regionId"><?php _e('Region', 'matrix'); ?></label>
+                                <input type="text" name="region" class="form-control" id="regionId" placeholder="<?php _e('Your region, visible on public profile.', 'matrix'); ?>" value="<?php echo $u['s_country']; ?>">
                             </div>
                         <?php } ?>
                     </div>
@@ -91,8 +91,8 @@ $u = osc_user();
                         <?php $cities = osc_get_cities(); ?>
                         <?php if(count($cities) >= 1) { ?>
                             <div class="col">
-                                <label for="city"><?php _e('City', 'matrix'); ?></label>
-                                <select name="cityId" class="form-control" id="city">
+                                <label for="cityId"><?php _e('City', 'matrix'); ?></label>
+                                <select name="cityId" id="cityId" class="form-control">
                                     <option value=""><?php _e('Select a city', 'matrix'); ?></option>
                                     <?php foreach($cities as $city) { ?>
                                         <option value="<?php echo $city['pk_i_id']; ?>" <?php echo ($u['fk_i_city_id'] == $city['pk_i_id']) ? 'selected' : ''; ?>><?php echo $city['s_name']; ?></option>
@@ -101,8 +101,8 @@ $u = osc_user();
                             </div>
                         <?php } else { ?>
                             <div class="col">
-                                <label for="city"><?php _e('City', 'matrix'); ?></label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="<?php _e('Your city, visible on public profile.', 'matrix'); ?>" value="<?php echo $u['s_city']; ?>">
+                                <label for="cityId"><?php _e('City', 'matrix'); ?></label>
+                                <input type="text" name="city" class="form-control" id="cityId" placeholder="<?php _e('Your city, visible on public profile.', 'matrix'); ?>" value="<?php echo $u['s_city']; ?>">
                             </div>
                         <?php } ?>
 

@@ -59,7 +59,6 @@ matrix.photoUploaderActions = function($element,options) {
 }
 
 $(document).ready(function(event){
-    //OK
     $('.r-list h1 span').click(function(){
         if(matrix.responsive()){
             var $parent     = $(this).parent().parent();
@@ -75,66 +74,17 @@ $(document).ready(function(event){
             return false;
         }
     });
+
     $('.see_by').hover(function(){
         $(this).addClass('hover');
-    },function(){
+    }, function(){
         $(this).removeClass('hover');
     })
-    //OK
+
     matrix.toggleClass('data-bclass-toggle','body',true);
-    //OK
-    /*$('.doublebutton a').click(function (event) {
-        var thisParent = $(this).parent();
-        if($(this).hasClass('grid-button')){
-            thisParent.addClass('active');
-            $('#listing-card-list').addClass('listing-grid');
-        } else {
-        thisParent.removeClass('active');
-            $('#listing-card-list').removeClass('listing-grid');
-        }
-        if (history.pushState) {
-            window.history.pushState($('title').text(), $('title').text(), $(this).prop('href'));
-        }
-        event.preventDefault();
-        return;
-    });*/
-
-
-    /////// STARTS PLACE HOLDER
-    $('body').on('focus','.has-placeholder input, .has-placeholder textarea',function(){
-        var placeholder = $(this).prev();
-        var thatInput  = $(this);
-
-        if(thatInput.parents('.has-placeholder').not('.input-file')){
-            placeholder.hide();
-        }
-    });
-    $('body').on('blur','.has-placeholder input, .has-placeholder textarea',function(){
-        var placeholder = $(this).prev();
-        var thatInput  = $(this);
-
-        if(thatInput.parents('.has-placeholder').not('.input-file')){
-            if(thatInput.val() == '') {
-                placeholder.show();
-            }
-        }
-    });
-
-    $('body').on('click touchstart','.has-placeholder label',function(){
-        var placeholder = $(this)
-        var thatInput  = $(this).parents('.has-placeholder').find('input, textarea');
-        if(thatInput.attr('disabled') != 'disabled'){
-            placeholder.hide();
-            thatInput.focus();
-        }
-    });
 
     $('.flashmessage .ico-close').click(function(){
         $(this).parents('.flashmessage').remove();
-    });
-    $('#mask_as_form select').on('change',function(){
-        $('#mask_as_form').submit();
-        $('#mask_as_form').submit();
     });
 });
 
