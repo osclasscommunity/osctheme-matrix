@@ -28,7 +28,7 @@ osc_current_web_theme_path('header.php');
                         <input type="password" name="s_password" class="repeat form-control" id="pass" placeholder="<?php _e('Your password, required to login.', 'matrix'); ?>" required minlength="8">
                     </div>
                     <div class="form-group">
-                        <label for="pass2"><?php _e('Password 2', 'matrix'); ?></label>
+                        <label for="pass2"><?php _e('Repeat password', 'matrix'); ?></label>
                         <input type="password" name="s_password2" class="repeat form-control" id="pass2" placeholder="<?php _e('Repeat your password.', 'matrix'); ?>" required minlength="8">
                     </div>
 
