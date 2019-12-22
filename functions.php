@@ -929,4 +929,52 @@ function mtx_popular_categories() {
 
     return array();
 }
+
+/**
+ * Gets user account menu items.
+ *
+ * Based on osc_private_user_menu from helpers/hUtils.php
+ *
+ * @param array $menu Menu items..
+ *
+ * @return array
+ */
+function mtx_user_menu_items($menu = null) {
+    if($menu == null) {
+        $menu = array();
+        $menu[] = array('name' => __('Public Profile'), 'url' => osc_user_public_profile_url(osc_logged_user_id()), 'class' => 'opt_publicprofile');
+        $menu[] = array('name' => __('Dashboard'), 'url' => osc_user_dashboard_url(), 'class' => 'opt_dashboard');
+        $menu[] = array('name' => __('Manage your listings'), 'url' => osc_user_list_items_url(), 'class' => 'opt_items');
+        $menu[] = array('name' => __('Manage your alerts'), 'url' => osc_user_alerts_url(), 'class' => 'opt_alerts');
+        $menu[] = array('name' => __('My profile'), 'url' => osc_user_profile_url(), 'class' => 'opt_account');
+        $menu[] = array('name' => __('Logout'), 'url' => osc_user_logout_url(), 'class' => 'opt_logout');
+    }
+
+    $menu = osc_apply_filter('user_menu_filter', $menu);
+
+    return $menu;
+}
+
+/**
+ * Returns classes of user menu items that should be hidden/removed.
+ *
+ * For hiding "Change email, Change username and Change password".
+ *
+ * @return array
+ */
+function mtx_user_menu_skip() {
+    $skip = array('opt_change_email', 'opt_change_username', 'opt_change_password');
+
+    return $skip;
+}
+
+/**
+ * Sets user account items per page to 12.
+ */
+function mtx_user_items_perpage() {
+    if(Params::getParam('action') == 'items') {
+        Params::setParam('itemsPerPage', 12);
+    }
+}
+osc_add_hook('init_user', 'mtx_user_items_perpage');
 ?>

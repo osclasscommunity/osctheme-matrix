@@ -49,6 +49,7 @@ osc_enqueue_script('global-theme-js');
     matrix.fancybox_next = '<?php echo osc_esc_js(__('Next image', 'matrix')); ?>';
     matrix.fancybox_closeBtn = '<?php echo osc_esc_js(__('Close', 'matrix')); ?>';
     matrix.repeat_password = '<?php echo osc_esc_js(__('Passwords aren\'t matching.', 'matrix')); ?>';
+    matrix.confirm = '<?php echo osc_esc_js(__('This action can\'t be undone. Are you sure you want to continue?', 'matrix')); ?>';
 </script>
 
 <?php osc_run_hook('header') ; ?>
