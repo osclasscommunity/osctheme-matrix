@@ -17,7 +17,7 @@ osc_current_web_theme_path('header.php');
 
                     <div class="form-group">
                         <label for="mail"><?php _e('E-mail', 'matrix'); ?></label>
-                        <input type="email" name="email" class="form-control" id="mail" placeholder="<?php _e('Email for your account.', 'matrix'); ?>" required>
+                        <input type="email" name="s_email" class="form-control" id="mail" placeholder="<?php _e('Email for your account.', 'matrix'); ?>" required>
                     </div>
                     <div class="form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Submit', 'matrix'); ?></button>
