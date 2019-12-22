@@ -49,8 +49,6 @@ osc_current_web_theme_path('header.php');
         </div>
     </div>
 </div>
-<?php osc_current_web_theme_path('footer.php'); ?>
-
 <script>
 $(function() {
     var cInterval;
@@ -77,3 +75,4 @@ $(function() {
     });
 });
 </script>
+<?php osc_current_web_theme_path('footer.php'); ?>

@@ -136,47 +136,22 @@ $(document).ready(function(event){
         $('#mask_as_form').submit();
         $('#mask_as_form').submit();
     });
-
-    if(typeof $.fancybox == 'function') {
-        $("a.fancybox").fancybox({
-            openEffect : 'none',
-            closeEffect : 'none',
-            nextEffect : 'fade',
-            prevEffect : 'fade',
-            loop : false,
-            helpers : {
-                title : {
-                    type : 'inside'
-                }
-            },
-            tpl: {
-                prev: '<a title="'+matrix.fancybox_prev+'" class="fancybox-nav fancybox-prev"><span></span></a>',
-                next: '<a title="'+matrix.fancybox_next+'" class="fancybox-nav fancybox-next"><span></span></a>',
-                closeBtn : '<a title="'+matrix.fancybox_closeBtn+'" class="fancybox-item fancybox-close" href="javascript:;"></a>'
-            }
-        });
-
-        $(".main-photo").on('click', function(e) {
-            e.preventDefault();
-            $("a.fancybox").first().click();
-        });
-
-
-    }
 });
 
 $(function() {
-    function validatePass() {
-        var pass = document.querySelector('#pass.repeat');
-        var pass2 = document.querySelector('#pass2.repeat');
+    var pass = document.querySelector('#pass.repeat');
+    var pass2 = document.querySelector('#pass2.repeat');
 
-        if(pass.value != pass2.value) {
-            pass2.setCustomValidity(matrix.repeat_password);
-        } else {
-            pass2.setCustomValidity('');
+    if(pass && pass2) {
+        function validatePass() {
+            if(pass.value != pass2.value) {
+                pass2.setCustomValidity(matrix.repeat_password);
+            } else {
+                pass2.setCustomValidity('');
+            }
         }
-    }
 
-    document.querySelector('#pass.repeat').onchange = validatePass;
-    document.querySelector('#pass2.repeat').onkeyup = validatePass;
+        document.querySelector('#pass.repeat').onchange = validatePass;
+        document.querySelector('#pass2.repeat').onkeyup = validatePass;
+    }
 });

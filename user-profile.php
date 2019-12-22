@@ -32,6 +32,7 @@ $u = osc_user();
                 <form action="<?php echo osc_base_url(1); ?>" method="POST">
                     <input type="hidden" name="page" value="user" />
                     <input type="hidden" name="action" value="profile_post" />
+                    <input type="hidden" name="b_company" id="company" value="<?php echo $u['b_company']; ?>" />
 
                     <div class="form-group">
                         <label for="name"><?php _e('Name', 'matrix'); ?></label>
@@ -106,7 +107,7 @@ $u = osc_user();
                         <?php } ?>
 
                         <div class="col">
-                            <label for="cityArea"><?php _e('Region', 'matrix'); ?></label>
+                            <label for="cityArea"><?php _e('City area', 'matrix'); ?></label>
                             <input type="text" name="cityArea" class="form-control" id="cityArea" placeholder="<?php _e('Your city area, visible on public profile.', 'matrix'); ?>" value="<?php echo $u['s_city_area']; ?>">
                         </div>
                     </div>
@@ -121,10 +122,10 @@ $u = osc_user();
                             <input type="url" name="s_website" class="form-control" id="website" placeholder="<?php _e('Your website, visible on public profile.', 'matrix'); ?>" value="<?php echo $u['s_website']; ?>">
                         </div>
                         <div class="col">
-                            <label for="company"><?php _e('User type', 'matrix'); ?></label>
+                            <label for="companySwitch"><?php _e('User type', 'matrix'); ?></label>
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" name="b_company" class="custom-control-input" id="company" <?php echo ($u['b_company']) ? 'checked' : ''; ?>>
-                                <label class="custom-control-label" for="company"><?php _e('Company', 'matrix'); ?></label>
+                                <input type="checkbox" class="custom-control-input" id="companySwitch" <?php echo ($u['b_company']) ? 'checked' : ''; ?>>
+                                <label class="custom-control-label" for="companySwitch"><?php _e('Company', 'matrix'); ?></label>
                             </div>
                         </div>
                     </div>
@@ -144,4 +145,11 @@ $u = osc_user();
         </div>
     </div>
 </div>
-<?php osc_current_web_theme_path('footer.php') ; ?>
+<script>
+$(function() {
+    $('#companySwitch').change(function() {
+        $('#company').attr('value', + this.checked);
+    });
+});
+</script>
+<?php osc_current_web_theme_path('footer.php'); ?>
