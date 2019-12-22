@@ -1,5 +1,5 @@
 <?php
-osc_add_hook('header', 'mtx_nofollow_construct');
+osc_add_hook('header', 'mtx_follow_construct');
 mtx_add_body_class('login');
 
 osc_current_web_theme_path('header.php');
@@ -29,15 +29,14 @@ osc_current_web_theme_path('header.php');
                     <div class="form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Login', 'matrix'); ?></button>
                     </div>
-                    <div class="form-group">
-                        <a href="<?php echo osc_register_account_url(); ?>"><?php _e('Register', 'matrix'); ?></a>
-                    </div>
-                    <div class="form-group">
-                        <a href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgotten password?', 'matrix'); ?></a>
+
+                    <div class="form-group text-center">
+                        <p><a href="<?php echo osc_register_account_url(); ?>"><?php _e('Register', 'matrix'); ?></a></p>
+                        <p><a href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgotten password?', 'matrix'); ?></a></p>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-<?php osc_current_web_theme_path('footer.php') ; ?>
+<?php osc_current_web_theme_path('footer.php'); ?>

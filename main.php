@@ -88,6 +88,9 @@ if(mtx_show_as() == 'gallery') {
                 <?php while(osc_has_latest_items()) { ?>
                     <?php mtx_loop_item(false); ?>
                 <?php } ?>
+                <p class="text-center cl-darker mt-3 mb-4 col-12">
+                    <a class="btn btn-mtx bg-accent" href="<?php echo osc_search_url(array()); ?>"><?php _e('Show all', 'matrix'); ?></a>
+                </p>
             </div>
         </div>
     </section>

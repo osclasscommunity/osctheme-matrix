@@ -68,7 +68,7 @@
                                     <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
                                     <p class="mt-5"><?php _e('What are you waiting for?', 'matrix'); ?></p>
                                     <p class="lead">
-                                        <a class="btn btn-lg btn-mtx bg-accent" href="#" role="button"><?php _e('Post an ad', 'matrix'); ?></a>
+                                        <a class="btn btn-lg btn-mtx bg-accent" href="<?php echo osc_item_post_url_in_category(); ?>"><?php _e('Post an ad', 'matrix'); ?></a>
                                     </p>
                                 </div>
                                 <div class="jumbo-search col-md-4">
