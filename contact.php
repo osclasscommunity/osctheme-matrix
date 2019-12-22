@@ -1,55 +1,51 @@
 <?php
-osc_add_hook('header', 'mtx_nofollow_construct');
+osc_enqueue_script('jquery-validate'); // DEPRECATED! HTML5 validation used.
+osc_add_hook('header', 'mtx_follow_construct');
 mtx_add_body_class('contact');
-osc_enqueue_script('jquery-validate');
 
 osc_current_web_theme_path('header.php');
 ?>
-<div class="form-container form-horizontal form-container-box">
-    <div class="header">
-        <h1><?php _e('Contact us', 'matrix'); ?></h1>
-    </div>
-    <div class="resp-wrapper">
-        <ul id="error_list"></ul>
-        <form name="contact_form" action="<?php echo osc_base_url(true); ?>" method="post" >
-            <input type="hidden" name="page" value="contact" />
-            <input type="hidden" name="action" value="contact_post" />
-            <div class="control-group">
-                <label class="control-label" for="yourName">
-                    <?php _e('Your name', 'matrix'); ?>
-                    (<?php _e('optional', 'matrix'); ?>)</label>
-                <div class="controls">
-                    <?php ContactForm::your_name(); ?></div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="yourEmail">
-                    <?php _e('Your email address', 'matrix'); ?></label>
-                <div class="controls">
-                    <?php ContactForm::your_email(); ?></div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="subject">
-                    <?php _e('Subject', 'matrix'); ?>
-                    (<?php _e('optional', 'matrix'); ?>)</label>
-                <div class="controls">
-                    <?php ContactForm::the_subject(); ?></div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="message">
-                    <?php _e('Message', 'matrix'); ?></label>
-                <div class="controls textarea">
-                    <?php ContactForm::your_message(); ?></div>
-            </div>
-            <div class="control-group">
-                <div class="controls">
+<section class="login bg-lighter">
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Contact', 'matrix'); ?></h1>
+            <p class="text-center cl-darker mb-5 col-12"><?php _e('Send us a message.', 'matrix'); ?></p>
+            <div class="small-container col-md-6 col-12 bg-lighty">
+                <form action="<?php echo osc_base_url(1); ?>" method="POST">
+                    <input type="hidden" name="page" value="contact" />
+                    <input type="hidden" name="action" value="contact_post" />
+
+                    <div class="form-group">
+                        <label for="name"><?php _e('Your name (optional)', 'matrix'); ?></label>
+                        <input type="text" name="yourName" class="form-control" id="name" placeholder="<?php _e('Your name, not required.', 'matrix'); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="mail"><?php _e('E-mail', 'matrix'); ?></label>
+                        <input type="email" name="yourEmail" class="form-control" id="mail" placeholder="<?php _e('Your e-mail, required to reply you.', 'matrix'); ?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject"><?php _e('Subject (optional)', 'matrix'); ?></label>
+                        <input type="text" name="subject" class="form-control" id="subject" placeholder="<?php _e('Subject of the message, not required.', 'matrix'); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="message"><?php _e('Message', 'matrix'); ?></label>
+                        <textarea name="subject" class="form-control" id="message" required minlength="15"></textarea>
+                    </div>
+
                     <?php osc_run_hook('contact_form'); ?>
-                    <?php osc_show_recaptcha(); ?>
-                    <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php _e("Send", 'matrix');?></button>
+
+                    <div class="form-group captcha">
+                        <?php osc_show_recaptcha('register'); ?>
+                    </div>
+
+                    <div class="form-group form-submit">
+                        <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Send', 'matrix'); ?></button>
+                    </div>
+
                     <?php osc_run_hook('admin_contact_form'); ?>
-                </div>
+                </form>
             </div>
-        </form>
-        <?php ContactForm::js_validation(); ?>
+        </div>
     </div>
-</div>
-<?php osc_current_web_theme_path('footer.php') ; ?>
+</section>
+<?php osc_current_web_theme_path('footer.php'); ?>
