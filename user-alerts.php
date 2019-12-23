@@ -29,7 +29,6 @@ $alerts = View::newInstance()->_get('alerts');
 
                                     <a href="<?php echo osc_user_unsubscribe_alert_url($alert['pk_i_id'], $alert['s_email'], $alert['s_secret']); ?>" class="btn btn-mtx bg-accent text-white mt-3 mb-3" onclick="javascript: return confirm(matrix.confirm);"><?php _e('Unsubscribe', 'matrix'); ?></a>
                                 </div>
-
                                 <?php View::newInstance()->_exportVariableToView('items', $alert['items']); ?>
                                 <?php osc_current_web_theme_path('loop.php'); ?>
                             </div>
