@@ -9,12 +9,10 @@
         </div>
 
         <ul class="nav flex-column mb-0">
-            <?php $skip = mtx_user_menu_skip(); ?>
             <?php foreach(mtx_user_menu_items() as $item) { ?>
-                <?php if(in_array($item['class'], $skip)) continue; ?>
                 <li class="nav-item">
-                    <a href="<?php echo $item['url']; ?>" class="nav-link <?php echo $item['class']; ?>">
-                        <i class="fa fa-th-large mr-3 text-primary fa-fw"></i> <?php echo $item['name']; ?>
+                    <a href="<?php echo $item['url']; ?>" class="nav-link <?php echo $item['class']; ?> <?php echo mtx_user_menu_active($item); ?>">
+                        <i class="fa fa-fw <?php echo mtx_user_menu_icon($item); ?>"></i> <?php echo $item['name']; ?>
                     </a>
                 </li>
             <?php } ?>

@@ -860,19 +860,55 @@ function mtx_popular_categories() {
  *
  * Based on osc_private_user_menu from helpers/hUtils.php
  *
- * @param array $menu Menu items..
+ * @param array $menu Menu items.
  *
  * @return array
  */
 function mtx_user_menu_items() {
+    $action = Params::getParam('action');
     $menu = array();
-    $menu[] = array('name' => __('Public Profile'), 'url' => osc_user_public_profile_url(osc_logged_user_id()), 'class' => 'opt_publicprofile');
-    $menu[] = array('name' => __('Dashboard'), 'url' => osc_user_dashboard_url(), 'class' => 'opt_dashboard');
-    $menu[] = array('name' => __('Ads'), 'url' => osc_user_list_items_url(), 'class' => 'opt_items');
-    $menu[] = array('name' => __('Alerts'), 'url' => osc_user_alerts_url(), 'class' => 'opt_alerts');
-    $menu[] = array('name' => __('Account'), 'url' => osc_user_profile_url(), 'class' => 'opt_account');
-    $menu[] = array('name' => __('Delete account'), 'url' => osc_user_profile_url(), 'class' => 'opt_delete_account');
-    $menu[] = array('name' => __('Logout'), 'url' => osc_user_logout_url(), 'class' => 'opt_logout');
+    $menu[] = array(
+        'name' => __('Ads'),
+        'url' => osc_user_list_items_url(),
+        'class' => 'opt_items',
+        'icon' => 'fa-list-alt',
+        'active' => ($action == 'items')
+    );
+    $menu[] = array(
+        'name' => __('Alerts'),
+        'url' => osc_user_alerts_url(),
+        'class' => 'opt_alerts',
+        'icon' => 'fa-clock',
+        'active' => ($action == 'alerts')
+    );
+    $menu[] = array(
+        'name' => __('Account'),
+        'url' => osc_user_profile_url(),
+        'class' => 'opt_account',
+        'icon' => 'fa-cog',
+        'active' => ($action == 'profile')
+    );
+    $menu[] = array(
+        'name' => __('Public Profile'),
+        'url' => osc_user_public_profile_url(osc_logged_user_id()),
+        'class' => 'opt_publicprofile',
+        'icon' => 'fa-globe-europe',
+        'active' => 0
+    );
+    $menu[] = array(
+        'name' => __('Delete account'),
+        'url' => osc_user_profile_url(),
+        'class' => 'opt_delete_account',
+        'icon' => 'fa-user-times',
+        'active' => 0
+    );
+    $menu[] = array(
+        'name' => __('Logout'),
+        'url' => osc_user_logout_url(),
+        'class' => 'opt_logout',
+        'icon' => 'fa-sign-out-alt',
+        'active' => 0
+    );
 
     $menu = osc_apply_filter('user_menu_filter', $menu);
 
@@ -880,16 +916,33 @@ function mtx_user_menu_items() {
 }
 
 /**
- * Returns classes of user menu items that should be hidden/removed.
+ * Returns class for menu item if active.
  *
- * For hiding "Change email, Change username, Change password and Delete account" - replaced in theme.
+ * @param array $item Menu item.
  *
- * @return array
+ * @return string
  */
-function mtx_user_menu_skip() {
-    $skip = array('opt_change_email', 'opt_change_username', 'opt_change_password', 'opt_delete_account');
+function mtx_user_menu_active($item) {
+    if(isset($item['active'])) {
+        return ($item['active']) ? 'bg-accent' : '';
+    } else {
+        return '';
+    }
+}
 
-    return $skip;
+/**
+ * Returns icon for menu item if exists, otherwise returns default icon.
+ *
+ * @param array $item Menu item.
+ *
+ * @return string
+ */
+function mtx_user_menu_icon($item) {
+    if(isset($item['icon'])) {
+        return $item['icon'];
+    } else {
+        return 'fa-chevron-right';
+    }
 }
 
 /**
@@ -901,3 +954,13 @@ function mtx_user_items_perpage() {
     }
 }
 osc_add_hook('init_user', 'mtx_user_items_perpage');
+
+/**
+ * Redirects user dashboard to items page.
+ */
+function mtx_user_dashboard_redirect() {
+    if(Params::getParam('action') == 'dashboard') {
+        osc_redirect_to(osc_user_list_items_url());
+    }
+}
+osc_add_hook('init_user', 'mtx_user_dashboard_redirect');
