@@ -888,6 +888,9 @@ function mtx_user_menu_items() {
         'icon' => 'fa-cog',
         'active' => ($action == 'profile')
     );
+
+    $menu = osc_apply_filter('user_menu_filter', $menu);
+
     $menu[] = array(
         'name' => __('Public Profile'),
         'url' => osc_user_public_profile_url(osc_logged_user_id()),
@@ -897,9 +900,10 @@ function mtx_user_menu_items() {
     );
     $menu[] = array(
         'name' => __('Delete account'),
-        'url' => osc_user_profile_url(),
+        'url' => osc_base_url(1).'?page=user&action=delete&id='.osc_user_id().'&secret='.osc_user()['s_secret'],
         'class' => 'opt_delete_account',
         'icon' => 'fa-user-times',
+        'attr' => 'onclick="javascript: return confirm(matrix.confirm);"',
         'active' => 0
     );
     $menu[] = array(
@@ -909,8 +913,6 @@ function mtx_user_menu_items() {
         'icon' => 'fa-sign-out-alt',
         'active' => 0
     );
-
-    $menu = osc_apply_filter('user_menu_filter', $menu);
 
     return $menu;
 }
@@ -924,7 +926,22 @@ function mtx_user_menu_items() {
  */
 function mtx_user_menu_active($item) {
     if(isset($item['active'])) {
-        return ($item['active']) ? 'bg-accent' : '';
+        return ($item['active']) ? 'bg-accent-dark' : '';
+    } else {
+        return '';
+    }
+}
+
+/**
+ * Returns attributes for menu item if exist.
+ *
+ * @param array $item Menu item.
+ *
+ * @return string
+ */
+function mtx_user_menu_attr($item) {
+    if(isset($item['attr'])) {
+        return $item['attr'];
     } else {
         return '';
     }

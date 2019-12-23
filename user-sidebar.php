@@ -11,7 +11,7 @@
         <ul class="nav flex-column mb-0">
             <?php foreach(mtx_user_menu_items() as $item) { ?>
                 <li class="nav-item">
-                    <a href="<?php echo $item['url']; ?>" class="nav-link <?php echo $item['class']; ?> <?php echo mtx_user_menu_active($item); ?>">
+                    <a href="<?php echo $item['url']; ?>" class="nav-link <?php echo $item['class']; ?> <?php echo mtx_user_menu_active($item); ?>" <?php echo mtx_user_menu_attr($item); ?>>
                         <i class="fa fa-fw <?php echo mtx_user_menu_icon($item); ?>"></i> <?php echo $item['name']; ?>
                     </a>
                 </li>
