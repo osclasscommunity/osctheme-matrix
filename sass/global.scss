@@ -4,9 +4,11 @@
 
 ::selection {
     background: $accent;
+    color: $white;
 }
 ::-moz-selection {
     background: $accent;
+    color: $white;
 }
 
 .mb-10 {

@@ -24,3 +24,8 @@
     border-color: $accent !important;
     background-color: $accent !important;
 }
+
+.custom-checkbox .custom-control-label::before {
+    border-radius: 0;
+    border: 0;
+}

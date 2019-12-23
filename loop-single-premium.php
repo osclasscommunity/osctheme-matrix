@@ -21,32 +21,3 @@
         </div>
     </div>
 </div>
-
-<!-- <li class="listing-card <?php echo $class; ?> premium">
-    <div class="listing-detail">
-        <div class="listing-cell">
-            <div class="listing-data">
-                <div class="listing-basicinfo">
-                    <a href="<?php echo osc_premium_url() ; ?>" class="title" title="<?php echo osc_esc_html(osc_premium_title()) ; ?>"><?php echo osc_premium_title() ; ?></a>
-                    <div class="listing-attributes">
-                        <span class="category"><?php echo osc_premium_category() ; ?></span> -
-                        <span class="location"><?php echo osc_premium_city(); ?> <?php if(osc_premium_region()!='') { ?>(<?php echo osc_premium_region(); ?>)<?php } ?></span> <span class="g-hide">-</span> <?php echo osc_format_date(osc_premium_pub_date()); ?>
-                        <?php if( osc_price_enabled_at_items() ) { ?><span class="currency-value"><?php echo osc_format_price(osc_premium_price(),osc_premium_currency_symbol()); ?></span><?php } ?>
-                    </div>
-                    <p><?php echo osc_highlight( osc_premium_description(), 250 ); ?></p>
-                </div>
-                <?php if($admin){ ?>
-                    <span class="admin-options">
-                        <a href="<?php echo osc_premium_edit_url(); ?>" rel="nofollow"><?php _e('Edit item', 'matrix'); ?></a>
-                        <span>|</span>
-                        <a class="delete" onclick="javascript:return confirm('<?php echo osc_esc_js(__('This action can not be undone. Are you sure you want to continue?', 'matrix')); ?>')" href="<?php echo osc_premium_delete_url();?>" ><?php _e('Delete', 'matrix'); ?></a>
-                        <?php if(osc_premium_is_inactive()) {?>
-                        <span>|</span>
-                        <a href="<?php echo osc_premium_activate_url();?>" ><?php _e('Activate', 'matrix'); ?></a>
-                        <?php } ?>
-                    </span>
-                <?php } ?>
-            </div>
-        </div>
-    </div>
-</li> -->
