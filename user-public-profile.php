@@ -1,63 +1,45 @@
 <?php
 osc_add_hook('header', 'mtx_follow_construct');
-mtx_add_body_class('user-public-profile');
-osc_enqueue_script('jquery-validate');
-osc_add_hook('after-main', function() {
-    osc_current_web_theme_path('user-public-sidebar.php');
+mtx_add_body_class('user user-public-profile');
+
+osc_add_hook('mtx_jumbo', function() {
+    osc_current_web_theme_path('user-public-profile-jumbo.php');
 });
 
-$address = '';
-if(osc_user_address()!='') {
-    if(osc_user_city_area()!='') {
-        $address = osc_user_address().", ".osc_user_city_area();
-    } else {
-        $address = osc_user_address();
-    }
-} else {
-    $address = osc_user_city_area();
-}
-$location_array = array();
-if(trim(osc_user_city()." ".osc_user_zip())!='') {
-    $location_array[] = trim(osc_user_city()." ".osc_user_zip());
-}
-if(osc_user_region()!='') {
-    $location_array[] = osc_user_region();
-}
-if(osc_user_country()!='') {
-    $location_array[] = osc_user_country();
-}
-$location = implode(", ", $location_array);
-unset($location_array);
-
 osc_current_web_theme_path('header.php');
+
+$ads_class = 'bg-ligter';
 ?>
-<div id="item-content">
-    <div class="user-card">
-        <img src="http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( osc_user_email() ) ) ); ?>?s=120&d=<?php echo osc_current_web_theme_url('images/user_default.gif') ; ?>" />
-        <ul id="user_data">
-            <li class="name"><?php echo osc_user_name(); ?></li>
-            <?php if( osc_user_website() !== '' ) { ?>
-            <li class="website"><a href="<?php echo osc_user_website(); ?>"><?php echo osc_user_website(); ?></a></li>
-            <?php } ?>
-            <?php if( $address !== '' ) { ?>
-            <li class="adress"><?php printf(__('<strong>Address:</strong> %1$s'), $address); ?></li>
-            <?php } ?>
-            <?php if( $location !== '' ) { ?>
-            <li class="location"><?php printf(__('<strong>Location:</strong> %1$s'), $location); ?></li>
-            <?php } ?>
-        </ul>
-    </div>
-    <?php if( osc_user_info() !== '' ) { ?>
-    <h2><?php _e('User description', 'matrix'); ?></h2>
+    <?php if(osc_user_info() != '') { ?>
+        <?php $ads_class = ''; ?>
+        <section class="about bg-lighter">
+            <div class="container">
+                <div class="row">
+                    <h2 class="text-center cl-accent-dark mt-5 col-12"><?php _e('About', 'matrix'); ?></h2>
+                    <p class="text-center cl-darker mb-5 col-12"><?php printf(__('More information about %s.', 'matrix'), osc_highlight(osc_user_name(), 20)); ?></p>
+                    <p class="mb-5"><?php echo nl2br(osc_user_info()); ?></p>
+                </div>
+            </div>
+        </section>
     <?php } ?>
-    <?php echo nl2br(osc_user_info()); ?>
-    <?php if( osc_count_items() > 0 ) { ?>
-    <div class="similar_ads">
-        <h2><?php _e('Latest listings', 'matrix'); ?></h2>
-        <?php osc_current_web_theme_path('loop.php'); ?>
-        <div class="paginate"><?php echo osc_pagination_items(); ?></div>
-        <div class="clear"></div>
-    </div>
-    <?php } ?>
+
+    <section class="ads <?php echo $ads_class; ?>">
+        <div class="container">
+            <div class="row">
+                <h2 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Latest ads', 'matrix'); ?></h2>
+                <p class="text-center cl-darker mb-5 col-12"><?php printf(__('Browse latest ads by %s.', 'matrix'), osc_highlight(osc_user_name(), 20)); ?></p>
+                <?php if(osc_count_items() == 0) { ?>
+                    <p class="text-center cl-darker"><?php _e('No items, yet.', 'matrix'); ?></p>
+                <?php } else { ?>
+                    <?php while(osc_has_items()) {
+                        mtx_loop_item(false);
+                    } ?>
+                    <p class="text-center cl-darker mt-3 mb-4 col-12">
+                        <a class="btn btn-mtx bg-accent" href="<?php echo osc_search_url(array('sUser' => osc_user_id())); ?>"><?php _e('Show all', 'matrix'); ?></a>
+                    </p>
+                <?php } ?>
+            </div>
+        </div>
+    </section>
 </div>
 <?php osc_current_web_theme_path('footer.php') ; ?>

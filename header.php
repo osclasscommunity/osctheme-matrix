@@ -93,6 +93,8 @@
                         </div>
                     </div>
                 </section>
+            <?php } else { ?>
+                <?php osc_run_hook('mtx_jumbo'); ?>
             <?php } ?>
         </header>
 

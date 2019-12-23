@@ -691,15 +691,21 @@ function mtx_loop_item($premium = false) {
  *
  * @return string Formatted item location.
  */
-function mtx_loop_item_location($premium = false) {
-    if(!$premium) {
-        $country = osc_item_country();
-        $region = osc_item_region();
-        $city = osc_item_city();
+function mtx_loop_item_location($premium = false, $user = false) {
+    if(!$user) {
+        if(!$premium) {
+            $country = osc_item_country();
+            $region = osc_item_region();
+            $city = osc_item_city();
+        } else {
+            $country = osc_premium_country();
+            $region = osc_premium_region();
+            $city = osc_premium_city();
+        }
     } else {
-        $country = osc_premium_country();
-        $region = osc_premium_region();
-        $city = osc_premium_city();
+        $country = osc_user_country();
+        $region = osc_user_region();
+        $city = osc_user_city();
     }
 
     if($country != '') {
@@ -973,6 +979,16 @@ function mtx_user_items_perpage() {
 osc_add_hook('init_user', 'mtx_user_items_perpage');
 
 /**
+ * Sets public profile items per page to 12.
+ */
+function mtx_profile_items_perpage() {
+     if(Params::getParam('action') == 'pub_profile') {
+         Params::setParam('itemsPerPage', 12);
+     }
+ }
+ osc_add_hook('init_user_non_secure', 'mtx_profile_items_perpage');
+
+/**
  * Redirects user dashboard to items page.
  */
 function mtx_user_dashboard_redirect() {
@@ -982,6 +998,13 @@ function mtx_user_dashboard_redirect() {
 }
 osc_add_hook('init_user', 'mtx_user_dashboard_redirect');
 
+/**
+ * Parses alert record from database into (some) search parameters.
+ *
+ * @param array $alert Alert object.
+ *
+ * @return array Formatted data.
+ */
 function mtx_user_alert_parse_details($alert) {
      $details = (array) json_decode($alert['s_search']);
      $formatted = array();
