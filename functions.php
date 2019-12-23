@@ -981,3 +981,29 @@ function mtx_user_dashboard_redirect() {
     }
 }
 osc_add_hook('init_user', 'mtx_user_dashboard_redirect');
+
+function mtx_user_alert_parse_details($alert) {
+     $details = (array) json_decode($alert['s_search']);
+     $formatted = array();
+
+     $formatted[] = array('name' => __('Created', 'matrix'), 'value' => osc_format_date($alert['dt_date']));
+
+     if($details['sPattern'] != null) {
+         $formatted[] = array('name' => __('Keywords', 'matrix'), 'value' => $details['sPattern']);
+     }
+
+     if($details['price_min'] != 0) {
+         $formatted[] = array('name' => __('Min price', 'matrix'), 'value' => $details['price_min']);
+     }
+
+     if($details['price_max'] != 0) {
+         $formatted[] = array('name' => __('Max price', 'matrix'), 'value' => $details['price_max']);
+     }
+
+     if(count($details['aCategories']) > 0) {
+         $name = ModelMatrix_Helper::newInstance()->categoryName($details['aCategories'][0]);
+         $formatted[] = array('name' => __('Category', 'matrix'), 'value' => $name['s_name']);
+     }
+
+     return $formatted;
+}
