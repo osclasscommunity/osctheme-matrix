@@ -6,6 +6,15 @@ This is a *WIP* Osclass theme that's based on Bender 3.2.0.
 
 ## Current progress
 
+- Finished frontend for homepage, login (forgot password), register, contact, my account (items, profile, alerts), public profile.
+- Working on item page.
+
+## What's left
+
+- Item publish/edit page.
+- Search page.
+- Integration with plugins and admin configuration.
+
 ![Current progress](https://i.postimg.cc/4yRQGcdb/some-progress-html-css.jpg)
 
 ## Dependencies
