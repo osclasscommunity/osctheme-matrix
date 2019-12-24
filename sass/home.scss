@@ -1,9 +1,9 @@
 .category {
+    display: block;
     text-align: center;
     position: relative;
     padding: 1.5rem;
     margin: 1.5rem 0 1.5rem 0;
-    cursor: pointer;
 
     .category-icon {
         font-size: 3rem;
@@ -15,11 +15,11 @@
 
     &:hover {
         color: $accent;
+        text-decoration: none;
     }
 
     &::before, &::after {
         content: '';
-        cursor: pointer;
         position: absolute;
         box-sizing: inherit;
         width: 100%;
