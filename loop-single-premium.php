@@ -3,7 +3,7 @@
         <div class="card-img-wrap">
             <span class="ad-premium badge bg-accent text-white p-2"><?php _e('Premium', 'matrix'); ?></span>
             <?php if(osc_images_enabled_at_items()) { ?>
-                <a href="<?php echo osc_item_url(); ?>">
+                <a href="<?php echo osc_premium_url(); ?>">
                     <?php if(osc_count_premium_resources()) { ?>
                         <img src="<?php echo osc_resource_thumbnail_url(); ?>" class="card-img-top" alt="<?php echo osc_esc_html(osc_premium_title()); ?>">
                     <?php } else { ?>

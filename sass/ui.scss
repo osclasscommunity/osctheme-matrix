@@ -19,20 +19,18 @@
     transition: .5s ease all;
 
     &.bg-accent:hover {
-        background: #fff;
-        color: $accent !important;
+        background: $darker;
         transition: .5s ease all;
     }
 
     &.bg-accent-dark:hover {
-        background: #fff;
-        color: $accent-dark !important;
+        background: $accent;
         transition: .5s ease all;
     }
 
     &.bg-darker:hover {
-        background: #fff;
-        color: $darker !important;
+        background: $accent;
+        color: $white;
         transition: .5s ease all;
     }
 }

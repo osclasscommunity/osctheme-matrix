@@ -52,6 +52,8 @@
             </div>
         </nav>
 
+        <?php osc_current_web_theme_path('breadcrumb.php'); ?>
+
         <?php mtx_flash(); ?>
 
         <?php if(osc_is_home_page()) { ?>

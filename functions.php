@@ -6,6 +6,7 @@ DEFINES
 */
     define('MTX_VERSION', '100');
     require 'classes/ModelMatrix.php';
+    require 'classes/BreadcrumbMatrix.php';
 
     if((string) osc_get_preference('keyword_placeholder', 'matrix') == "") {
         Params::setParam('keyword_placeholder', __('ie. PHP Programmer', 'matrix') ) ;

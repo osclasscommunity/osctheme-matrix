@@ -2,6 +2,13 @@
     color: rgba(255,255,255,.8);
 }
 
+.breadcrumb {
+    padding: .75rem 0;
+    margin-bottom: 0;
+    background: none;
+    color: $white;
+}
+
 @media (max-width: 767.98px) {
     .header {
         text-align: center;
