@@ -1,15 +1,3 @@
-<?php
-$js_lang = array(
-    'delete' => __('Delete', 'matrix'),
-    'cancel' => __('Cancel', 'matrix')
-);
-
-osc_enqueue_script('jquery');
-osc_enqueue_script('jquery-ui');
-osc_register_script('global-theme-js', osc_current_web_theme_js_url('global.js'), 'jquery');
-osc_register_script('delete-user-js', osc_current_web_theme_js_url('delete_user.js'), 'jquery-ui');
-osc_enqueue_script('global-theme-js');
-?>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 
 <title><?php echo meta_title() ; ?></title>
@@ -43,8 +31,8 @@ osc_enqueue_script('global-theme-js');
 
 <script type="text/javascript">
     var matrix = window.matrix || {};
-    matrix.base_url = '<?php echo osc_base_url(true); ?>';
-    matrix.langs = <?php echo json_encode($js_lang); ?>;
+    matrix.base_url = '<?php echo osc_base_url(1); ?>';
+    matrix.langs = <?php echo json_encode(array('delete' => __('Delete', 'matrix'), 'cancel' => __('Cancel', 'matrix'))); ?>;
     matrix.fancybox_prev = '<?php echo osc_esc_js(__('Previous image', 'matrix')); ?>';
     matrix.fancybox_next = '<?php echo osc_esc_js(__('Next image', 'matrix')); ?>';
     matrix.fancybox_closeBtn = '<?php echo osc_esc_js(__('Close', 'matrix')); ?>';
