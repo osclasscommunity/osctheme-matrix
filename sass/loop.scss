@@ -1,4 +1,24 @@
 .ad {
+    .card-img-wrap {
+        overflow: hidden;
+        position: relative;
+
+        img {
+            transition: transform .25s;
+            width: 100%;
+        }
+
+        &:hover img {
+            transform: scale(1.2);
+        }
+
+        &:hover .badge {
+            z-index: 0;
+            opacity: 0;
+            transition: transform .25s;
+        }
+    }
+
     .card-title {
         white-space: nowrap;
         overflow: hidden;
