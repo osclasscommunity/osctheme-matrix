@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html dir="<?php echo mtx_default_direction() == '0' ? 'ltr': 'rtl'; ?>" lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
+<html lang="<?php echo str_replace('_', '-', osc_current_user_locale()); ?>">
     <head>
         <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-
         <title><?php echo meta_title(); ?></title>
         <meta name="title" content="<?php echo osc_esc_html(meta_title()); ?>" />
         <?php if(meta_description() != '') { ?>

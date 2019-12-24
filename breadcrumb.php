@@ -10,7 +10,7 @@ $data = $breadcrumb->data;
                 <?php foreach($data as $page) { ?>
                     <?php $i++; ?>
                     <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-                        <a itemprop="item" href="<?php echo $page['url']; ?>"><span itemprop="name"><?php echo $page['title']; ?></span></a>
+                        <a itemprop="item" href="<?php echo (array_key_exists('url', $page)) ? $page['url'] : '#'; ?>"><span itemprop="name"><?php echo $page['title']; ?></span></a>
                         <meta itemprop="position" content="<?php echo $i; ?>" />
                     </li>
                 <?php } ?>

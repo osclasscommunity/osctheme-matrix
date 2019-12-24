@@ -1,13 +1,6 @@
 <?php
 osc_add_hook('header', 'mtx_follow_construct');
 mtx_add_body_class('home');
-
-$buttonClass = '';
-$listClass   = '';
-if(mtx_show_as() == 'gallery') {
-    $listClass = 'listing-grid';
-    $buttonClass = 'active';
-}
 ?>
 <?php osc_current_web_theme_path('header.php'); ?>
 
