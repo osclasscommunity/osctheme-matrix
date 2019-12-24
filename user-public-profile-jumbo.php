@@ -5,7 +5,7 @@ $user_type = (osc_user_is_company()) ? __('company', 'matrix') : __('user', 'mat
     <div class="jumbotron bg-darker text-white mb-0">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 jumbo-margin">
                     <img src="//placehold.it/250x250" class="img-fluid"/>
                 </div>
                 <div class="col-md-9">

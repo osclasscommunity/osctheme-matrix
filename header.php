@@ -63,7 +63,7 @@
                     <div class="jumbotron bg-darker text-white mb-0">
                         <div class="container">
                             <div class="row">
-                                <div class="jumbo-text col-md-8">
+                                <div class="jumbo-text jumbo-margin col-md-8">
                                     <h1 class="display-4"><?php _e('Modern & open-source', 'matrix'); ?></h1>
                                     <p class="lead"><?php _e('Osclass theme', 'matrix'); ?></p>
                                     <p class="mt-5"><?php _e('What are you waiting for?', 'matrix'); ?></p>
