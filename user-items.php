@@ -17,7 +17,13 @@ View::newInstance()->_exportVariableToView('listAdmin', 1);
                 <?php if(osc_count_items() == 0) { ?>
                     <p class="text-center cl-darker"><?php _e('No items, yet.', 'matrix'); ?></p>
                 <?php } else { ?>
-                    <?php osc_current_web_theme_path('loop.php'); ?>
+                    <div class="container">
+                        <div class="row">
+                            <?php while(osc_has_items()) {
+                                mtx_draw_item(false);
+                            } ?>
+                        </div>
+                    </div>
                 <?php } ?>
                 <div class="paginate">
                     <?php echo osc_pagination_items(); ?>
