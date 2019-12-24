@@ -1,5 +1,5 @@
 .btn-mtx {
-    &.bg-accent, &.bg-accent-dark {
+    &.bg-accent, &.bg-accent-dark, &.bg-darker {
         color: $white;
     }
 }
@@ -26,6 +26,12 @@
     &.bg-accent-dark:hover {
         background: #fff;
         color: $accent-dark !important;
+        transition: .5s ease all;
+    }
+
+    &.bg-darker:hover {
+        background: #fff;
+        color: $darker !important;
         transition: .5s ease all;
     }
 }

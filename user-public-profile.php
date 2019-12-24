@@ -35,7 +35,7 @@ $ads_class = 'bg-ligter';
                         mtx_loop_item(false);
                     } ?>
                     <p class="text-center cl-darker mt-3 mb-4 col-12">
-                        <a class="btn btn-mtx bg-accent" href="<?php echo osc_search_url(array('sUser' => osc_user_id())); ?>"><?php _e('Show all', 'matrix'); ?></a>
+                        <a class="btn btn-mtx bg-darker" href="<?php echo osc_search_url(array('sUser' => osc_user_id())); ?>"><?php _e('Show all', 'matrix'); ?></a>
                     </p>
                 <?php } ?>
             </div>
