@@ -1,0 +1,51 @@
+.item {
+    section {
+        border: 1px solid rgba(0,0,0,0.125);
+        background: #fff;
+        padding: 1rem;
+    }
+}
+
+.ad-gallery {
+    img {
+        margin: 0 auto;
+    }
+
+    .bx-wrapper {
+        margin-bottom: 1rem;
+        overflow: hidden;
+        box-shadow: none;
+        background: transparent;
+
+        li a {
+            display: block;
+            width: 100%;
+            height: 100%;
+
+            img {
+                max-width: 100%;
+                display: block;
+                width: auto;
+                height: auto;
+            }
+        }
+
+        .bx-controls-direction {
+            a {
+                background: rgba(0, 0, 0, 0.65);
+                color: $accent;
+                z-index: 1;
+                text-indent: 0;
+                font-size: 2rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &:hover {
+                    background: rgba(0, 0, 0, 0.85);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

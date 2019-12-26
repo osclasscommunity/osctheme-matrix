@@ -8,6 +8,8 @@ if(!OC_ADMIN) {
     osc_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js');
     osc_register_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js', array('jquery'));
     osc_register_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js', array('jquery'));
+    osc_register_script('bxslider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js', array('jquery'));
+    osc_register_script('lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery.min.js', array('jquery'));
     osc_register_script('matrix', osc_current_web_theme_js_url('global.js'), 'jquery');
     osc_enqueue_script('jquery');
     osc_enqueue_script('jquery-ui');
@@ -18,6 +20,8 @@ if(!OC_ADMIN) {
 
     osc_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css');
     osc_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css');
+    osc_enqueue_style('bxslider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css');
+    osc_enqueue_style('lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css');
     osc_enqueue_style('matrix', osc_current_web_theme_url('css/main.css'));
 }
 osc_enqueue_script('php-date');
@@ -383,7 +387,7 @@ function mtx_flash_icon($message) {
  * @return array
  */
 function mtx_popular_locations() {
-    $data = RegionStats::newInstance()->listRegions('%%%%', '>', 'i_num_items DESC');
+    $data = RegionStats::newInstance()->listRegions('%%%%', '>', 'items DESC');
     if(count($data)) {
         return array('type' => 'region', 'data' => $data);
     }
@@ -449,6 +453,15 @@ function mtx_popular_categories() {
     return array();
 }
 
+function mtx_user_delete_account_url($user) {
+    $secret = ModelMatrix_Helper::newInstance()->userSecret($user);
+    if($secret['s_secret'] != '') {
+        return osc_base_url(1).'?page=user&action=delete&id='.$user.'&secret='.$secret['s_secret'];
+    }
+
+    return '#';
+}
+
 /**
  * Gets user account menu items.
  *
@@ -494,7 +507,7 @@ function mtx_user_menu_items() {
     );
     $menu[] = array(
         'name' => __('Delete account'),
-        'url' => osc_base_url(1).'?page=user&action=delete&id='.osc_user_id().'&secret='.osc_user()['s_secret'],
+        'url' => mtx_user_delete_account_url(osc_logged_user_id()),
         'class' => 'opt_delete_account',
         'icon' => 'fa-user-times',
         'attr' => 'onclick="javascript: return confirm(matrix.confirm);"',
@@ -618,3 +631,14 @@ function mtx_user_alert_parse_details($alert) {
 
      return $formatted;
 }
+
+/**
+ * Exports user data array to be used on change email, change password and change username pages.
+ */
+function mtx_user_page_export() {
+    if(in_array(Params::getParam('action'), array('change_email', 'change_password', 'change_username'))) {
+        $user = User::newInstance()->findByPrimaryKey(osc_logged_user_id());
+        View::newInstance()->_exportVariableToView('user', $user);
+    }
+}
+osc_add_hook('init_user', 'mtx_user_page_export');

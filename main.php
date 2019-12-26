@@ -43,7 +43,7 @@ mtx_add_body_class('home');
     <div class="container">
         <div class="row">
             <h2 class="text-center text-white mt-5 col-12"><?php _e('Ribbon', 'matrix'); ?></h2>
-            <p class="text-center cl-lighty mb-5 col-12"><?php _e('Because what\'s a modern theme without one?.', 'matrix'); ?></p>
+            <p class="text-center cl-lighty mb-5 col-12"><?php _e('Because what\'s a modern theme without one?', 'matrix'); ?></p>
             <div class="col-md-3 mb-10">
                 <div class="ribbon-stat text-center text-white">
                     <span class="ribbon-count">61989</span>

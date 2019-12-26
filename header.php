@@ -47,6 +47,16 @@
                                 <?php } ?>
                             <?php } ?>
                         <?php } ?>
+                        <?php osc_goto_first_locale(); ?>
+                        <?php if(osc_count_web_enabled_locales() > 1) { ?>
+                            <li class="nav-item nav-language">
+                                <select onchange="window.location.href=this.options[this.selectedIndex].getAttribute('data-url');">
+                                    <?php while(osc_has_web_enabled_locales()) { ?>
+                                        <option data-url="<?php echo osc_change_language_url(osc_locale_code()); ?>" <?php echo (osc_locale_code() == osc_current_user_locale()) ? 'selected' : ''; ?>><?php echo osc_locale_name(); ?></option>
+                                    <?php } ?>
+                                </select>
+                            </li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

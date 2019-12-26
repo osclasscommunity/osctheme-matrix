@@ -40,11 +40,23 @@ class ModelMatrix_Helper extends DAO {
         $this->dao->from(DB_TABLE_PREFIX.'t_category_description');
         $this->dao->where('fk_i_category_id', $id);
         $this->dao->where('fk_c_locale_code', osc_current_user_locale());
-        $this->dao->limit(5);
 
         $result = $this->dao->get();
         if($result === false) {
             return array('s_name' => '');
+        }
+
+        return $result->row();
+    }
+
+    public function userSecret($id) {
+        $this->dao->select('s_secret');
+        $this->dao->from(DB_TABLE_PREFIX.'t_user');
+        $this->dao->where('pk_i_id', $id);
+
+        $result = $this->dao->get();
+        if($result === false) {
+            return array('s_secret' => '');
         }
 
         return $result->row();

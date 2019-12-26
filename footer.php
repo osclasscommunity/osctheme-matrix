@@ -92,15 +92,6 @@
             </div>
         </div>
     </section>
-    <?php /*if ( osc_count_web_enabled_locales() > 1) { ?>
-        <?php osc_goto_first_locale(); ?>
-        <strong><?php _e('Language:', 'matrix'); ?></strong>
-        <?php $i = 0;  ?>
-        <?php while ( osc_has_web_enabled_locales() ) { ?>
-        <span><a id="<?php echo osc_locale_code(); ?>" href="<?php echo osc_change_language_url ( osc_locale_code() ); ?>"><?php echo osc_locale_name(); ?></a></span><?php if( $i == 0 ) { echo " &middot; "; } ?>
-            <?php $i++; ?>
-        <?php } ?>
-    <?php } */ ?>
 </footer>
 <?php osc_run_hook('footer'); ?>
 </body>
