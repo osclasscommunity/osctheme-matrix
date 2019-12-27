@@ -11,6 +11,11 @@ osc_enqueue_script('lightgallery');
 mtx_add_body_class('item');
 
 osc_current_web_theme_path('header.php');
+
+if(osc_item_user_id() != null) {
+    $user = User::newInstance()->findByPrimaryKey(osc_item_user_id());
+    View::newInstance()->_exportVariableToView('user', $user);
+}
 ?>
 <div class="container-fluid bg-lighter">
     <div class="container">
@@ -85,9 +90,60 @@ osc_current_web_theme_path('header.php');
                     <?php osc_run_hook('location'); ?>
                 </section>
             </div>
-            <div class="col-md-4 pl-0">
-                <section class="ad-contact border">
-                    <p>Content...</p>
+            <div class="col-md-4 pl-0 ">
+                <section class="ad-contact border mb-3">
+                    <div class="user-card text-center">
+                        <?php $cover_phone = mtx_pref('item_cover_phone'); $cover_email = mtx_pref('item_cover_email'); ?>
+
+                        <?php if(mtx_item_phone() != '') { ?>
+                            <p>
+                                <?php if($cover_phone) { ?>
+                                    <a class="phone hidden" href="javascipt:void();" data-value="<?php echo mtx_item_phone(); ?>"><?php echo substr(mtx_item_phone(), 0, 3); ?>XXXXXX</a>
+                                <?php } else { ?>
+                                    <a class="phone" href="tel:<?php echo mtx_item_phone(); ?>"><?php mtx_item_phone(); ?></a>
+                                <?php } ?>
+                            </p>
+                        <?php } ?>
+
+                        <?php if(osc_item_user_id() != null) { ?>
+                            <?php if(osc_user_phone_mobile() != '') { ?>
+                                <?php if($cover_phone) { ?>
+                                    <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_user_phone_mobile(); ?>"><?php echo substr(osc_user_phone_mobile(), 0, 3); ?>XXXXXX</a>
+                                <?php } else { ?>
+                                    <a class="phone" href="tel:<?php echo osc_user_phone_mobile(); ?>"><?php osc_user_phone_mobile(); ?></a>
+                                <?php } ?>
+                            <?php } ?>
+                            <?php if(osc_user_phone_land() != '') { ?>
+                                <?php if($cover_phone) { ?>
+                                    <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_user_phone_land(); ?>"><?php echo substr(osc_user_phone_land(), 0, 3); ?>XXXXXX</a>
+                                <?php } else { ?>
+                                    <a class="phone" href="tel:<?php echo osc_user_phone_land(); ?>"><?php osc_user_phone_land(); ?></a>
+                                <?php } ?>
+                            <?php } ?>
+                        <?php } ?>
+
+                        <?php if(osc_item_show_email()) { ?>
+                            <?php if($cover_mail) { ?>
+                                <a class="email hidden" href="javascipt:void();" data-value="<?php echo osc_item_contact_email(); ?>"><?php echo substr(osc_item_contact_email(), 0, 3); ?>@XXX.XXX</a>
+                            <?php } else { ?>
+                                <a class="email" href="mailto:<?php echo osc_item_contact_email(); ?>"><?php osc_item_contact_email(); ?></a>
+                            <?php } ?>
+                        <?php } ?>
+                    </div>
+                </section>
+                <section class="ad-user border">
+                    <div class="user-card text-center">
+                        <div class="user-img d-flex justify-content-center mb-3">
+                            <img class="img-fluid" width="70" src="<?php echo mtx_user_profilepic_url(osc_item_user_id()); ?>" alt="<?php echo osc_item_contact_name(); ?>">
+                        </div>
+                        <?php if(osc_item_user_id() == null) { ?>
+                            <p><?php echo osc_item_contact_name(); ?></p>
+                        <?php } else { ?>
+                            <p class="mb-1"><a href="<?php echo osc_user_public_profile_url(); ?>"><?php echo osc_item_contact_name(); ?></a></p>
+                            <p><a href="<?php echo osc_user_public_profile_url(); ?>" class="cl-accent"><?php _e('View profile', 'matrix'); ?></a></p>
+                            <p><?php echo mtx_loop_item_location(false, true); ?></p>
+                        <?php } ?>
+                    </div>
                 </section>
             </div>
         </div>

@@ -26,6 +26,19 @@ if(!OC_ADMIN) {
 }
 osc_enqueue_script('php-date');
 
+/*
+ * item_cover_phone - BOOLEAN - Hide phone partially on item page. Default 0.
+ * item_cover_email - BOOLEAN - Hide email partially on item page. Default 0.
+*/
+
+function mtx_pref($key) {
+    return 1;
+    // return osc_get_preference($key, 'matrix');
+}
+
+function mtx_set_pref($key, $value) {
+    return osc_set_preference($key, $value, 'matrix');
+}
 
 function mtx_theme_install() {
     osc_set_preference('version', MTX_VERSION, 'matrix');
@@ -642,3 +655,25 @@ function mtx_user_page_export() {
     }
 }
 osc_add_hook('init_user', 'mtx_user_page_export');
+
+/**
+ * Returns profile picture URL.
+ *
+ * If Profile Picture plugin by WEBmods is installed fetch picture from there. Otherwise use default one.
+ *
+ * @param int $user User ID.
+ *
+ * @return string URL.
+ */
+function mtx_user_profilepic_url($user) {
+    if(Plugins::isEnabled('zo_profilepic/index.php')) {
+        return profilepic_user_url($user);
+    }
+
+    return osc_current_web_theme_url('assets/img/profilepic.jpg');
+}
+
+// Add support for telephone plugin, custom field phone and add own phone field.
+function mtx_item_phone() {
+    return '000 111 222';
+}

@@ -89,6 +89,30 @@ $(document).ready(function(event){
 });
 
 $(function() {
+    /*
+     * Show hidden phone number or email.
+    */
+    $('.phone.hidden, .email.hidden').click(function(e) {
+        if(!$(this).hasClass('hidden')) {
+            return;
+        }
+        
+        e.preventDefault();
+
+        var value = $(this).attr('data-value');
+        $(this).removeClass('hidden');
+        $(this).removeClass('hidden');
+        $(this).html(value);
+
+        if($(this).hasClass('phone')) {
+            $(this).attr('href', 'tel:' + value);
+        } else if($(this).hasClass('email')) {
+            $(this).attr('href', 'mailto:' + value);
+        }
+    });
+});
+
+$(function() {
     var pass = document.querySelector('#pass.repeat');
     var pass2 = document.querySelector('#pass2.repeat');
 
