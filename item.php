@@ -85,7 +85,7 @@ osc_current_web_theme_path('header.php');
                     <?php osc_run_hook('location'); ?>
                 </section>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 pl-0">
                 <section class="ad-contact border">
                     <p>Content...</p>
                 </section>
