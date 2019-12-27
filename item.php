@@ -11,62 +11,38 @@ osc_enqueue_script('lightgallery');
 mtx_add_body_class('item');
 
 osc_current_web_theme_path('header.php');
-
-// if( osc_price_enabled_at_items() )
 ?>
-<?php if(osc_count_item_resources() > 0) { ?>
-    <script>
-        $(function() {
-            $('.bx-slider').lightGallery({
-                mode: 'lg-slide',
-                thumbnail: true,
-                cssEasing: 'cubic-bezier(0.25, 0, 0.25, 1)',
-                selector: 'a',
-                getCaptionFromTitleOrAlt: false,
-                download: true,
-                thumbWidth: 90,
-                thumbContHeight: 80,
-                share: true
-          });
-
-          $('.bx-slider').bxSlider({
-              slideWidth: $(window).outerWidth(),
-              infiniteLoop: false,
-              slideMargin: 0,
-              pager: true,
-              pagerCustom: '.item-bx-pager',
-              infiniteLoop: true,
-              nextText: '<i class="fa fa-angle-right"></i>',
-              prevText: '<i class="fa fa-angle-left"></i>'
-          });
-
-          if($('ul.bx-slider').find('li').length <= 1) {
-              $('.bx-controls').hide(0);
-          }
-
-        });
-    </script>
-<?php } ?>
 <div class="container-fluid bg-lighter">
     <div class="container">
         <div class="row">
-            <div class="col-12">
-                <section class="ad-heading mt-3 mb-3">
-                    <h1 class="text-center cl-accent-dark">
-                        <?php echo osc_item_title(); ?>
-                        <?php if(osc_item_price() > 0) { ?><small><?php printf(__('for %s', 'matrix'), osc_item_formated_price()); } ?></small>
-                    </h1>
-                    <p class="text-center cl-darker"><?php echo mtx_loop_item_location(); ?></p>
-                </section>
-            </div>
+            <?php if(osc_price_enabled_at_items()) { ?>
+                <div class="col-8 ad-heading-col">
+                    <section class="ad-heading bg-white">
+                        <h1 class="cl-accent-dark"><?php echo osc_item_title(); ?></h1>
+                        <p class="text-center cl-darker"><?php echo mtx_loop_item_location(); ?></p>
+                    </section>
+                </div>
+                <div class="col-4 ad-price-col">
+                    <section class="ad-price bg-darker">
+                        <h2 class="text-center"><?php echo osc_item_formated_price(); ?></h2>
+                    </section>
+                </div>
+            <?php } else { ?>
+                <div class="col-12 ad-heading-col">
+                    <section class="ad-heading bg-white">
+                        <h1 class="cl-accent-dark"><?php echo osc_item_title(); ?></h1>
+                        <p class="text-center cl-darker"><?php echo mtx_loop_item_location(); ?></p>
+                    </section>
+                </div>
+            <?php } ?>
         </div>
         <div class="row">
             <div class="col-md-8">
-                <section class="ad-photos">
+                <section class="ad-photos border">
                     <?php if(osc_images_enabled_at_items()) { ?>
                         <?php if(osc_count_item_resources() > 0 ) { ?>
                             <div class="ad-gallery">
-                                <ul class="list bx-slider">
+                                <ul class="list gallery-slider">
                                     <?php for($x = 0; osc_has_item_resources(); $x++) { ?>
                                         <li>
                                             <a href="<?php echo osc_resource_url(); ?>">
@@ -77,7 +53,7 @@ osc_current_web_theme_path('header.php');
                                 </ul>
 
                                 <?php if(osc_count_item_resources() > 1) { ?>
-                                    <div class="row m-0 item-bx-pager">
+                                    <div class="row m-0 gallery-thumbs">
                                         <?php osc_reset_resources(); ?>
                                         <?php for($x = 1; osc_has_item_resources(); $x++) { ?>
                                             <a data-slide-index="<?php echo $x - 1; ?>" href="#" class="col-2 p-1 navi<?php if($x == 0) { ?> first<?php } ?><?php if($x - 1 == osc_count_item_resources()) { ?> last<?php } ?>">
@@ -90,14 +66,28 @@ osc_current_web_theme_path('header.php');
                         <?php } ?>
                     <?php } ?>
                 </section>
+                <section class="ad-description border mt-3">
+                    <p class="mb-0"><?php echo osc_item_description(); ?></p>
+                </section>
+                <section class="ad-meta border mt-3">
+                    <?php while (osc_has_item_meta()) { ?>
+                        <?php if(osc_item_meta_value() != '') { ?>
+                            <div class="meta">
+                                <strong><?php echo osc_item_meta_name(); ?>:</strong> <?php echo osc_item_meta_value(); ?>
+                            </div>
+                        <?php } ?>
+                    <?php } ?>
+                </section>
+                <section class="ad-plugin border mt-3">
+                    <?php osc_run_hook('item_detail', osc_item()); ?>
+                </section>
+                <section class="ad-location border mt-3">
+                    <?php osc_run_hook('location'); ?>
+                </section>
             </div>
             <div class="col-md-4">
-                <section class="ad-contact">
-                    <h1 class="text-center cl-accent-dark">
-                        <?php echo osc_item_title(); ?>
-                        <?php if(osc_item_price() > 0) { ?><small><?php printf(__('for %s', 'matrix'), osc_item_formated_price()); } ?></small>
-                    </h1>
-                    <p class="text-center cl-darker"><?php echo mtx_loop_item_location(); ?></p>
+                <section class="ad-contact border">
+                    <p>Content...</p>
                 </section>
             </div>
         </div>
@@ -110,47 +100,6 @@ osc_current_web_theme_path('header.php');
 
 
 <div id="item-content">
-
-    <div id="description">
-        <p><?php echo osc_item_description(); ?></p>
-        <div id="custom_fields">
-            <?php if( osc_count_item_meta() >= 1 ) { ?>
-                <br />
-                <div class="meta_list">
-                    <?php while ( osc_has_item_meta() ) { ?>
-                        <?php if(osc_item_meta_value()!='') { ?>
-                            <div class="meta">
-                                <strong><?php echo osc_item_meta_name(); ?>:</strong> <?php echo osc_item_meta_value(); ?>
-                            </div>
-                        <?php } ?>
-                    <?php } ?>
-                </div>
-            <?php } ?>
-        </div>
-        <?php osc_run_hook('item_detail', osc_item() ); ?>
-        <p class="contact_button">
-            <?php if( !osc_item_is_expired () ) { ?>
-            <?php if( !( ( osc_logged_user_id() == osc_item_user_id() ) && osc_logged_user_id() != 0 ) ) { ?>
-                <?php     if(osc_reg_user_can_contact() && osc_is_web_user_logged_in() || !osc_reg_user_can_contact() ) { ?>
-                    <a href="#contact" class="ui-button ui-button-middle ui-button-main resp-toogle"><?php _e('Contact seller', 'matrix'); ?></a>
-                <?php     } ?>
-            <?php     } ?>
-            <?php } ?>
-           <a href="<?php echo osc_item_send_friend_url(); ?>" rel="nofollow" class="ui-button ui-button-middle"><?php _e('Share', 'matrix'); ?></a>
-        </p>
-        <?php osc_run_hook('location'); ?>
-    </div>
-    <!-- plugins -->
-    <div id="useful_info" class="bordered-box">
-        <h2><?php _e('Useful information', 'matrix'); ?></h2>
-        <ul>
-            <li><?php _e('Avoid scams by acting locally or paying with PayPal', 'matrix'); ?></li>
-            <li><?php _e('Never pay with Western Union, Moneygram or other anonymous payment services', 'matrix'); ?></li>
-            <li><?php _e('Don\'t buy or sell outside of your country. Don\'t accept cashier cheques from outside your country', 'matrix'); ?></li>
-            <li><?php _e('This site is never involved in any transaction, and does not handle payments, shipping, guarantee transactions, provide escrow services, or offer "buyer protection" or "seller certification"', 'matrix'); ?></li>
-        </ul>
-    </div>
-
     <?php if( osc_comments_enabled() ) { ?>
         <?php if( osc_reg_user_post_comments () && osc_is_web_user_logged_in() || !osc_reg_user_post_comments() ) { ?>
         <div id="comments">
@@ -226,4 +175,34 @@ osc_current_web_theme_path('header.php');
         <?php } ?>
     <?php } ?>
 </div>
+<?php if(osc_count_item_resources() > 0) { ?>
+    <script>
+        $(function() {
+            $('.gallery-slider').lightGallery({
+                mode: 'lg-slide',
+                thumbnail: true,
+                selector: 'a',
+                download: true,
+                share: true,
+                thumbWidth: 90,
+                thumbContHeight: 80
+            });
+
+            $('.gallery-slider').bxSlider({
+                slideWidth: $(window).outerWidth(),
+                infiniteLoop: false,
+                slideMargin: 0,
+                pager: true,
+                pagerCustom: '.gallery-thumbs',
+                infiniteLoop: true,
+                nextText: '<i class="fa fa-angle-right"></i>',
+                prevText: '<i class="fa fa-angle-left"></i>'
+            });
+
+            if($('ul.gallery-slider').find('li').length <= 1) {
+                $('.bx-controls').hide(0);
+            }
+        });
+    </script>
+<?php } ?>
 <?php osc_current_web_theme_path('footer.php'); ?>

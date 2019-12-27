@@ -1,7 +1,42 @@
 .item {
-    section {
+    .ad-heading-col, .ad-price-col {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+    }
+
+    .ad-heading-col {
+        padding-right: 0;
+    }
+
+    .ad-price-col {
+        padding-left: 0;
+    }
+
+    .ad-heading, .ad-price {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+
+    .ad-heading {
         border: 1px solid rgba(0,0,0,0.125);
-        background: #fff;
+        border-right-color: transparent;
+    }
+
+    .ad-price {
+        border: 1px solid rgba(0,0,0,0.125);
+        border-left-color: transparent;
+        color: $white;
+    }
+
+    section.border {
+        border: 1px solid rgba(0,0,0,0.125);
+        background: $white;
         padding: 1rem;
     }
 }
