@@ -71,10 +71,12 @@ if(osc_item_user_id() != null) {
                         <?php } ?>
                     <?php } ?>
                 </section>
-                <section class="ad-description border mt-3">
+                <section class="ad-description border">
+                    <h3 class="bg-darker"><?php _e('Description', 'matrix'); ?></h3>
                     <p class="mb-0"><?php echo osc_item_description(); ?></p>
                 </section>
-                <section class="ad-meta border mt-3">
+                <section class="ad-plugin border">
+                    <h3 class="bg-darker"><?php _e('More information', 'matrix'); ?></h3>
                     <?php while (osc_has_item_meta()) { ?>
                         <?php if(osc_item_meta_value() != '') { ?>
                             <div class="meta">
@@ -82,30 +84,51 @@ if(osc_item_user_id() != null) {
                             </div>
                         <?php } ?>
                     <?php } ?>
-                </section>
-                <section class="ad-plugin border mt-3">
                     <?php osc_run_hook('item_detail', osc_item()); ?>
                 </section>
-                <section class="ad-location border mt-3">
-                    <?php osc_run_hook('location'); ?>
-                </section>
-            </div>
-            <div class="col-md-4 pl-0 ">
-                <section class="ad-contact border mb-3">
-                    <div class="user-card text-center">
-                        <?php $cover_phone = mtx_pref('item_cover_phone'); $cover_email = mtx_pref('item_cover_email'); ?>
 
-                        <?php if(mtx_item_phone() != '') { ?>
-                            <p>
-                                <?php if($cover_phone) { ?>
-                                    <a class="phone hidden" href="javascipt:void();" data-value="<?php echo mtx_item_phone(); ?>"><?php echo substr(mtx_item_phone(), 0, 3); ?>XXXXXX</a>
-                                <?php } else { ?>
-                                    <a class="phone" href="tel:<?php echo mtx_item_phone(); ?>"><?php mtx_item_phone(); ?></a>
+                <?php if(osc_comments_enabled()) { ?>
+                    <section class="ad-comments border">
+                        <h3 class="bg-darker"><?php _e('Comments', 'matrix'); ?></h3>
+
+                        <?php while(osc_has_item_comments()) { ?>
+                            <div class="comment">
+                                <?php echo osc_comment_title(); ?>
+                                <?php if(osc_comment_author_name() == '') { _e('Anonymous', 'matrix'); } else { echo osc_comment_author_name(); } ?>
+
+                                <?php echo osc_comment_body(); ?>
+
+                                <?php if(osc_comment_user_id() && (osc_comment_user_id() == osc_logged_user_id())) { ?>
+                                    <a href="<?php echo osc_delete_comment_url(); ?>" title="<?php echo osc_esc_html(__('Delete', 'matrix')); ?>"></a>
                                 <?php } ?>
-                            </p>
+                            </div>
                         <?php } ?>
+                        <div class="pagination"><?php echo osc_comments_pagination(); ?></div>
 
-                        <?php if(osc_item_user_id() != null) { ?>
+                        <?php if(osc_reg_user_post_comments () && osc_is_web_user_logged_in() || !osc_reg_user_post_comments()) { ?>
+                            <!-- form -->
+                        <?php } ?>
+                    </section>
+                <?php } ?>
+            </div>
+            <div class="col-md-4 pl-0">
+                <section class="ad-contact border mb-3">
+                    <h3 class="bg-darker"><?php _e('Contact', 'matrix'); ?></h3>
+
+                    <?php $cover_phone = mtx_pref('item_cover_phone'); $cover_email = mtx_pref('item_cover_email'); ?>
+
+                    <?php if(mtx_item_phone() != '') { ?>
+                        <p class="mb-0">
+                            <?php if($cover_phone) { ?>
+                                <a class="phone hidden" href="javascipt:void();" data-value="<?php echo mtx_item_phone(); ?>"><?php echo substr(mtx_item_phone(), 0, 3); ?>XXXXXX</a>
+                            <?php } else { ?>
+                                <a class="phone" href="tel:<?php echo mtx_item_phone(); ?>"><?php mtx_item_phone(); ?></a>
+                            <?php } ?>
+                        </p>
+                    <?php } ?>
+
+                    <?php if(osc_item_user_id() != null) { ?>
+                        <p class="mb-0">
                             <?php if(osc_user_phone_mobile() != '') { ?>
                                 <?php if($cover_phone) { ?>
                                     <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_user_phone_mobile(); ?>"><?php echo substr(osc_user_phone_mobile(), 0, 3); ?>XXXXXX</a>
@@ -120,18 +143,22 @@ if(osc_item_user_id() != null) {
                                     <a class="phone" href="tel:<?php echo osc_user_phone_land(); ?>"><?php osc_user_phone_land(); ?></a>
                                 <?php } ?>
                             <?php } ?>
-                        <?php } ?>
+                        </p>
+                    <?php } ?>
 
-                        <?php if(osc_item_show_email()) { ?>
-                            <?php if($cover_mail) { ?>
+                    <?php if(osc_item_show_email()) { ?>
+                        <p class="mb-0">
+                            <?php if($cover_email) { ?>
                                 <a class="email hidden" href="javascipt:void();" data-value="<?php echo osc_item_contact_email(); ?>"><?php echo substr(osc_item_contact_email(), 0, 3); ?>@XXX.XXX</a>
                             <?php } else { ?>
                                 <a class="email" href="mailto:<?php echo osc_item_contact_email(); ?>"><?php osc_item_contact_email(); ?></a>
                             <?php } ?>
-                        <?php } ?>
-                    </div>
+                        </p>
+                    <?php } ?>
                 </section>
                 <section class="ad-user border">
+                    <h3 class="bg-darker"><?php _e('User', 'matrix'); ?></h3>
+
                     <div class="user-card text-center">
                         <div class="user-img d-flex justify-content-center mb-3">
                             <img class="img-fluid" width="70" src="<?php echo mtx_user_profilepic_url(osc_item_user_id()); ?>" alt="<?php echo osc_item_contact_name(); ?>">
@@ -145,91 +172,13 @@ if(osc_item_user_id() != null) {
                         <?php } ?>
                     </div>
                 </section>
+                <section class="ad-location border">
+                    <h3 class="bg-darker"><?php _e('Map', 'matrix'); ?></h3>
+                    <?php osc_run_hook('location'); ?>
+                </section>
             </div>
         </div>
     </div>
-</div>
-
-
-
-
-
-
-<div id="item-content">
-    <?php if( osc_comments_enabled() ) { ?>
-        <?php if( osc_reg_user_post_comments () && osc_is_web_user_logged_in() || !osc_reg_user_post_comments() ) { ?>
-        <div id="comments">
-            <h2><?php _e('Comments', 'matrix'); ?></h2>
-            <ul id="comment_error_list"></ul>
-            <?php if( osc_count_item_comments() >= 1 ) { ?>
-                <div class="comments_list">
-                    <?php while ( osc_has_item_comments() ) { ?>
-                        <div class="comment">
-                            <h3><strong><?php echo osc_comment_title(); ?></strong> <em><?php _e("by", 'matrix'); ?> <?php echo osc_comment_author_name(); ?>:</em></h3>
-                            <p><?php echo nl2br( osc_comment_body() ); ?> </p>
-                            <?php if ( osc_comment_user_id() && (osc_comment_user_id() == osc_logged_user_id()) ) { ?>
-                            <p>
-                                <a rel="nofollow" href="<?php echo osc_delete_comment_url(); ?>" title="<?php _e('Delete your comment', 'matrix'); ?>"><?php _e('Delete', 'matrix'); ?></a>
-                            </p>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
-                    <div class="paginate" style="text-align: right;">
-                        <?php echo osc_comments_pagination(); ?>
-                    </div>
-                </div>
-            <?php } ?>
-            <div class="form-container form-horizontal">
-                <div class="header">
-                    <h3><?php _e('Leave your comment (spam and offensive messages will be removed)', 'matrix'); ?></h3>
-                </div>
-                <div class="resp-wrapper">
-                    <form action="<?php echo osc_base_url(true); ?>" method="post" name="comment_form" id="comment_form">
-                        <fieldset>
-
-                            <input type="hidden" name="action" value="add_comment" />
-                            <input type="hidden" name="page" value="item" />
-                            <input type="hidden" name="id" value="<?php echo osc_item_id(); ?>" />
-                            <?php if(osc_is_web_user_logged_in()) { ?>
-                                <input type="hidden" name="authorName" value="<?php echo osc_esc_html( osc_logged_user_name() ); ?>" />
-                                <input type="hidden" name="authorEmail" value="<?php echo osc_logged_user_email();?>" />
-                            <?php } else { ?>
-                                <div class="control-group">
-                                    <label class="control-label" for="authorName"><?php _e('Your name', 'matrix'); ?></label>
-                                    <div class="controls">
-                                        <?php CommentForm::author_input_text(); ?>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="authorEmail"><?php _e('Your e-mail', 'matrix'); ?></label>
-                                    <div class="controls">
-                                        <?php CommentForm::email_input_text(); ?>
-                                    </div>
-                                </div>
-                            <?php }; ?>
-                            <div class="control-group">
-                                <label class="control-label" for="title"><?php _e('Title', 'matrix'); ?></label>
-                                <div class="controls">
-                                    <?php CommentForm::title_input_text(); ?>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label class="control-label" for="body"><?php _e('Comment', 'matrix'); ?></label>
-                                <div class="controls textarea">
-                                    <?php CommentForm::body_input_textarea(); ?>
-                                </div>
-                            </div>
-                            <div class="actions">
-                                <button type="submit"><?php _e('Send', 'matrix'); ?></button>
-                            </div>
-
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <?php } ?>
-    <?php } ?>
 </div>
 <?php if(osc_count_item_resources() > 0) { ?>
     <script>
