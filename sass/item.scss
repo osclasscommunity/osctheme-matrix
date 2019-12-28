@@ -198,11 +198,6 @@
     p {
         margin-bottom: .5rem;
 
-        .btn {
-            width: 100%;
-            margin-top: 1rem;
-        }
-
         &:last-child {
             margin-bottom: 0;
         }
@@ -268,5 +263,14 @@ section.border {
         font-size: 1.1rem;
         color: $white;
         text-transform: lowercase;
+    }
+
+    p.btn-fw {
+        margin-top: 1rem;
+        margin-bottom: 0;
+
+        .btn {
+            width: 100%;
+        }
     }
 }

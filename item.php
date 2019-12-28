@@ -58,7 +58,7 @@ $location = ob_get_clean();
                                     <?php for($x = 0; osc_has_item_resources(); $x++) { ?>
                                         <li>
                                             <a href="<?php echo osc_resource_url(); ?>">
-                                                <img src="<?php echo osc_resource_url(); ?>" alt="<?php echo $x + 1;?> / <?php echo osc_esc_html(osc_item_title()); ?>"/>
+                                                <img src="<?php echo osc_resource_url(); ?>" alt="<?php echo osc_esc_html(osc_item_title()); ?>"/>
                                             </a>
                                         </li>
                                     <?php } ?>
@@ -67,10 +67,10 @@ $location = ob_get_clean();
                                 <?php if(osc_count_item_resources() > 1) { ?>
                                     <div class="row m-0 gallery-thumbs">
                                         <?php osc_reset_resources(); ?>
-                                        <?php for($x = 1; osc_has_item_resources(); $x++) { ?>
+                                        <?php for($x = 0; osc_has_item_resources(); $x++) { ?>
                                             <div class="thumb col-4 col-sm-3 col-md-2">
-                                                <a data-slide-index="<?php echo $x - 1; ?>" href="#">
-                                                    <img class="img-fluid" src="<?php echo osc_resource_thumbnail_url(); ?>" alt="<?php echo $x; ?> / <?php echo osc_esc_html(osc_item_title()); ?>"/>
+                                                <a data-slide-index="<?php echo $x; ?>" href="#">
+                                                    <img class="img-fluid" src="<?php echo osc_resource_thumbnail_url(); ?>" alt="<?php echo osc_esc_html(osc_item_title()); ?>"/>
                                                     <div class="thumb-border"></div>
                                                 </a>
                                             </div>
@@ -129,43 +129,9 @@ $location = ob_get_clean();
                         <div class="pagination"><?php echo osc_comments_pagination(); ?></div>
 
                         <?php if(osc_reg_user_post_comments() && osc_is_web_user_logged_in() || !osc_reg_user_post_comments()) { ?>
-                            <div class="form-container bg-lighty">
-                                <form action="<?php echo osc_base_url(1); ?>" method="POST" class="comment_form">
-                                    <input type="hidden" name="page" value="item" />
-                                    <input type="hidden" name="action" value="add_comment" />
-                                    <input type="hidden" name="id" value="<?php echo osc_item_id(); ?>" />
-                                    <?php if(osc_is_web_user_logged_in()) { ?>
-                                        <input type="hidden" name="authorName" value="<?php echo osc_esc_html(osc_logged_user_name()); ?>" />
-                                        <input type="hidden" name="authorEmail" value="<?php echo osc_logged_user_email();?>" />
-                                    <?php } ?>
-
-                                    <?php if(!osc_is_web_user_logged_in()) { ?>
-                                        <div class="form-row">
-                                            <div class="col">
-                                                <label for="name"><?php _e('Your name (optional)', 'matrix'); ?></label>
-                                                <input type="text" name="authorName" class="form-control" id="name" placeholder="<?php _e('Your name, not required.', 'matrix'); ?>">
-                                            </div>
-                                            <div class="col">
-                                                <label for="mail"><?php _e('Your e-mail', 'matrix'); ?></label>
-                                                <input type="email" name="authorEmail" class="form-control" id="mail" placeholder="<?php _e('Your e-mail, required to reply you.', 'matrix'); ?>" required>
-                                            </div>
-                                        </div>
-                                    <?php } ?>
-
-                                    <div class="form-group">
-                                        <label for="subject"><?php _e('Title (optional)', 'matrix'); ?></label>
-                                        <input type="text" name="title" class="form-control" id="subject" placeholder="<?php _e('Title of the comment, not required.', 'matrix'); ?>">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="message"><?php _e('Comment', 'matrix'); ?></label>
-                                        <textarea name="body" class="form-control" id="message" required minlength="15"></textarea>
-                                    </div>
-
-                                    <div class="form-group form-submit">
-                                    	<button type="submit" class="btn btn-mtx bg-accent"><?php _e('Post', 'matrix'); ?></button>
-                                    </div>
-                                </form>
-                            </div>
+                            <p class="btn-fw">
+                                <a href="#" class="btn btn-mtx bg-darker" data-toggle="modal" data-target="#comment-modal"><?php _e('Add a comment', 'matrix'); ?></a>
+                            </p>
                         <?php } ?>
                     </section>
                 <?php } ?>
@@ -215,7 +181,7 @@ $location = ob_get_clean();
                     <?php } ?>
 
                     <?php if(mtx_pref('ad_contact_form')) { ?>
-                        <p class="mt-2 mb-0">
+                        <p class="btn-fw">
                             <a href="#" class="btn btn-mtx bg-darker" data-toggle="modal" data-target="#contact-modal"><?php _e('Message seller', 'matrix'); ?></a>
                         </p>
                     <?php } ?>
