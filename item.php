@@ -114,19 +114,28 @@ $location = ob_get_clean();
                     <section class="ad-comments border">
                         <h3 class="bg-darker"><?php _e('Comments', 'matrix'); ?></h3>
 
-                        <?php while(osc_has_item_comments()) { ?>
-                            <div class="comment">
-                                <?php echo osc_comment_title(); ?>
-                                <?php if(osc_comment_author_name() == '') { _e('Anonymous', 'matrix'); } else { echo osc_comment_author_name(); } ?>
-
-                                <?php echo osc_comment_body(); ?>
-
-                                <?php if(osc_comment_user_id() && (osc_comment_user_id() == osc_logged_user_id())) { ?>
-                                    <a href="<?php echo osc_delete_comment_url(); ?>" title="<?php echo osc_esc_html(__('Delete', 'matrix')); ?>"></a>
+                        <?php if(osc_count_item_comments() > 0) { ?>
+                            <ul class="list-unstyled">
+                                <?php while(osc_has_item_comments()) { ?>
+                                    <?php $name = (osc_comment_author_name() != '') ? osc_comment_author_name() : __('Anonymous', 'matrix'); ?>
+                                    <li class="comment media">
+                                        <img class="img-fluid" width="50" src="<?php echo mtx_user_profilepic_url(osc_comment_user_id()); ?>" alt="<?php $name; ?>">
+                                        <div class="media-body">
+                                            <h5 class="comment-title"><?php echo (osc_comment_title() != '') ? osc_comment_title() : __('Comment', 'matrix'); ?> <?php printf(__('by %s', 'matrix'), $name); ?></h5>
+                                            <p class="comment-date"><?php echo osc_format_date(osc_comment_pub_date()); ?></p>
+                                            <p class="comment-body"><?php echo osc_comment_body(); ?></p>
+                                            <?php if(osc_comment_user_id() && (osc_comment_user_id() == osc_logged_user_id())) { ?>
+                                                <a class="comment-del cl-accent" href="<?php echo osc_delete_comment_url(); ?>"><?php _e('Delete', 'matrix'); ?></a>
+                                            <?php } ?>
+                                        </div>
+                                    </li>
+                                    <hr>
                                 <?php } ?>
-                            </div>
+                            </ul>
+                            <div class="paginate"><?php echo osc_comments_pagination(); ?></div>
+                        <?php } else { ?>
+                            <p><?php _e('No comments, yet', 'matrix'); ?></p>
                         <?php } ?>
-                        <div class="pagination"><?php echo osc_comments_pagination(); ?></div>
 
                         <?php if(osc_reg_user_post_comments() && osc_is_web_user_logged_in() || !osc_reg_user_post_comments()) { ?>
                             <p class="btn-fw">
@@ -232,9 +241,9 @@ $location = ob_get_clean();
                 <?php } ?>
                 <section class="ad-misc border">
                     <h3 class="bg-darker"><?php _e('Misc info', 'matrix'); ?></h3>
-                    <p class="mb-0"><i class="fa fa-hashtag fa-fw cl-accent"></i> <span><?php _e('ID', 'matrix'); ?></span>: #<?php echo osc_item_id(); ?></p>
-                    <p class="mb-0"><i class="fa fa-calendar-alt fa-fw cl-accent"></i> <span><?php _e('Published', 'matrix'); ?></span>: <?php echo osc_format_date(osc_item_pub_date()); ?></p>
-                    <p class="mb-0"><i class="fa fa-eye fa-fw cl-accent"></i> <span><?php _e('Views', 'matrix'); ?></span>: <?php echo osc_item_views(); ?></p>
+                    <p class="mb-0"><i class="fa fa-hashtag fa-fw cl-accent"></i> <span><?php printf(__('ID: %s', 'matrix'), osc_item_id()); ?></span></p>
+                    <p class="mb-0"><i class="fa fa-calendar-alt fa-fw cl-accent"></i> <span><?php echo osc_format_date(osc_item_pub_date()); ?></span></p>
+                    <p class="mb-0"><i class="fa fa-eye fa-fw cl-accent"></i> <span><?php printf(__('%s views', 'matrix'), osc_item_views()); ?></span></p>
                 </section>
             </div>
         </div>

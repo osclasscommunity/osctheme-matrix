@@ -177,13 +177,24 @@
  * COMMENTS section.
  */
 .ad-comments {
-    .form-container {
-        padding: 1rem;
-        margin: 0 auto;
-
-        .form-submit {
-            margin-bottom: 0;
+    .comment {
+        img {
+            margin-right: 1rem;
         }
+
+        .comment-title {
+            font-size: 1.15rem;
+        }
+
+        .comment-date {
+            font-size: .8rem;
+            margin-bottom: .5rem;
+        }
+    }
+    .comment-del {
+        display: block;
+        margin-top: .5rem;
+        text-transform: lowercase;
     }
 }
 
