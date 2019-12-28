@@ -93,6 +93,61 @@
         </div>
     </section>
 </footer>
+
+<?php if(mtx_pref('ad_contact_form') && osc_is_ad_page()) { ?>
+    <div class="modal fade" id="contact-modal" tabindex="-1" role="dialog" aria-labelledby="contact-modal-title" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-darker text-white">
+                    <h5 class="modal-title" id="contact-modal-title"><?php _e('Message seller', 'matrix'); ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body bg-lighty">
+                    <form action="<?php echo osc_base_url(1); ?>" method="POST" class="contact_form">
+                        <input type="hidden" name="page" value="item">
+                        <input type="hidden" name="action" value="contact_post">
+                        <input type="hidden" name="id" value="<?php echo osc_item_id(); ?>">
+                        <?php if(osc_is_web_user_logged_in()) { ?>
+                            <input type="hidden" name="yourName" value="<?php echo osc_esc_html(osc_logged_user_name()); ?>" />
+                            <input type="hidden" name="yourEmail" value="<?php echo osc_logged_user_email(); ?>" />
+                        <?php } ?>
+
+                        <?php if(!osc_is_web_user_logged_in()) { ?>
+                            <div class="form-row">
+                                <div class="col">
+                                        <label for="name"><?php _e('Your name', 'matrix'); ?></label>
+                                    <input type="text" name="yourName" class="form-control" id="name" placeholder="<?php _e('Your name, required to reply you.', 'matrix'); ?>" required>
+                                </div>
+                                <div class="col">
+                                    <label for="mail"><?php _e('Your e-mail', 'matrix'); ?></label>
+                                    <input type="email" name="yourEmail" class="form-control" id="mail" placeholder="<?php _e('Your e-mail, required to reply you.', 'matrix'); ?>" required>
+                                </div>
+                            </div>
+                        <?php } ?>
+
+                        <div class="form-group">
+                            <label for="phone"><?php _e('Phone (optional)', 'matrix'); ?></label>
+                            <input type="text" name="phoneNumber" class="form-control" id="phone" placeholder="<?php _e('Your phone number, optional.', 'matrix'); ?>" inputmode="numeric">
+                        </div>
+                        <div class="form-group">
+                            <label for="message"><?php _e('Message', 'matrix'); ?></label>
+                            <textarea name="message" class="form-control" id="message" required minlength="15"></textarea>
+                        </div>
+
+                        <button type="submit" class="submit d-none"></button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-mtx bg-darker" data-dismiss="modal"><?php _e('Close', 'matrix'); ?></button>
+                    <button type="button" class="btn btn-mtx bg-accent" onclick="$('.contact_form .submit').click();"><?php _e('Send', 'matrix'); ?></button>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+
 <?php osc_run_hook('footer'); ?>
 </body>
 </html>

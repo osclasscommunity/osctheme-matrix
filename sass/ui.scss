@@ -96,3 +96,26 @@
         }
     }
 }
+
+.modal {
+    .modal-content {
+        border: 0;
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            color: $white;
+            border: 0;
+
+            .close {
+                color: #fff;
+                text-shadow: none;
+                opacity: 1;
+
+                &:hover {
+                    color: $accent;
+                }
+            }
+        }
+    }
+}

@@ -10,7 +10,7 @@
 
                 <div class="collapse navbar-collapse" id="mainNav">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="<?php echo osc_base_url(); ?>"><?php _e('Home', 'matrix'); ?> <span class="sr-only">(<?php _e('current', 'matrix'); ?>)</span></a>
                         </li>
 

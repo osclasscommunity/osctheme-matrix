@@ -27,8 +27,10 @@ if(!OC_ADMIN) {
 osc_enqueue_script('php-date');
 
 /*
- * item_cover_phone - BOOLEAN - Hide phone partially on item page. Default 0.
- * item_cover_email - BOOLEAN - Hide email partially on item page. Default 0.
+ * ad_cover_phone - BOOLEAN - Hide phone partially on ad page. Default 0.
+ * ad_cover_email - BOOLEAN - Hide email partially on ad page. Default 0.
+ * ad_markas - BOOLEAN - Show Mark As form on ad page. Default 1.
+ * ad_contact_form - BOOLEAN - Show contact form on ad page. Default 1.
 */
 
 function mtx_pref($key) {
@@ -671,6 +673,64 @@ function mtx_user_profilepic_url($user) {
     }
 
     return osc_current_web_theme_url('assets/img/profilepic.jpg');
+}
+
+/**
+ * Returns value of a meta field in a loop. Based on osc_item_meta_value.
+ *
+ * Why use filters when you can copy the entire function!
+ *
+ * @param int $user User ID.
+ *
+ * @return string URL.
+ */
+function mtx_item_meta_value() {
+    $meta = osc_item_meta();
+    $value = osc_field($meta, 's_value', '');
+    $value = osc_apply_filter('osc_item_meta_value_pre_filter', $value, $meta);
+    if($meta['e_type'] == 'DATEINTERVAL' || $meta['e_type'] == 'DATE') {
+        if(is_array($value)) {
+            if(isset($value['from']) && $value['from'] != '' && is_numeric($value['from']) && isset($value['to']) && $value['to'] != '' && is_numeric($value['to'])) {
+                $return  = __('From').' '.htmlentities(date(osc_date_format(), $value['from']), ENT_COMPAT, 'UTF-8');
+                $return .= ' '.__('to').' '.htmlentities(date(osc_date_format(), $value['to']), ENT_COMPAT, 'UTF-8');
+                return $return;
+            } else {
+                return __('Unknown', 'matrix');
+            }
+        } else {
+            if($value != '' && is_numeric($value)) {
+                return htmlentities(date(osc_date_format(), $value), ENT_COMPAT, 'UTF-8');
+            } else {
+                return __('Unknown', 'matrix');
+            }
+        }
+    } else if($meta['e_type'] == 'CHECKBOX') {
+        if($value == 1) {
+            return '<i class="fa fa-check-circle fa-fw cl-accent"></i>';
+        } else {
+            return '<i class="fa fa-times-circle fa-fw cl-accent"></i>';
+        }
+    } else if($meta['e_type'] == 'URL') {
+        if($value != '') {
+            if(stripos($value, 'http://') !== false || stripos($value, 'https://') !== false) {
+                return '<a href="'.html_entity_decode($value, ENT_COMPAT, 'UTF-8').'" rel="nofollow" target="_blank">'.html_entity_decode($value, ENT_COMPAT, 'UTF-8').'</a>';
+            } else {
+                return '<a href="//'.html_entity_decode($value, ENT_COMPAT, 'UTF-8').'" rel="nofollow" target="_blank">'.html_entity_decode($value, ENT_COMPAT, 'UTF-8').'</a>';
+            }
+        } else {
+            return __('Unknown', 'matrix');
+        }
+    } else if($meta['e_type'] == 'TEXTAREA') {
+        $value = nl2br(htmlentities($value));
+        $value = osc_apply_filter('osc_item_meta_textarea_value_filter', $value, $meta);
+        return $value;
+    } else if($meta['e_type'] == 'DROPDOWN' || $meta['e_type'] == 'RADIO') {
+        return $value;
+    } else {
+        $value = nl2br(htmlentities($value));
+        $value = osc_apply_filter('osc_item_meta_value_filter', $value, $meta);
+        return $value;
+    }
 }
 
 // Add support for telephone plugin, custom field phone and add own phone field.
