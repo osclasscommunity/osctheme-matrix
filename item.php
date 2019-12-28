@@ -120,9 +120,9 @@ if(osc_item_user_id() != null) {
                     <?php if(mtx_item_phone() != '') { ?>
                         <p class="mb-0">
                             <?php if($cover_phone) { ?>
-                                <a class="phone hidden" href="javascipt:void();" data-value="<?php echo mtx_item_phone(); ?>"><?php echo substr(mtx_item_phone(), 0, 3); ?>XXXXXX</a>
+                                <i class="fa fa-phone-square fa-fw cl-accent"></i> <a class="phone hidden" href="javascipt:void();" data-value="<?php echo mtx_item_phone(); ?>"><?php echo substr(mtx_item_phone(), 0, 3); ?>XXXXXX</a>
                             <?php } else { ?>
-                                <a class="phone" href="tel:<?php echo mtx_item_phone(); ?>"><?php mtx_item_phone(); ?></a>
+                                <i class="fa fa-phone-square fa-fw cl-accent"></i> <a class="phone" href="tel:<?php echo mtx_item_phone(); ?>"><?php mtx_item_phone(); ?></a>
                             <?php } ?>
                         </p>
                     <?php } ?>
@@ -131,16 +131,16 @@ if(osc_item_user_id() != null) {
                         <p class="mb-0">
                             <?php if(osc_user_phone_mobile() != '') { ?>
                                 <?php if($cover_phone) { ?>
-                                    <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_user_phone_mobile(); ?>"><?php echo substr(osc_user_phone_mobile(), 0, 3); ?>XXXXXX</a>
+                                    <i class="fa fa-phone-square fa-fw cl-accent"></i> <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_user_phone_mobile(); ?>"><?php echo substr(osc_user_phone_mobile(), 0, 3); ?>XXXXXX</a>
                                 <?php } else { ?>
-                                    <a class="phone" href="tel:<?php echo osc_user_phone_mobile(); ?>"><?php osc_user_phone_mobile(); ?></a>
+                                    <i class="fa fa-phone-square fa-fw cl-accent"></i> <a class="phone" href="tel:<?php echo osc_user_phone_mobile(); ?>"><?php osc_user_phone_mobile(); ?></a>
                                 <?php } ?>
                             <?php } ?>
                             <?php if(osc_user_phone_land() != '') { ?>
                                 <?php if($cover_phone) { ?>
-                                    <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_user_phone_land(); ?>"><?php echo substr(osc_user_phone_land(), 0, 3); ?>XXXXXX</a>
+                                    <i class="fa fa-home fa-fw cl-accent"></i> <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_user_phone_land(); ?>"><?php echo substr(osc_user_phone_land(), 0, 3); ?>XXXXXX</a>
                                 <?php } else { ?>
-                                    <a class="phone" href="tel:<?php echo osc_user_phone_land(); ?>"><?php osc_user_phone_land(); ?></a>
+                                    <i class="fa fa-home fa-fw cl-accent"></i> <a class="phone" href="tel:<?php echo osc_user_phone_land(); ?>"><?php osc_user_phone_land(); ?></a>
                                 <?php } ?>
                             <?php } ?>
                         </p>
@@ -149,9 +149,9 @@ if(osc_item_user_id() != null) {
                     <?php if(osc_item_show_email()) { ?>
                         <p class="mb-0">
                             <?php if($cover_email) { ?>
-                                <a class="email hidden" href="javascipt:void();" data-value="<?php echo osc_item_contact_email(); ?>"><?php echo substr(osc_item_contact_email(), 0, 3); ?>@XXX.XXX</a>
+                                <i class="fa fa-envelope fa-fw cl-accent"></i> <a class="email hidden" href="javascipt:void();" data-value="<?php echo osc_item_contact_email(); ?>"><?php echo substr(osc_item_contact_email(), 0, 3); ?>@XXX.XXX</a>
                             <?php } else { ?>
-                                <a class="email" href="mailto:<?php echo osc_item_contact_email(); ?>"><?php osc_item_contact_email(); ?></a>
+                                <i class="fa fa-envelope fa-fw cl-accent"></i> <a class="email" href="mailto:<?php echo osc_item_contact_email(); ?>"><?php osc_item_contact_email(); ?></a>
                             <?php } ?>
                         </p>
                     <?php } ?>
