@@ -28,28 +28,28 @@ $location = ob_get_clean();
     <div class="container">
         <div class="row">
             <?php if(osc_price_enabled_at_items()) { ?>
-                <div class="col-8 ad-heading-col">
-                    <section class="ad-heading bg-white">
+                <div class="col-12 col-md-8 col-lg-9 ad-heading">
+                    <section class="bg-white">
                         <h1 class="cl-accent-dark"><?php echo osc_item_title(); ?></h1>
-                        <p class="text-center cl-darker"><?php echo mtx_loop_item_location(); ?></p>
+                        <p class="cl-darker"><?php echo mtx_loop_item_location(); ?></p>
                     </section>
                 </div>
-                <div class="col-4 ad-price-col">
-                    <section class="ad-price bg-darker">
-                        <h2 class="text-center"><?php echo osc_item_formated_price(); ?></h2>
+                <div class="col-12 col-md-4 col-lg-3 ad-price">
+                    <section class="bg-darker">
+                        <h2><?php echo osc_item_formated_price(); ?></h2>
                     </section>
                 </div>
             <?php } else { ?>
-                <div class="col-12 ad-heading-col">
-                    <section class="ad-heading bg-white">
+                <div class="col-12 ad-heading mb-3 mb-md-0">
+                    <section class="bg-white">
                         <h1 class="cl-accent-dark"><?php echo osc_item_title(); ?></h1>
-                        <p class="text-center cl-darker"><?php echo mtx_loop_item_location(); ?></p>
+                        <p class="cl-darker"><?php echo mtx_loop_item_location(); ?></p>
                     </section>
                 </div>
             <?php } ?>
         </div>
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 col-lg-9">
                 <section class="ad-photos border">
                     <?php if(osc_images_enabled_at_items()) { ?>
                         <?php if(osc_count_item_resources() > 0 ) { ?>
@@ -68,7 +68,7 @@ $location = ob_get_clean();
                                     <div class="row m-0 gallery-thumbs">
                                         <?php osc_reset_resources(); ?>
                                         <?php for($x = 1; osc_has_item_resources(); $x++) { ?>
-                                            <div class="thumb col-2 p-1">
+                                            <div class="thumb col-4 col-sm-3 col-md-2">
                                                 <a data-slide-index="<?php echo $x - 1; ?>" href="#">
                                                     <img class="img-fluid" src="<?php echo osc_resource_thumbnail_url(); ?>" alt="<?php echo $x; ?> / <?php echo osc_esc_html(osc_item_title()); ?>"/>
                                                     <div class="thumb-border"></div>
@@ -170,13 +170,13 @@ $location = ob_get_clean();
                     </section>
                 <?php } ?>
             </div>
-            <div class="col-md-4 pl-0">
-                <section class="ad-contact border mb-3">
+            <div class="col-md-4 col-lg-3 pl-md-0">
+                <section class="ad-contact border">
                     <h3 class="bg-darker"><?php _e('Contact', 'matrix'); ?></h3>
                     <?php $cover_phone = mtx_pref('ad_cover_phone'); $cover_email = mtx_pref('ad_cover_email'); ?>
 
                     <?php if(mtx_item_phone() != '') { ?>
-                        <p class="mb-0">
+                        <p>
                             <?php if($cover_phone) { ?>
                                 <i class="fa fa-phone-square fa-fw cl-accent"></i> <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_esc_html(mtx_item_phone()); ?>"><?php echo substr(mtx_item_phone(), 0, 3); ?>XXXXXX</a>
                             <?php } else { ?>
@@ -186,7 +186,7 @@ $location = ob_get_clean();
                     <?php } ?>
 
                     <?php if(osc_item_user_id() != null) { ?>
-                        <p class="mb-0">
+                        <p>
                             <?php if(osc_user_phone_mobile() != '') { ?>
                                 <?php if($cover_phone) { ?>
                                     <i class="fa fa-phone-square fa-fw cl-accent"></i> <a class="phone hidden" href="javascipt:void();" data-value="<?php echo osc_esc_html(osc_user_phone_mobile()); ?>"><?php echo substr(osc_user_phone_mobile(), 0, 3); ?>XXXXXX</a>
@@ -205,7 +205,7 @@ $location = ob_get_clean();
                     <?php } ?>
 
                     <?php if(osc_item_show_email()) { ?>
-                        <p class="mb-0">
+                        <p>
                             <?php if($cover_email) { ?>
                                 <i class="fa fa-envelope fa-fw cl-accent"></i> <a class="email hidden" href="javascipt:void();" data-value="<?php echo osc_esc_html(osc_item_contact_email()); ?>"><?php echo substr(osc_item_contact_email(), 0, 3); ?>@XXX.XXX</a>
                             <?php } else { ?>

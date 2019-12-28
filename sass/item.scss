@@ -1,10 +1,21 @@
-.ad-heading-col, .ad-price-col {
+.ad {
+    .container-fluid {
+        padding: 0;
+    }
+}
+
+/*
+ * HEADING section.
+ * Title and price.
+ */
+.ad-heading, .ad-price {
     display: flex;
     flex-direction: column;
     margin-top: 1rem;
+    text-align: center;
 }
 
-.ad-heading-col .ad-heading, .ad-price-col .ad-price {
+.ad-heading section, .ad-price section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,25 +24,49 @@
     margin: 1rem 0;
     padding: 1rem;
     border: 1px solid rgba(0,0,0,0.125);
-}
 
-.ad-heading-col {
-    padding-right: 0;
-
-    .ad-heading {
-        border-right-color: transparent;
+    @media (max-width: 768px) {
+        margin: 0;
     }
 }
 
-.ad-price-col {
+.ad-heading {
+    padding-right: 0;
+
+    section {
+        border-right-color: transparent;
+    }
+
+    @media (max-width: 768px) {
+        padding-right: 15px;
+
+        section h1 {
+            font-size: 2rem;
+        }
+    }
+}
+
+.ad-price {
     padding-left: 0;
 
-    .ad-price {
+    section {
         border-left-color: transparent;
         color: $white;
     }
+
+    @media (max-width: 768px) {
+        margin: 0 0 1rem 0;
+    	padding-left: 15px;
+
+        section h2 {
+            font-size: 1.5rem;
+        }
+    }
 }
 
+/*
+ * GALLERY section.
+ */
 .ad-gallery {
     img {
         margin: 0 auto;
@@ -85,7 +120,7 @@
 
                 &.active .thumb-border {
                     transition: .5s ease all;
-                    box-shadow: inset 0px -10px 0px 0px $accent;
+                    box-shadow: inset 0 -.5rem 0 0 $accent;
                     display: block;
                     position: absolute;
                     width: 100%;
@@ -100,6 +135,9 @@
     }
 }
 
+/*
+ * META/PLUGINS section.
+ */
 .ad-plugin {
     .meta {
         .list-group-item {
@@ -122,6 +160,9 @@
 
 }
 
+/*
+ * COMMENTS section.
+ */
 .ad-comments {
     .form-container {
         padding: 1rem;
@@ -133,6 +174,31 @@
     }
 }
 
+/*
+ * SIDEBAR
+ */
+
+ /*
+  * CONTACT section.
+  */
+.ad-contact {
+    p {
+        margin-bottom: .5rem;
+
+        .btn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+/*
+ * SHARE section.
+ */
 .ad-share {
     display: flex;
     align-items: center;
@@ -154,6 +220,9 @@
     }
 }
 
+/*
+ * MAP section.
+ */
 .ad-location {
     #itemMap {
         width: auto !important;
@@ -162,9 +231,13 @@
     }
 }
 
+/*
+ * MARK AS section.
+ */
 .ad-markas.border {
     padding: 0;
 }
+
 
 section.border {
     border: 1px solid rgba(0,0,0,0.125);
