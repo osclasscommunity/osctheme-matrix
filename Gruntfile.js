@@ -14,7 +14,7 @@ module.exports = function(grunt) {
                     compass: true
                 },
                 files: {
-                    'assets/css/main.css': 'sass/main.scss'
+                    'assets/css/main.css': 'assets/sass/main.scss'
                 }
             }
         },
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     var pkg = grunt.config.get('pkg');
 
     grunt.config('watch.matrix', {
-        files: ['sass/**'],
+        files: ['assets/sass/**'],
         tasks: ['sass'],
         options: {
             interrupt: true,
