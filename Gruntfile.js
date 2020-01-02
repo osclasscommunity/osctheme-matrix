@@ -38,22 +38,20 @@ module.exports = function(grunt) {
                 src: [
                     '*.php',
                     'admin/**',
-                    'common/**',
-                    'css/**',
-                    'favicon/**',
-                    'fonts/**',
-                    'images/**',
-                    'js/**',
+                    'assets/css/**',
+                    'assets/js/**',
+                    'assets/img/**',
+                    'classes/**'
                     'languages/**'
                 ],
-                dest: 'dist/matrix'
+                dest: 'build/matrix'
             }
         ]
     });
 
     var archive = '../packages/matrix_' + pkg.version + '.zip';
     grunt.config('shell.compress_matrix', {
-        command : 'cd dist/; zip -r ' + archive + ' matrix/;',
+        command : 'cd build/; zip -r ' + archive + ' matrix/;',
         options: {
             stdout: false
         }
