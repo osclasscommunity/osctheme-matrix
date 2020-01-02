@@ -14,21 +14,17 @@ osc_current_web_theme_path('header.php');
                     <input type="hidden" name="page" value="contact" />
                     <input type="hidden" name="action" value="contact_post" />
 
-                    <div class="form-group">
-                        <label for="name"><?php _e('Your name (optional)', 'matrix'); ?></label>
-                        <input type="text" name="yourName" class="form-control" id="name" placeholder="<?php _e('Your name, not required.', 'matrix'); ?>">
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::input('text', 'yourName', 'name', Session::newInstance()->_get('yourName'), __('Name (optional)', 'matrix')); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="mail"><?php _e('E-mail', 'matrix'); ?></label>
-                        <input type="email" name="yourEmail" class="form-control" id="mail" placeholder="<?php _e('Your e-mail, required to reply you.', 'matrix'); ?>" required>
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::input('email', 'yourEmail', 'mail', Session::newInstance()->_get('yourEmail'), __('E-mail', 'matrix'), true); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="subject"><?php _e('Subject (optional)', 'matrix'); ?></label>
-                        <input type="text" name="subject" class="form-control" id="subject" placeholder="<?php _e('Subject of the message, not required.', 'matrix'); ?>">
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::input('text', 'subject', 'subject', Session::newInstance()->_get('subject'), __('Subject (optional)', 'matrix')); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="message"><?php _e('Message', 'matrix'); ?></label>
-                        <textarea name="subject" class="form-control" id="message" required minlength="15"></textarea>
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::textarea('message_body', 'message', Session::newInstance()->_get('message'), __('Message', 'matrix'), true, 'minlength="15"'); ?>
                     </div>
 
                     <?php osc_run_hook('contact_form'); ?>

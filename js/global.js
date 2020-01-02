@@ -32,8 +32,8 @@ $(function() {
 });
 
 $(function() {
-    var pass = document.querySelector('#pass.repeat');
-    var pass2 = document.querySelector('#pass2.repeat');
+    var pass = document.querySelector('.pass-repeat #pass');
+    var pass2 = document.querySelector('.pass-repeat #pass2');
 
     if(pass && pass2) {
         function validatePass() {
@@ -44,7 +44,7 @@ $(function() {
             }
         }
 
-        document.querySelector('#pass.repeat').onchange = validatePass;
-        document.querySelector('#pass2.repeat').onkeyup = validatePass;
+        document.querySelector('.pass-repeat #pass').onchange = validatePass;
+        document.querySelector('.pass-repeat #pass2').onkeyup = validatePass;
     }
 });

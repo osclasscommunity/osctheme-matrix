@@ -14,21 +14,17 @@ osc_current_web_theme_path('header.php');
                     <input type="hidden" name="page" value="register" />
                     <input type="hidden" name="action" value="register_post" />
 
-                    <div class="form-group">
-                        <label for="name"><?php _e('Name', 'matrix'); ?></label>
-                        <input type="text" name="s_name" class="form-control" id="name" placeholder="<?php _e('Your name, visible on ads.', 'matrix'); ?>" required>
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::input('text', 's_name', 'name', '', __('Name', 'matrix'), true); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="mail"><?php _e('E-mail', 'matrix'); ?></label>
-                        <input type="email" name="s_email" class="form-control" id="mail" placeholder="<?php _e('Your e-mail, used for contacting you.', 'matrix'); ?>" required>
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::input('email', 's_email', 'mail', '', __('E-mail', 'matrix'), true); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="pass"><?php _e('Password', 'matrix'); ?></label>
-                        <input type="password" name="s_password" class="repeat form-control" id="pass" placeholder="<?php _e('Your password, required to login.', 'matrix'); ?>" required minlength="8">
+                    <div class="mtx-form-group pass-repeat">
+                        <?php FormMatrix::input('password', 's_password', 'pass', '', __('Password', 'matrix'), true, '', 'minlength="8"'); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="pass2"><?php _e('Repeat password', 'matrix'); ?></label>
-                        <input type="password" name="s_password2" class="repeat form-control" id="pass2" placeholder="<?php _e('Repeat your password.', 'matrix'); ?>" required minlength="8">
+                    <div class="mtx-form-group pass-repeat">
+                        <?php FormMatrix::input('password', 's_password2', 'pass2', '', __('Repeat password', 'matrix'), true, '', 'minlength="8"'); ?>
                     </div>
 
                     <?php osc_run_hook('user_register_form'); ?>

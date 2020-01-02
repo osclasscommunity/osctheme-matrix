@@ -14,13 +14,11 @@ osc_current_web_theme_path('header.php');
                     <input type="hidden" name="page" value="login" />
                     <input type="hidden" name="action" value="login_post" />
 
-                    <div class="form-group">
-                        <label for="mail"><?php _e('E-mail', 'matrix'); ?></label>
-                        <input type="email" name="email" class="form-control" id="mail" placeholder="<?php _e('E-mail for your account.', 'matrix'); ?>" required>
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::input('text', 'email', 'mail', '', __('Username or e-mail', 'matrix'), true); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="pass"><?php _e('Password', 'matrix'); ?></label>
-                        <input type="password" name="password" class="form-control" id="pass" placeholder="<?php _e('Password for your account.', 'matrix'); ?>" required>
+                    <div class="mtx-form-group">
+                        <?php FormMatrix::input('password', 'password', 'pass', '', __('Password', 'matrix'), true); ?>
                     </div>
                     <div class="form-group custom-control custom-checkbox">
                         <input type="checkbox" name="remember" class="custom-control-input" id="remember">
@@ -29,7 +27,6 @@ osc_current_web_theme_path('header.php');
                     <div class="form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Login', 'matrix'); ?></button>
                     </div>
-
                     <div class="form-group text-center">
                         <p><a href="<?php echo osc_register_account_url(); ?>"><?php _e('Register', 'matrix'); ?></a></p>
                         <p><a href="<?php echo osc_recover_user_password_url(); ?>"><?php _e('Forgotten password?', 'matrix'); ?></a></p>
