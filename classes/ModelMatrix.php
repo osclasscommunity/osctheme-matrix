@@ -1,4 +1,6 @@
 <?php
+if(!defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allowed.');
+
 class ModelMatrix_Helper extends DAO {
     private static $instance;
 

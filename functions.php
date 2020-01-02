@@ -1,13 +1,16 @@
 <?php
 define('MTX_VERSION', '100');
-require 'classes/ModelMatrix.php';
-require 'classes/BreadcrumbMatrix.php';
-require 'classes/BodyClassMatrix.php';
+
+include 'classes/ModelMatrix.php';
+spl_autoload_register(function($class) {
+    include 'classes/'.$class.'.php';
+});
 
 if(!OC_ADMIN) {
     osc_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js');
     osc_register_script('popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js', array('jquery'));
     osc_register_script('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js', array('jquery'));
+    osc_register_script('boostrap-select', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.min.js', array('jquery', 'bootstrap'));
     osc_register_script('bxslider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js', array('jquery'));
     osc_register_script('lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery.min.js', array('jquery'));
     osc_register_script('matrix', osc_current_web_theme_js_url('global.js'), 'jquery');
@@ -15,11 +18,13 @@ if(!OC_ADMIN) {
     osc_enqueue_script('jquery-ui');
     osc_enqueue_script('popper');
     osc_enqueue_script('bootstrap');
+    osc_enqueue_script('boostrap-select');
     osc_enqueue_script('fancybox');
     osc_enqueue_script('matrix');
 
     osc_enqueue_style('bootstrap', 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css');
     osc_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css');
+    osc_enqueue_style('boostrap-select', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/css/bootstrap-select.min.css');
     osc_enqueue_style('bxslider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css');
     osc_enqueue_style('lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css');
     osc_enqueue_style('matrix', osc_current_web_theme_url('css/main.css'));

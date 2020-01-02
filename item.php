@@ -96,7 +96,7 @@ $location = ob_get_clean();
                                 <?php while (osc_has_item_meta()) { ?>
                                     <li class="list-group-item">
                                         <span class="name"><?php echo osc_item_meta_name(); ?></span>
-                                        <span class="value"><?php echo mtx_item_meta_value(); ?></span>
+                                        <span class="value"><?php echo linkanalytics_meta_value(); ?></span>
                                     </li>
                                 <?php } ?>
                             </ul>

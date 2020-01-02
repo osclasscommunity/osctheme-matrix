@@ -1,22 +1,59 @@
 <?php
-osc_add_hook('header', 'mtx_nofollow_construct');
-osc_enqueue_script('jquery-validate');
-mtx_add_body_class('item item-post');
+osc_add_hook('header', 'mtx_follow_construct');
+mtx_add_body_class('ad ad-post');
 
-$action = 'item_add_post';
-$edit = false;
-if(Params::getParam('action') == 'item_edit') {
+
+if(Params::getParam('action') == 'item_add') {
+    $action = 'item_add_post';
+    $edit = 0;
+} else {
     $action = 'item_edit_post';
-    $edit = true;
+    $edit = 1;
 }
+
 osc_current_web_theme_path('header.php');
 
-if (mtx_default_location_show_as() == 'dropdown') {
-    ItemForm::location_javascript();
-} else {
-    ItemForm::location_javascript_new();
-}
+ItemForm::location_javascript();
 ?>
+<div class="container-fluid bg-lighter">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 mt-5 mb-3">
+                <h1 class="text-center cl-accent-dark"><?php _e('Post an ad', 'matrix'); ?></h1>
+                <p class="text-center cl-darker mb-5"><?php _e('Publish your ad on our site and get hundreds of views.', 'matrix'); ?></p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-9">
+                <section class="adpost-category border">
+                    <h3 class="bg-darker"><?php _e('Category', 'matrix'); ?></h3>
+                    <label><?php _e('Pick a category that best suits your product or service.', 'matrix'); ?></label>
+                    <?php ItemForm::category_select(null, null, __('Select a category', 'matrix')); ?>
+                </section>
+                <section class="adpost-description border">
+                    <h3 class="bg-darker"><?php _e('Description', 'matrix'); ?></h3>
+                    <label><?php _e('Describe your product or service to the seller.', 'matrix'); ?></label>
+                    <?php ItemFormMatrix::title_description(); ?>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(function() {
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        $('select').selectpicker('mobile');
+    } else {
+        $('select').selectpicker({
+            style: '',
+            styleBase: 'form-control',
+            width: '100%',
+        });
+    }
+});
+</script>
+
 <div class="form-container form-horizontal">
     <div class="resp-wrapper">
         <div class="header">
