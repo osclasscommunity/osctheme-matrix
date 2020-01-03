@@ -50,13 +50,7 @@ $u = osc_user();
                         <?php $countries = osc_get_countries(); ?>
                         <?php if(count($countries) > 1) { ?>
                             <div class="col">
-                                <label for="countryId"><?php _e('Country', 'matrix'); ?></label>
-                                <select name="countryId" id="countryId" class="form-control" id="country">
-                                    <option value=""><?php _e('Select a country', 'matrix'); ?></option>
-                                    <?php foreach($countries as $country) { ?>
-                                        <option value="<?php echo $country['pk_c_code']; ?>" <?php echo ($u['fk_c_country_code'] == $country['pk_c_code']) ? 'selected' : ''; ?>><?php echo $country['s_name']; ?></option>
-                                    <?php } ?>
-                                </select>
+                                <?php FormMatrix::select('countryId', 'countryId', $countries, 'pk_c_code', 's_name', $u['fk_c_country_code'], __('Country', 'matrix')); ?>
                             </div>
                         <?php } else { ?>
                             <input type="hidden" name="countryId" id="countryId" value="" />
@@ -68,14 +62,7 @@ $u = osc_user();
                         <?php $regions = osc_get_regions(); ?>
                         <?php if(count($regions) >= 1) { ?>
                             <div class="col">
-                                <label for="regionId"><?php _e('Region', 'matrix'); ?></label>
-                                <select name="regionId" class="form-control" id="regionId">
-                                    <option value=""><?php _e('Select a region', 'matrix'); ?></option>
-                                    <?php foreach($regions as $region) { ?>
-                                        <option value="<?php echo $region['pk_i_id']; ?>" <?php echo ($u['fk_i_region_id'] == $region['pk_i_id']) ? 'selected' : ''; ?>><?php echo $region['s_name']; ?></option>
-                                    <?php } ?>
-                                </select>
-                                <span class="input-line bg-accent"></span>
+                                <?php FormMatrix::select('regionId', 'regionId', $regions, 'pk_i_id', 's_name', $u['fk_i_region_id'], __('Region', 'matrix')); ?>
                             </div>
                         <?php } else { ?>
                             <div class="col">
@@ -87,13 +74,7 @@ $u = osc_user();
                         <?php $cities = osc_get_cities(); ?>
                         <?php if(count($cities) >= 1) { ?>
                             <div class="col">
-                                <label for="cityId"><?php _e('City', 'matrix'); ?></label>
-                                <select name="cityId" id="cityId" class="form-control">
-                                    <option value=""><?php _e('Select a city', 'matrix'); ?></option>
-                                    <?php foreach($cities as $city) { ?>
-                                        <option value="<?php echo $city['pk_i_id']; ?>" <?php echo ($u['fk_i_city_id'] == $city['pk_i_id']) ? 'selected' : ''; ?>><?php echo $city['s_name']; ?></option>
-                                    <?php } ?>
-                                </select>
+                                <?php FormMatrix::select('cityId', 'cityId', $cities, 'pk_i_id', 's_name', $u['fk_i_city_id'], __('City', 'matrix')); ?>
                             </div>
                         <?php } else { ?>
                             <div class="col">

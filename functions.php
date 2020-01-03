@@ -653,10 +653,10 @@ function mtx_user_alert_parse_details($alert) {
 }
 
 /**
- * Exports user data array to be used on change email, change password and change username pages.
+ * Exports user data array to be used on items, change email, change password and change username pages.
  */
 function mtx_user_page_export() {
-    if(in_array(Params::getParam('action'), array('change_email', 'change_password', 'change_username'))) {
+    if(in_array(Params::getParam('action'), array('items', 'change_email', 'change_password', 'change_username'))) {
         $user = User::newInstance()->findByPrimaryKey(osc_logged_user_id());
         View::newInstance()->_exportVariableToView('user', $user);
     }

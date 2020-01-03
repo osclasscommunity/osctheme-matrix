@@ -29,6 +29,27 @@
             transform: scaleX(1) translateY(-2px);
             opacity: 1;
         }
+
+        .dropdown-item.active {
+            background: $accent-dark;
+
+            &:hover {
+                color: $white;
+            }
+        }
+
+        .dropdown-item:not(.active):hover {
+            background: $accent;
+            color: $white;
+        }
+
+        .dropdown-menu {
+            margin-top: 0;
+        }
+    }
+
+    .bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus {
+        outline: none !important;
     }
 
     textarea + .input-line {

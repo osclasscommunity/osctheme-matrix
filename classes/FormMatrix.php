@@ -24,6 +24,22 @@ class FormMatrix {
         echo '<textarea name="'.osc_esc_html($name).'" '.$id.' '.$required.' '.$attributes.'>'.$value.'</textarea>';
         echo '<span class="input-line bg-accent"></span>';
     }
+
+    static function select($name, $id = '', $items, $i_key, $i_val, $i_sel = '', $label = '', $required = false, $attributes = '') {
+        $for = ($id != '') ? 'for="'.osc_esc_html($id).'"' : '';
+        $id = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $required = ($required) ? 'required' : '';
+
+        echo '<label '.$for.'>'.$label.'</label>';
+        echo '<select name="'.osc_esc_html($name).'" '.$id.' '.$required.' '.$attributes.'>';
+        echo '<option value="">'.__('Select a option', 'matrix').'</option>';
+        foreach($items as $item) {
+            $selected = ($i_sel == $item[$i_key]) ? 'selected' : '';
+            echo '<option value="'.osc_esc_html($item[$i_key]).'" '.$selected.'>'.$item[$i_val].'</option>';
+        }
+        echo '</select>';
+        echo '<span class="input-line bg-accent"></span>';
+    }
 }
 
 class ItemFormMatrix extends FormMatrix {
