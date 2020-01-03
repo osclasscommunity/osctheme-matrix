@@ -29,19 +29,19 @@ $location = ob_get_clean();
         <div class="row">
             <?php if(osc_price_enabled_at_items()) { ?>
                 <div class="col-12 col-md-8 col-lg-9 ad-heading">
-                    <section class="bg-white">
+                    <section class="bg-white nomargin">
                         <h1 class="cl-accent-dark"><?php echo osc_item_title(); ?></h1>
                         <p class="cl-darker"><?php echo mtx_loop_item_location(); ?></p>
                     </section>
                 </div>
                 <div class="col-12 col-md-4 col-lg-3 ad-price">
-                    <section class="bg-darker">
+                    <section class="bg-darker nomargin">
                         <h2><?php echo osc_item_formated_price(); ?></h2>
                     </section>
                 </div>
             <?php } else { ?>
                 <div class="col-12 ad-heading mb-3 mb-md-0">
-                    <section class="bg-white">
+                    <section class="bg-white nomargin">
                         <h1 class="cl-accent-dark"><?php echo osc_item_title(); ?></h1>
                         <p class="cl-darker"><?php echo mtx_loop_item_location(); ?></p>
                     </section>
