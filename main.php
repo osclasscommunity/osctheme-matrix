@@ -7,8 +7,8 @@ mtx_add_body_class('home');
 <section class="categories bg-lighter">
     <div class="container">
         <div class="row">
-            <h2 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Categories', 'matrix'); ?></h2>
-            <p class="text-center cl-darker mb-5 col-12"><?php _e('Browse our selection of ads through various categories.', 'matrix'); ?></p>
+            <h2 class="cl-accent-dark"><?php _e('Categories', 'matrix'); ?></h2>
+            <p class="cl-darker"><?php _e('Browse our selection of ads through various categories.', 'matrix'); ?></p>
             <?php while(osc_has_categories()) { ?>
                 <div class="col-lg-3 col-md-4 col-6">
                     <a class="category bg-lighty" href="<?php echo osc_search_url(['sCategory' => osc_category_id()]); ?>">
@@ -29,8 +29,8 @@ mtx_add_body_class('home');
     <section class="spotlight">
         <div class="container">
             <div class="row">
-                <h2 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Spotlight', 'matrix'); ?></h2>
-                <p class="text-center cl-darker mb-5 col-12"><?php _e('Check our featured ads.', 'matrix'); ?></p>
+                <h2 class="cl-accent-dark"><?php _e('Spotlight', 'matrix'); ?></h2>
+                <p class="cl-darker"><?php _e('Check our featured ads.', 'matrix'); ?></p>
                 <?php while(osc_has_premiums()) { ?>
                     <?php mtx_loop_item(true); ?>
                 <?php } ?>
@@ -42,8 +42,8 @@ mtx_add_body_class('home');
 <section class="ribbon bg-darker">
     <div class="container">
         <div class="row">
-            <h2 class="text-center text-white mt-5 col-12"><?php _e('Ribbon', 'matrix'); ?></h2>
-            <p class="text-center cl-lighty mb-5 col-12"><?php _e('Because what\'s a modern theme without one?', 'matrix'); ?></p>
+            <h2 class="text-white"><?php _e('Ribbon', 'matrix'); ?></h2>
+            <p class="cl-lighty"><?php _e('Because what\'s a modern theme without one?', 'matrix'); ?></p>
             <div class="col-md-3 mb-10">
                 <div class="ribbon-stat text-center text-white">
                     <span class="ribbon-count">61989</span>
@@ -76,8 +76,8 @@ mtx_add_body_class('home');
     <section class="latest">
         <div class="container">
             <div class="row">
-                <h2 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Newly added', 'matrix'); ?></h2>
-                <p class="text-center cl-darker mb-5 col-12"><?php _e('Latest ads submitted by our users..', 'matrix'); ?></p>
+                <h2 class="cl-accent-dark"><?php _e('Newly added', 'matrix'); ?></h2>
+                <p class="cl-darker"><?php _e('Latest ads submitted by our users..', 'matrix'); ?></p>
                 <?php while(osc_has_latest_items()) { ?>
                     <?php mtx_loop_item(false); ?>
                 <?php } ?>

@@ -1,3 +1,23 @@
+main section {
+    h1:first-of-type, h2:first-of-type, p:first-of-type {
+        position: relative;
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        text-align: center;
+    }
+
+    h1:first-of-type, h2:first-of-type {
+        margin-top: 3rem;
+    }
+
+    p:first-of-type {
+        margin-bottom: 3rem;
+    }
+}
+
 .btn-mtx {
     &.bg-accent, &.bg-accent-dark, &.bg-darker {
         color: $white;
@@ -56,7 +76,13 @@
 
 .small-container {
     padding: 3rem;
-    margin: 0 auto 3rem auto;
+    margin: 0 auto;
+
+    @media (min-width: 576px) {
+        & {
+            margin: 0 auto 3rem auto;
+        }
+    }
 }
 
 .paginate {

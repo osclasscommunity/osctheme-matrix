@@ -3,21 +3,22 @@ if(!defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allo
 
 class FormMatrix {
     static function input($type, $name, $id = '', $value = '', $label = '', $required = false, $inputmode = '', $attributes = '') {
-        $value = ($value != '') ? 'value="'.osc_esc_html($value).'"' : '';
         $for = ($id != '') ? 'for="'.osc_esc_html($id).'"' : '';
         $id = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $value = ($value != '') ? 'value="'.osc_esc_html($value).'"' : '';
         $required = ($required) ? 'required' : '';
         $inputmode = ($inputmode != '') ? 'inputmode="'.osc_esc_html($inputmode).'"' : '';
+        $placeholder = 'placeholder="'.__('Fill me...', 'matrix').'"'; // mtx_pref('input_placeholder');
 
         echo '<label '.$for.'>'.$label.'</label>';
-        echo '<input type="'.osc_esc_html($type).'" name="'.osc_esc_html($name).'" '.$value.' '.$id.' '.$required.' '.$inputmode.' '.$attributes.'>';
+        echo '<input type="'.osc_esc_html($type).'" name="'.osc_esc_html($name).'" '.$value.' '.$id.' '.$required.' '.$inputmode.' '.$attributes.' '.$placeholder.'>';
         echo '<span class="input-line bg-accent"></span>';
     }
 
     static function textarea($name, $id = '', $value = '', $label = '', $required = false, $attributes = '') {
-        $value = ($value != '') ? osc_esc_html($value) : '';
         $for = ($id != '') ? 'for="'.osc_esc_html($id).'"' : '';
         $id = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $value = ($value != '') ? osc_esc_html($value) : '';
         $required = ($required) ? 'required' : '';
 
         echo '<label '.$for.'>'.$label.'</label>';
@@ -39,6 +40,16 @@ class FormMatrix {
         }
         echo '</select>';
         echo '<span class="input-line bg-accent"></span>';
+    }
+
+    static function checkbox($name, $id = '', $checked = false, $label = '', $required = false, $attributes = '') {
+        $for = ($id != '') ? 'for="'.osc_esc_html($id).'"' : '';
+        $id = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $checked = ($checked) ? 'checked' : '';
+        $required = ($required) ? 'required' : '';
+
+        echo '<input type="checkbox" name="'.osc_esc_html($name).'" '.$id.' '.$checked.' '.$required.' '.$attributes.' class="custom-control-input">';
+        echo '<label class="custom-control-label" '.$for.'>'.$label.'</label>';
     }
 }
 

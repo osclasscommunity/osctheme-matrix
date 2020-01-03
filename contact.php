@@ -7,9 +7,9 @@ osc_current_web_theme_path('header.php');
 <section class="login bg-lighter">
     <div class="container">
         <div class="row">
-            <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('Contact', 'matrix'); ?></h1>
-            <p class="text-center cl-darker mb-5 col-12"><?php _e('Send us a message.', 'matrix'); ?></p>
-            <div class="small-container col-md-6 col-12 bg-lighty">
+            <h1 class="cl-accent-dark"><?php _e('Contact', 'matrix'); ?></h1>
+            <p class="cl-darker"><?php _e('Send us a message.', 'matrix'); ?></p>
+            <div class="small-container bg-lighty col-12 col-md-8 col-lg-6">
                 <form action="<?php echo osc_base_url(1); ?>" method="POST">
                     <input type="hidden" name="page" value="contact" />
                     <input type="hidden" name="action" value="contact_post" />
@@ -29,11 +29,11 @@ osc_current_web_theme_path('header.php');
 
                     <?php osc_run_hook('contact_form'); ?>
 
-                    <div class="form-group captcha">
+                    <div class="mtx-form-group captcha">
                         <?php osc_show_recaptcha('register'); ?>
                     </div>
 
-                    <div class="form-group form-submit">
+                    <div class="mtx-form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Send', 'matrix'); ?></button>
                     </div>
 

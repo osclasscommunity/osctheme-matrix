@@ -1,6 +1,8 @@
-.mtx-form-group, .mtx-form-row {
+.mtx-form-group, .mtx-form-group-cs .mtx-form-row {
     margin-bottom: 1rem;
+}
 
+.mtx-form-group, .mtx-form-row {
     label {
         display: block;
         font-size: .875em;
@@ -79,6 +81,16 @@
     }
 }
 
+.mtx-form-group-xt {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    text-align: center;
+    padding-top: 1rem;
+    margin-bottom: -1rem;
+    font-size: .95rem;
+    border-top: 1px solid rgba(0, 0, 0, .125);
+}
 
 
 
