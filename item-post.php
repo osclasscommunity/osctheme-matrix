@@ -40,19 +40,6 @@ ItemForm::location_javascript();
         </div>
     </div>
 </div>
-<script>
-$(function() {
-    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
-        $('select').selectpicker('mobile');
-    } else {
-        $('select').selectpicker({
-            style: '',
-            styleBase: 'form-control',
-            width: '100%',
-        });
-    }
-});
-</script>
 
 <div class="form-container form-horizontal">
     <div class="resp-wrapper">

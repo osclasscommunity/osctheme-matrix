@@ -1,5 +1,10 @@
 * {
     border-radius: 0 !important;
+
+    &:focus {
+        outline-color: transparent !important;
+        outline-style: none !important;
+    }
 }
 
 ::selection {

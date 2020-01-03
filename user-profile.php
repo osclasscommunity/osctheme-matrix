@@ -75,6 +75,7 @@ $u = osc_user();
                                         <option value="<?php echo $region['pk_i_id']; ?>" <?php echo ($u['fk_i_region_id'] == $region['pk_i_id']) ? 'selected' : ''; ?>><?php echo $region['s_name']; ?></option>
                                     <?php } ?>
                                 </select>
+                                <span class="input-line bg-accent"></span>
                             </div>
                         <?php } else { ?>
                             <div class="col">

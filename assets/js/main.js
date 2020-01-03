@@ -1,5 +1,17 @@
 $(function() {
     /*
+     * Custom selectboxes.
+    */
+    $('select').selectpicker({
+        style: '',
+        styleBase: '',
+        width: '100%',
+    });
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+        $('select').selectpicker('mobile');
+    }
+
+    /*
      * Show hidden phone number or email.
     */
     $('.phone.hidden, .email.hidden').click(function(e) {

@@ -11,14 +11,23 @@
         padding: .5rem;
         border: none;
 
-        &:focus {
-            outline-color: transparent;
-            outline-style: none;
+        &:focus + .input-line {
+            transform: scaleX(1) translateY(-2px);
+            opacity: 1;
+        }
+    }
 
-            &+.input-line {
-                transform: scaleX(1) translateY(-2px);
-                opacity: 1;
-            }
+    .dropdown {
+        button {
+            width: 100%;
+            padding: .5rem;
+            border: none;
+            background: $white;
+        }
+
+        &.show + .input-line {
+            transform: scaleX(1) translateY(-2px);
+            opacity: 1;
         }
     }
 

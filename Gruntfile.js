@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                     'assets/css/**',
                     'assets/js/**',
                     'assets/img/**',
-                    'classes/**'
+                    'classes/**',
                     'languages/**'
                 ],
                 dest: 'build/matrix'

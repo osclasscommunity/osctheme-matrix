@@ -13,7 +13,7 @@ if(!OC_ADMIN) {
     osc_register_script('boostrap-select', 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.12/js/bootstrap-select.min.js', array('jquery', 'bootstrap'));
     osc_register_script('bxslider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js', array('jquery'));
     osc_register_script('lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/js/lightgallery.min.js', array('jquery'));
-    osc_register_script('matrix', osc_current_web_theme_js_url('assets/js/main.js'), 'jquery');
+    osc_register_script('matrix', osc_current_web_theme_url('assets/js/main.js'), 'jquery');
     osc_enqueue_script('jquery');
     osc_enqueue_script('jquery-ui');
     osc_enqueue_script('popper');
