@@ -4,34 +4,31 @@ mtx_add_body_class('forgot');
 
 osc_current_web_theme_path('header.php');
 ?>
-
 <section class="forgot bg-lighter">
     <div class="container">
         <div class="row">
-            <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('New password', 'matrix'); ?></h1>
-            <p class="text-center cl-darker mb-5 col-12"><?php _e('Create a new password for your account.', 'matrix'); ?></p>
-            <div class="small-container col-md-6 col-12 bg-lighty">
+            <h1 class="cl-accent-dark"><?php _e('New password', 'matrix'); ?></h1>
+            <p class="cl-darker"><?php _e('Create a new password for your account.', 'matrix'); ?></p>
+            <div class="small-container bg-lighty col-12 col-md-8 col-lg-6">
                 <form action="<?php echo osc_base_url(1); ?>" method="POST">
                     <input type="hidden" name="page" value="login" />
                     <input type="hidden" name="action" value="forgot_post" />
                     <input type="hidden" name="userId" value="<?php echo osc_esc_html(Params::getParam('userId')); ?>" />
                     <input type="hidden" name="code" value="<?php echo osc_esc_html(Params::getParam('code')); ?>" />
 
-                    <div class="form-group">
-                        <label for="pass"><?php _e('New password', 'matrix'); ?></label>
-                        <input type="password" name="new_password" class="repeat form-control" id="pass" placeholder="<?php _e('Your new password.', 'matrix'); ?>" required minlength="8">
+                    <div class="mtx-form-group pass-repeat">
+                        <?php FormMatrix::input('password', 'new_password', 'pass', '', __('New password', 'matrix'), true, '', 'minlength="8"'); ?>
                     </div>
-                    <div class="form-group">
-                        <label for="pass2"><?php _e('Repeat new password', 'matrix'); ?></label>
-                        <input type="password" name="new_password2" class="repeat form-control" id="pass2" placeholder="<?php _e('Repeat your new password.', 'matrix'); ?>" required minlength="8">
+                    <div class="mtx-form-group pass-repeat">
+                        <?php FormMatrix::input('password', 'new_password2', 'pass2', '', __('Repeat new password', 'matrix'), true, '', 'minlength="8"'); ?>
                     </div>
 
-                    <div class="form-group form-submit">
+                    <div class="mtx-form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Submit', 'matrix'); ?></button>
                     </div>
 
-                    <div class="form-group text-center">
-                        <p><a href="<?php echo osc_user_login_url(); ?>"><?php _e('Login', 'matrix'); ?></a></p>
+                    <div class="mtx-form-group-xt">
+                        <a href="<?php echo osc_user_login_url(); ?>"><?php _e('Login', 'matrix'); ?></a>
                     </div>
                 </form>
             </div>

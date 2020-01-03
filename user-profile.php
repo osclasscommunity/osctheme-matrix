@@ -9,10 +9,10 @@ $u = osc_user();
 <div class="container-fluid">
     <div class="row">
         <?php osc_current_web_theme_path('user-sidebar.php'); ?>
-        <div class="col-md-9 col-xl-10 bg-lighter">
+        <div class="bg-lighter col-md-9 col-xl-10">
             <section class="container user-account">
-                <h1 class="text-center cl-accent-dark mt-5 col-12"><?php _e('My account', 'matrix'); ?></h1>
-                <p class="text-center cl-darker mb-5 col-12"><?php _e('Manage your account information.', 'matrix'); ?></p>
+                <h1 class="cl-accent-dark"><?php _e('My account', 'matrix'); ?></h1>
+                <p class="cl-darker"><?php _e('Manage your account information.', 'matrix'); ?></p>
 
                 <ul class="user-subnav nav nav-pills flex-column flex-lg-row mb-4">
                     <li class="flex-sm-fill text-center nav-link">
