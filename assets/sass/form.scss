@@ -1,3 +1,7 @@
+.bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus {
+    outline: none !important;
+}
+
 .mtx-form-group, .mtx-form-group-cs .mtx-form-row {
     margin-bottom: 1rem;
 }
@@ -48,10 +52,6 @@
         .dropdown-menu {
             margin-top: 0;
         }
-    }
-
-    .bootstrap-select > select.mobile-device:focus + .dropdown-toggle, .bootstrap-select .dropdown-toggle:focus {
-        outline: none !important;
     }
 
     textarea + .input-line {
