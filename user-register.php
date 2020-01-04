@@ -7,8 +7,8 @@ osc_current_web_theme_path('header.php');
 <section class="register bg-lighter">
     <div class="container">
         <div class="row">
-            <h1 class="cl-accent-dark"><?php _e('Register', 'matrix'); ?></h1>
-            <p class="cl-darker"><?php _e('Create an account to gain access to more features.', 'matrix'); ?></p>
+            <h1 class="title cl-accent-dark"><?php _e('Register', 'matrix'); ?></h1>
+            <p class="subtitle cl-darker"><?php _e('Create an account to gain access to more features.', 'matrix'); ?></p>
             <div class="small-container bg-lighty col-12 col-md-8 col-lg-6">
                 <form action="<?php echo osc_base_url(1); ?>" method="POST">
                     <input type="hidden" name="page" value="register" />

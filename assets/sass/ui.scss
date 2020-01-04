@@ -1,5 +1,5 @@
-main section:not(.nomargin):not(.border) {
-    h1:first-of-type, h2:first-of-type, p:first-of-type {
+section {
+    .title, .subtitle {
         position: relative;
         flex: 0 0 100%;
         width: 100%;
@@ -9,11 +9,11 @@ main section:not(.nomargin):not(.border) {
         text-align: center;
     }
 
-    h1:first-of-type, h2:first-of-type {
+    .title {
         margin-top: 3rem;
     }
 
-    p:first-of-type {
+    .subtitle {
         margin-bottom: 3rem;
     }
 }

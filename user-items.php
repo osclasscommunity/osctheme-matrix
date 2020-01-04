@@ -12,8 +12,8 @@ View::newInstance()->_exportVariableToView('listAdmin', 1);
         <div class="bg-lighter col-md-9 col-xl-10">
             <section class="user-items">
                 <?php osc_run_hook('search_ads_listing_top'); ?>
-                <h1 class="cl-accent-dark"><?php _e('My ads', 'matrix'); ?></h1>
-                <p class="cl-darker"><?php _e('Manage the ads you have posted.', 'matrix'); ?></p>
+                <h1 class="title cl-accent-dark"><?php _e('My ads', 'matrix'); ?></h1>
+                <p class="subtitle cl-darker"><?php _e('Manage the ads you have posted.', 'matrix'); ?></p>
                 <?php if(osc_count_items() == 0) { ?>
                     <p class="text-center cl-darker"><?php _e('No items, yet.', 'matrix'); ?></p>
                 <?php } else { ?>

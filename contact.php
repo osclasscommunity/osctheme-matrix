@@ -7,8 +7,8 @@ osc_current_web_theme_path('header.php');
 <section class="login bg-lighter">
     <div class="container">
         <div class="row">
-            <h1 class="cl-accent-dark"><?php _e('Contact', 'matrix'); ?></h1>
-            <p class="cl-darker"><?php _e('Send us a message.', 'matrix'); ?></p>
+            <h1 class="title cl-accent-dark"><?php _e('Contact', 'matrix'); ?></h1>
+            <p class="subtitle cl-darker"><?php _e('Send us a message.', 'matrix'); ?></p>
             <div class="small-container bg-lighty col-12 col-md-8 col-lg-6">
                 <form action="<?php echo osc_base_url(1); ?>" method="POST">
                     <input type="hidden" name="page" value="contact" />

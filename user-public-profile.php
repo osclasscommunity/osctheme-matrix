@@ -15,8 +15,8 @@ $ads_class = 'bg-ligter';
         <section class="about bg-lighter">
             <div class="container">
                 <div class="row">
-                    <h2 class="cl-accent-dark"><?php _e('About', 'matrix'); ?></h2>
-                    <p class="cl-darker"><?php printf(__('More information about %s.', 'matrix'), osc_highlight(osc_user_name(), 20)); ?></p>
+                    <h2 class="title cl-accent-dark"><?php _e('About', 'matrix'); ?></h2>
+                    <p class="subtitle cl-darker"><?php printf(__('More information about %s.', 'matrix'), osc_highlight(osc_user_name(), 20)); ?></p>
                     <p class="mb-5"><?php echo nl2br(osc_user_info()); ?></p>
                 </div>
             </div>
@@ -26,8 +26,8 @@ $ads_class = 'bg-ligter';
     <section class="ads <?php echo $ads_class; ?>">
         <div class="container">
             <div class="row">
-                <h2 class="cl-accent-dark"><?php _e('Latest ads', 'matrix'); ?></h2>
-                <p class="cl-darker"><?php printf(__('Browse latest ads by %s.', 'matrix'), osc_highlight(osc_user_name(), 20)); ?></p>
+                <h2 class="title cl-accent-dark"><?php _e('Latest ads', 'matrix'); ?></h2>
+                <p class="subtitle cl-darker"><?php printf(__('Browse latest ads by %s.', 'matrix'), osc_highlight(osc_user_name(), 20)); ?></p>
                 <?php if(osc_count_items() == 0) { ?>
                     <p class="text-center cl-darker"><?php _e('No items, yet.', 'matrix'); ?></p>
                 <?php } else { ?>

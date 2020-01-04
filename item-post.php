@@ -19,8 +19,8 @@ ItemForm::location_javascript();
     <div class="container">
         <div class="row">
             <div class="col-12 mt-5 mb-3">
-                <h1 class="text-center cl-accent-dark"><?php _e('Post an ad', 'matrix'); ?></h1>
-                <p class="text-center cl-darker mb-5"><?php _e('Publish your ad on our site and get hundreds of views.', 'matrix'); ?></p>
+                <h1 class="title cl-accent-dark"><?php _e('Post an ad', 'matrix'); ?></h1>
+                <p class="subtitle cl-darker"><?php _e('Publish your ad on our site and get hundreds of views.', 'matrix'); ?></p>
             </div>
         </div>
 

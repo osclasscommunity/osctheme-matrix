@@ -257,6 +257,7 @@ function mtx_search_category_select($selected = null) {
             <?php mtx_search_category_select_sub($category, $selected, 1); ?>
         <?php } ?>
     </select>
+    <span class="input-line bg-accent"></span>
     <?php
 }
 

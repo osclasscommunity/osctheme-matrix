@@ -11,8 +11,8 @@ $alerts = View::newInstance()->_get('alerts');
         <?php osc_current_web_theme_path('user-sidebar.php'); ?>
         <div class="bg-lighter col-md-9 col-xl-10">
             <section class="user-alerts">
-                <h1 class="cl-accent-dark"><?php _e('My alerts', 'matrix'); ?></h1>
-                <p class="cl-darker"><?php _e('Manage searches you subscribed to.', 'matrix'); ?></p>
+                <h1 class="title cl-accent-dark"><?php _e('My alerts', 'matrix'); ?></h1>
+                <p class="subtitle cl-darker"><?php _e('Manage searches you subscribed to.', 'matrix'); ?></p>
                 <div class="container">
                     <?php if(osc_count_alerts() == 0) { ?>
                         <p class="text-center cl-darker"><?php _e('No alerts, yet.', 'matrix'); ?></p>

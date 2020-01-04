@@ -83,11 +83,10 @@
                                 <form action="<?php echo osc_base_url(1); ?>" method="GET" class="nocsrf text-white bg-accent">
                                     <input type="hidden" name="page" value="search"/>
                                     <div class="p-4">
-                                        <div class="form-group">
-                                            <label for="sPattern"><?php _e('Query', 'matrix'); ?></label>
-                                            <input type="text" class="form-control" id="sPattern" name="sPattern" placeholder="<?php echo osc_esc_html(osc_get_preference('keyword_placeholder', 'matrix')); ?>">
+                                        <div class="mtx-form-group">
+                                            <?php FormMatrix::input('text', 'sPattern', 'query', '', __('Query', 'matrix')); ?>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="mtx-form-group">
                                             <label for="sCategory"><?php _e('Category', 'matrix'); ?></label>
                                             <?php mtx_search_category_select(); ?>
                                         </div>
