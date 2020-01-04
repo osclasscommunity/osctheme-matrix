@@ -3,6 +3,10 @@ define('MTX_VERSION', '100');
 
 include 'classes/ModelMatrix.php';
 spl_autoload_register(function($class) {
+    if(strpos($class, '_') !== false) {
+        $class = explode('_', $class)[0];
+    }
+    
     include 'classes/'.$class.'.php';
 });
 

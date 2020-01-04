@@ -7,12 +7,13 @@
         }
     }
 
-    .dropdown {
-        width: 100% !important; // sorry.
+    .mtx-form-group, .mtx-form-row {
+        input, textarea, select, .dropdown button {
+            background: $lighter;
+        }
 
-        .dropdown-toggle {
-            height: 3rem;
-            border: 1px solid rgba(0, 0, 0, .125);
+        .desc-title {
+            margin: 1rem 0;
         }
     }
 }

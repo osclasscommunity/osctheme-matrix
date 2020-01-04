@@ -15,74 +15,52 @@ osc_current_web_theme_path('header.php');
 
 ItemForm::location_javascript();
 ?>
-<div class="container-fluid bg-lighter">
+<section class="login bg-lighter">
     <div class="container">
         <div class="row">
-            <div class="col-12 mt-5 mb-3">
-                <h1 class="title cl-accent-dark"><?php _e('Post an ad', 'matrix'); ?></h1>
-                <p class="subtitle cl-darker"><?php _e('Publish your ad on our site and get hundreds of views.', 'matrix'); ?></p>
-            </div>
+            <h1 class="title cl-accent-dark"><?php _e('Post an ad', 'matrix'); ?></h1>
+            <p class="subtitle cl-darker"><?php _e('Publish your ad on our site and get hundreds of views.', 'matrix'); ?></p>
         </div>
 
         <div class="row justify-content-center">
             <div class="col-9">
-                <section class="adpost-category border">
-                    <h3 class="bg-darker"><?php _e('Category', 'matrix'); ?></h3>
-                    <label><?php _e('Pick a category that best suits your product or service.', 'matrix'); ?></label>
-                    <?php ItemForm::category_select(null, null, __('Select a category', 'matrix')); ?>
-                </section>
-                <section class="adpost-description border">
-                    <h3 class="bg-darker"><?php _e('Description', 'matrix'); ?></h3>
-                    <label><?php _e('Describe your product or service to the seller.', 'matrix'); ?></label>
-                    <?php ItemFormMatrix::title_description(); ?>
-                </section>
+                <form action="<?php echo osc_base_url(1); ?>" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="page" value="item" />
+                    <input type="hidden" name="action" value="<?php echo $action; ?>" />
+                    <?php if($edit) { ?>
+                        <input type="hidden" name="id" value="<?php echo osc_item_id(); ?>" />
+                        <input type="hidden" name="secret" value="<?php echo osc_item_secret(); ?>" />
+                    <?php } ?>
+
+                    <section class="adpost-category border">
+                        <h3 class="bg-darker"><?php _e('Category', 'matrix'); ?></h3>
+                        <label><?php _e('Pick a category that best suits your product or service.', 'matrix'); ?></label>
+                        <div class="mtx-form-group single">
+                            <?php FormMatrix_Item::category_select(); ?>
+                        </div>
+                    </section>
+                    <section class="adpost-description border">
+                        <h3 class="bg-darker"><?php _e('Description', 'matrix'); ?></h3>
+                        <label><?php _e('Describe your product or service to the seller.', 'matrix'); ?></label>
+                        <div class="mtx-form-group single">
+                            <?php FormMatrix_Item::title_description(); ?>
+                        </div>
+                    </section>
+                    <?php if( osc_price_enabled_at_items() ) { ?>
+                        <section class="adpost-price border">
+                            <h3 class="bg-darker"><?php _e('Price', 'matrix'); ?></h3>
+                            <label><?php _e('Price your product or service.', 'matrix'); ?></label>
+                            <div class="mtx-form-group single">
+                                <?php FormMatrix_Item::price(); ?>
+                            </div>
+                        </section>
+                    <?php } ?>
+                </form>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-<div class="form-container form-horizontal">
-    <div class="resp-wrapper">
-        <div class="header">
-            <h1><?php _e('Publish a listing', 'matrix'); ?></h1>
-        </div>
-        <ul id="error_list"></ul>
-        <form name="item" action="<?php echo osc_base_url(true);?>" method="post" enctype="multipart/form-data" id="item-post">
-            <fieldset>
-            <input type="hidden" name="action" value="<?php echo $action; ?>" />
-                <input type="hidden" name="page" value="item" />
-            <?php if($edit){ ?>
-                <input type="hidden" name="id" value="<?php echo osc_item_id();?>" />
-                <input type="hidden" name="secret" value="<?php echo osc_item_secret();?>" />
-            <?php } ?>
-                <h2><?php _e('General Information', 'matrix'); ?></h2>
-                <div class="control-group">
-                    <label class="control-label" for="select_1"><?php _e('Category', 'matrix'); ?></label>
-                    <div class="controls">
-                        <?php ItemForm::category_select(null, null, __('Select a category', 'matrix')); ?>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="title[<?php echo osc_current_user_locale(); ?>]"><?php _e('Title', 'matrix'); ?></label>
-                    <div class="controls">
-                        <?php ItemForm::title_input('title',osc_current_user_locale(), osc_esc_html( mtx_item_title() )); ?>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="description[<?php echo osc_current_user_locale(); ?>]"><?php _e('Description', 'matrix'); ?></label>
-                    <div class="controls">
-                        <?php ItemForm::description_textarea('description',osc_current_user_locale(), osc_esc_html( mtx_item_description() )); ?>
-                    </div>
-                </div>
-                <?php if( osc_price_enabled_at_items() ) { ?>
-                <div class="control-group control-group-price">
-                    <label class="control-label" for="price"><?php _e('Price', 'matrix'); ?></label>
-                    <div class="controls">
-                        <?php ItemForm::price_input_text(); ?>
-                        <?php ItemForm::currency_select(); ?>
-                    </div>
-                </div>
-                <?php } ?>
                 <?php if( osc_images_enabled_at_items() ) {
                     ItemForm::ajax_photos();
                  } ?>
