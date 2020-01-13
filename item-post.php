@@ -46,12 +46,21 @@ ItemForm::location_javascript();
                             <?php FormMatrix_Item::title_description(); ?>
                         </div>
                     </section>
-                    <?php if( osc_price_enabled_at_items() ) { ?>
+                    <?php if(osc_price_enabled_at_items()) { ?>
                         <section class="adpost-price border">
                             <h3 class="bg-darker"><?php _e('Price', 'matrix'); ?></h3>
                             <label><?php _e('Price your product or service.', 'matrix'); ?></label>
-                            <div class="mtx-form-group single">
+                            <div class="mtx-form-row single">
                                 <?php FormMatrix_Item::price(); ?>
+                            </div>
+                        </section>
+                    <?php } ?>
+                    <?php if(osc_images_enabled_at_items()) { ?>
+                        <section class="adpost-price border">
+                            <h3 class="bg-darker"><?php _e('Photos', 'matrix'); ?></h3>
+                            <label><?php _e('Price your product or service.', 'matrix'); ?></label>
+                            <div class="mtx-form-row single">
+                                <?php ItemForm::ajax_photos(); ?>
                             </div>
                         </section>
                     <?php } ?>

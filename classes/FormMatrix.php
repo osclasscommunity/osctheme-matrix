@@ -92,13 +92,13 @@ class FormMatrix_Item extends FormMatrix {
             if(!osc_selectable_parent_categories() && !$parent_selectable) {
                 echo '<optgroup label="'.$cat['s_name'].'">';
                 if(isset($cat['categories']) && is_array($cat['categories'])) {
-                    ItemForm::subcategory_select($cat['categories'], $item, 1);
+                    FormMatrix_Item::subcategory_select($cat['categories'], $item, 1);
                 }
             } else {
                 $selected = ((isset($item['fk_i_category_id']) && $item['fk_i_category_id'] == $cat['pk_i_id']) || (isset($category) && $category == $cat['pk_i_id'])) ? 'selected' : '';
                 echo '<option value="'.$cat['pk_i_id'].'" '.$selected.'>'.$cat['s_name'].'</option>';
                 if(isset($cat['categories']) && is_array($cat['categories'])) {
-                    ItemForm::subcategory_select($cat['categories'], $item, 1);
+                    FormMatrix_Item::subcategory_select($cat['categories'], $item, 1);
                 }
             }
         }
@@ -122,7 +122,7 @@ class FormMatrix_Item extends FormMatrix {
             $selected = ((isset($item['fk_i_category_id']) && $item['fk_i_category_id'] == $cat['pk_i_id']) || (isset($category) && $category == $cat['pk_i_id'])) ? 'selected' : '';
             echo '<option value="'.$cat['pk_i_id'].'" '.$selected.'>'.$deep_string.$cat['s_name'].'</option>';
             if(isset($cat['categories']) && is_array($cat['categories'])) {
-                ItemForm::subcategory_select($cat['categories'], $item, $deep);
+                FormMatrix_Item::subcategory_select($cat['categories'], $item, $deep);
             }
         }
     }
@@ -236,36 +236,39 @@ class FormMatrix_Item extends FormMatrix {
         echo '</div>';
     }
 
-    static public function price($item, $currencies) {
-        // if($item == null) {
-        //     $item = osc_item();
-        // }
-        // if($currencies == null) {
-        //     $currencies = osc_get_currencies();
-        // }
-        //
-        // if(Session::newInstance()->_getForm('price') != '') {
-        //     $item['i_price'] = Session::newInstance()->_getForm('price');
-        // }
-        // if(Session::newInstance()->_getForm('currency') != '') {
-        //     $item['fk_c_currency_code'] = Session::newInstance()->_getForm('currency');
-        // }
-        //
-        // parent::generic_input_text('price', (isset($item['i_price'])) ? osc_prepare_price($item['i_price']) : null);
-        //
-        // if(count($currencies) > 1) {
-        //     $default_key = null;
-        //     $currency = osc_get_preference('currency');
-        //     if(isset($item['fk_c_currency_code'])) {
-        //         $default_key = $item['fk_c_currency_code'];
-        //     } elseif(isset($currency)) {
-        //         $default_key = $currency;
-        //     }
-        //     parent::generic_select('currency', $currencies, 'pk_c_code', 's_description', null, $default_key);
-        // } else if(count($currencies) == 1) {
-        //     parent::generic_input_hidden("currency", $currencies[0]["pk_c_code"]);
-        //     echo $currencies[0]['s_description'];
-        // }
+    static public function price($item = null, $currencies = null) {
+        if($item == null) {
+            $item = osc_item();
+        }
+        if($currencies == null) {
+            $currencies = osc_get_currencies();
+        }
+
+        if(Session::newInstance()->_getForm('price') != '') {
+            $item['i_price'] = Session::newInstance()->_getForm('price');
+        }
+        if(Session::newInstance()->_getForm('currency') != '') {
+            $item['fk_c_currency_code'] = Session::newInstance()->_getForm('currency');
+        }
+
+        echo '<div class="col-10">';
+        parent::input('text', 'price', 'price', $item['i_price'], __('Price', 'matrix'), osc_price_enabled_at_items(), 'numeric');
+        echo '</div>';
+
+        echo '<div class="col-2">';
+        if(count($currencies) > 1) {
+            $default_key = null;
+            $currency = osc_get_preference('currency');
+            if(isset($item['fk_c_currency_code'])) {
+                $default_key = $item['fk_c_currency_code'];
+            } elseif(isset($currency)) {
+                $default_key = $currency;
+            }
+            parent::select('currency', 'currency', $currencies, 'pk_c_code', 's_description', $default_key, __('Currency', 'matrix'), true);
+        } else if(count($currencies) == 1) {
+            parent::input('text', 'currency', 'currency', $currencies[0]['pk_c_code'], __('Currency', 'matrix'), true, 'numeric', 'disabled');
+        }
+        echo '</div>';
     }
 }
 ?>

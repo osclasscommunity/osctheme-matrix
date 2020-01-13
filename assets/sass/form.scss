@@ -2,7 +2,7 @@
     outline: none !important;
 }
 
-.mtx-form-group:not(.single), .mtx-form-group-cs, .mtx-form-row {
+.mtx-form-group:not(.single), .mtx-form-group-cs, .mtx-form-row:not(.single) {
     margin-bottom: 1rem;
 }
 
