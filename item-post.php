@@ -60,19 +60,22 @@ ItemForm::location_javascript();
                             <h3 class="bg-darker"><?php _e('Photos', 'matrix'); ?></h3>
                             <label><?php _e('Price your product or service.', 'matrix'); ?></label>
                             <div class="mtx-form-row single">
-                                <?php ItemForm::ajax_photos(); ?>
+                                <?php FormMatrix_Item::country(); ?>
                             </div>
                         </section>
                     <?php } ?>
+                    <section class="adpost-price border">
+                        <h3 class="bg-darker"><?php _e('Location', 'matrix'); ?></h3>
+                        <label><?php _e('Where are you located?', 'matrix'); ?></label>
+                        <div class="mtx-form-row single">
+                            <?php // ItemForm::ajax_photos(); ?>
+                        </div>
+                    </section>
                 </form>
             </div>
         </div>
     </div>
 </section>
-
-                <?php if( osc_images_enabled_at_items() ) {
-                    ItemForm::ajax_photos();
-                 } ?>
                 <div class="box location">
                     <h2><?php _e('Listing Location', 'matrix'); ?></h2>
                     <?php if(count(osc_get_countries()) > 1) { ?>
@@ -86,19 +89,11 @@ ItemForm::location_javascript();
                         <label class="control-label" for="regionId"><?php _e('Region', 'matrix'); ?></label>
                         <div class="controls">
                             <?php
-                            if (mtx_default_location_show_as() == 'dropdown') {
                                 if($edit) {
                                     ItemForm::region_select(osc_get_regions(osc_item_country_code()), osc_item());
                                 } else {
                                     ItemForm::region_select(osc_get_regions(osc_user_field('fk_c_country_code')), osc_user());
                                 }
-                            } else {
-                                if($edit) {
-                                    ItemForm::region_text(osc_item());
-                                } else {
-                                    ItemForm::region_text(osc_user());
-                                }
-                            }
                             ?>
                         </div>
                     </div>

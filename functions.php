@@ -6,7 +6,7 @@ spl_autoload_register(function($class) {
     if(strpos($class, '_') !== false) {
         $class = explode('_', $class)[0];
     }
-    
+
     include 'classes/'.$class.'.php';
 });
 
@@ -40,6 +40,7 @@ osc_enqueue_script('php-date');
  * ad_cover_email - BOOLEAN - Hide email partially on ad page. Default 0.
  * ad_markas - BOOLEAN - Show Mark As form on ad page. Default 1.
  * ad_contact_form - BOOLEAN - Show contact form on ad page. Default 1.
+ * ad_required_country - BOOLEAN - Country required on item post. Default 0.
 */
 
 function mtx_pref($key) {
