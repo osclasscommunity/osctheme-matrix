@@ -335,13 +335,13 @@ class FormMatrix_Item extends FormMatrix {
             $item['s_city'] = Session::newInstance()->_getForm('city');
         }
 
-        // if(count($cities) == 1) {
-        //     parent::input('hidden', 'cityId', 'cityId', (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null);
-        // } else if(count($cities) > 1) {
-        //     parent::select('cityId', 'cityId', $cities, 'pk_i_id', 's_name', (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null, __('City', 'matrix'), $required);
-        // } else {
+        if(count($cities) == 1) {
+            parent::input('hidden', 'cityId', 'cityId', (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null);
+        } else if(count($cities) > 1) {
+            parent::select('cityId', 'cityId', $cities, 'pk_i_id', 's_name', (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null, __('City', 'matrix'), $required);
+        } else {
             parent::input('text', 'city', 'city', (isset($item['s_city'])) ? $item['s_city'] : null, __('City', 'matrix'), $required);
-        // }
+        }
     }
 
 
