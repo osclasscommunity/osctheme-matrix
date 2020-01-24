@@ -56,7 +56,7 @@ ItemForm::location_javascript();
                         </section>
                     <?php } ?>
                     <?php if(osc_images_enabled_at_items()) { ?>
-                        <section class="adpost-price border">
+                        <section class="adpost-photos border">
                             <h3 class="bg-darker"><?php _e('Photos', 'matrix'); ?></h3>
                             <label><?php _e('Price your product or service.', 'matrix'); ?></label>
                             <div class="mtx-form-row single">
@@ -64,17 +64,30 @@ ItemForm::location_javascript();
                             </div>
                         </section>
                     <?php } ?>
-                    <section class="adpost-price border">
+                    <section class="adpost-location border">
                         <h3 class="bg-darker"><?php _e('Location', 'matrix'); ?></h3>
                         <label><?php _e('Where are you located?', 'matrix'); ?></label>
-                        <div class="mtx-form-row">
+                        <div class="mtx-form-group">
                             <?php FormMatrix_Item::country(); ?>
                         </div>
-                        <div class="mtx-form-row">
+                        <div class="mtx-form-group">
                             <?php FormMatrix_Item::region(); ?>
                         </div>
                         <div class="mtx-form-row">
-                            <?php FormMatrix_Item::city(); ?>
+                            <div class="col-6">
+                                <?php FormMatrix_Item::city(); ?>
+                            </div>
+                            <div class="col-6">
+                                <?php FormMatrix_Item::zip(); ?>
+                            </div>
+                        </div>
+                        <div class="mtx-form-row">
+                            <div class="col-6">
+                                <?php FormMatrix_Item::cityArea(); ?>
+                            </div>
+                            <div class="col-6">
+                                <?php FormMatrix_Item::address(); ?>
+                            </div>
                         </div>
                     </section>
                 </form>

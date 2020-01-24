@@ -344,31 +344,38 @@ class FormMatrix_Item extends FormMatrix {
         }
     }
 
+    static public function cityArea() {
+        $item = osc_item();
+        $required = mtx_pref('ad_required_cityarea');
 
-    static public function city_area_text($item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('cityArea') != "" ) {
+        if(Session::newInstance()->_getForm('cityArea') != '') {
             $item['s_city_area'] = Session::newInstance()->_getForm('cityArea');
         }
-        parent::generic_input_text('cityArea', (isset($item['s_city_area'])) ? $item['s_city_area'] : null);
-        parent::generic_input_hidden('cityAreaId', (isset($item['fk_i_city_area_id']) && $item['fk_i_city_area_id']!=null)?$item['fk_i_city_area_id']:'');
-        return true;
+
+        parent::input('hidden', 'cityAreaId', 'cityAreaId', (isset($item['fk_i_city_area_id'])) ? $item['fk_i_city_area_id'] : null);
+        parent::input('text', 'cityArea', 'cityArea', (isset($item['s_city_area'])) ? $item['s_city_area'] : null, __('City area', 'matrix'), $required);
     }
-    static public function address_text($item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('address') != "" ) {
+
+    static public function address() {
+        $item = osc_item();
+        $required = mtx_pref('ad_required_address');
+
+        if(Session::newInstance()->_getForm('address') != '') {
             $item['s_address'] = Session::newInstance()->_getForm('address');
         }
-        parent::generic_input_text('address', (isset($item['s_address'])) ? $item['s_address'] : null);
-        return true;
+
+        parent::input('text', 'address', 'address', (isset($item['s_address'])) ? $item['s_address'] : null, __('Address', 'matrix'), $required);
     }
-    static public function zip_text($item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('zip') != "") {
+
+    static public function zip() {
+        $item = osc_item();
+        $required = mtx_pref('ad_required_zip');
+
+        if(Session::newInstance()->_getForm('zip') != '') {
             $item['s_zip'] = Session::newInstance()->_getForm('zip');
         }
-        parent::generic_input_text('zip', (isset($item['s_zip'])) ? $item['s_zip'] : null);
-        return true;
-}
+
+        parent::input('text', 'zip', 'zip', (isset($item['s_zip'])) ? $item['s_zip'] : null, __('ZIP code', 'matrix'), $required);
+    }
 }
 ?>
