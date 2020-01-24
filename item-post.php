@@ -39,6 +39,7 @@ ItemForm::location_javascript();
                             <?php FormMatrix_Item::category_select(); ?>
                         </div>
                     </section>
+
                     <section class="adpost-description border">
                         <h3 class="bg-darker"><?php _e('Description', 'matrix'); ?></h3>
                         <label><?php _e('Describe your product or service to the seller.', 'matrix'); ?></label>
@@ -46,6 +47,7 @@ ItemForm::location_javascript();
                             <?php FormMatrix_Item::title_description(); ?>
                         </div>
                     </section>
+
                     <?php if(osc_price_enabled_at_items()) { ?>
                         <section class="adpost-price border">
                             <h3 class="bg-darker"><?php _e('Price', 'matrix'); ?></h3>
@@ -55,15 +57,17 @@ ItemForm::location_javascript();
                             </div>
                         </section>
                     <?php } ?>
+
                     <?php if(osc_images_enabled_at_items()) { ?>
                         <section class="adpost-photos border">
                             <h3 class="bg-darker"><?php _e('Photos', 'matrix'); ?></h3>
-                            <label><?php _e('Price your product or service.', 'matrix'); ?></label>
+                            <label><?php _e('Still not sure what I will do with photo uploader. Perhaps a custom uploader is too much. Fineuploader 3.8 sucks tho.', 'matrix'); ?></label>
                             <div class="mtx-form-row single">
                                 <?php // ItemForm::ajax_photos(); ?>
                             </div>
                         </section>
                     <?php } ?>
+
                     <section class="adpost-location border">
                         <h3 class="bg-darker"><?php _e('Location', 'matrix'); ?></h3>
                         <label><?php _e('Where are you located?', 'matrix'); ?></label>
@@ -90,89 +94,31 @@ ItemForm::location_javascript();
                             </div>
                         </div>
                     </section>
+
+                    <section class="adpost-author border">
+                        <h3 class="bg-darker"><?php _e('Author', 'matrix'); ?></h3>
+                        <label><?php _e('Your contact info', 'matrix'); ?></label>
+                        <div class="mtx-form-group">
+                        </div>
+                        <div class="mtx-form-group">
+                        </div>
+                        <div class="mtx-form-row">
+                            <div class="col-4">
+                                <?php FormMatrix_Item::author(); ?>
+                            </div>
+                            <div class="col-4">
+                                <?php FormMatrix_Item::phone(); ?>
+                            </div>
+                            <div class="col-4">
+                                <?php FormMatrix_Item::email(); ?>
+                            </div>
+                        </div>
+                    </section>
                 </form>
             </div>
         </div>
     </div>
 </section>
-                <div class="box location">
-                    <h2><?php _e('Listing Location', 'matrix'); ?></h2>
-                    <?php if(count(osc_get_countries()) > 1) { ?>
-                    <div class="control-group">
-                        <label class="control-label" for="country"><?php _e('Country', 'matrix'); ?></label>
-                        <div class="controls">
-                            <?php ItemForm::country_select(osc_get_countries(), osc_user()); ?>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="regionId"><?php _e('Region', 'matrix'); ?></label>
-                        <div class="controls">
-                            <?php
-                                if($edit) {
-                                    ItemForm::region_select(osc_get_regions(osc_item_country_code()), osc_item());
-                                } else {
-                                    ItemForm::region_select(osc_get_regions(osc_user_field('fk_c_country_code')), osc_user());
-                                }
-                            ?>
-                        </div>
-                    </div>
-                    <?php
-                    } else {
-                        $aCountries = osc_get_countries();
-                        $aRegions = osc_get_regions($aCountries[0]['pk_c_code']);
-                        ?>
-                    <input type="hidden" id="countryId" name="countryId" value="<?php echo osc_esc_html($aCountries[0]['pk_c_code']); ?>"/>
-                    <div class="control-group">
-                        <label class="control-label" for="region"><?php _e('Region', 'matrix'); ?></label>
-                        <div class="controls">
-                          <?php
-                            if (1 == 'dropdown') {
-                                if($edit) {
-                                    ItemForm::region_select($aRegions, osc_item());
-                                } else {
-                                    ItemForm::region_select($aRegions, osc_user());
-                                }
-                            } else {
-                                if($edit) {
-                                    ItemForm::region_text(osc_item());
-                                } else {
-                                    ItemForm::region_text(osc_user());
-                                }
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <?php } ?>
-
-                    <div class="control-group">
-                        <label class="control-label" for="city"><?php _e('City', 'matrix'); ?></label>
-                        <div class="controls">
-                            <?php
-                            if (1 == 'dropdown') {
-                                if($edit) {
-                                    ItemForm::city_select(null, osc_item());
-                                } else { // add new item
-                                    ItemForm::city_select(osc_get_cities(osc_user_region_id()), osc_user());
-                                }
-                            } else {
-                                ItemForm::city_text(osc_user());
-                            }
-                            ?>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="cityArea"><?php _e('City Area', 'matrix'); ?></label>
-                        <div class="controls">
-                            <?php ItemForm::city_area_text(osc_user()); ?>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="address"><?php _e('Address', 'matrix'); ?></label>
-                        <div class="controls">
-                          <?php ItemForm::address_text(osc_user()); ?>
-                        </div>
-                    </div>
-                </div>
                 <!-- seller info -->
                 <?php if(!osc_is_web_user_logged_in() ) { ?>
                 <div class="box seller_info">

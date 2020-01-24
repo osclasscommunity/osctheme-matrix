@@ -377,5 +377,48 @@ class FormMatrix_Item extends FormMatrix {
 
         parent::input('text', 'zip', 'zip', (isset($item['s_zip'])) ? $item['s_zip'] : null, __('ZIP code', 'matrix'), $required);
     }
+
+    static public function author() {
+        $item = osc_item();
+        $required = true;
+        $attributes = '';
+
+        if(Session::newInstance()->_getForm('contactName') != '') {
+            $item['s_contact_name'] = Session::newInstance()->_getForm('contactName');
+        } else if(osc_is_web_user_logged_in()) {
+            $item['s_contact_name'] = osc_logged_user_name();
+            $attributes = 'disabled';
+        }
+
+        parent::input('text', 'contactName', 'contactName', (isset($item['s_contact_name'])) ? $item['s_contact_name'] : null, __('Name', 'matrix'), $required, '', $attributes);
+    }
+
+    static public function phone() {
+        $item = osc_item();
+        $required = true;
+
+        if(Session::newInstance()->_getForm('contactEmail') != '') {
+            $item['s_contact_email'] = Session::newInstance()->_getForm('contactEmail');
+        } else if(osc_is_web_user_logged_in()) {
+            $item['s_contact_email'] = osc_logged_user_name();
+            $attributes = 'disabled';
+        }
+
+        parent::input('text', 'contactEmail', 'contactEmail', (isset($item['s_contact_email'])) ? $item['s_contact_email'] : null, __('Phone', 'matrix'), $required, '', $attributes);
+    }
+
+    static public function email() {
+        $item = osc_item();
+        $required = true;
+
+        if(Session::newInstance()->_getForm('contactEmail') != '') {
+            $item['s_contact_email'] = Session::newInstance()->_getForm('contactEmail');
+        } else if(osc_is_web_user_logged_in()) {
+            $item['s_contact_email'] = osc_logged_user_name();
+            $attributes = 'disabled';
+        }
+
+        parent::input('text', 'contactEmail', 'contactEmail', (isset($item['s_contact_email'])) ? $item['s_contact_email'] : null, __('E-mail', 'matrix'), $required, '', $attributes);
+    }
 }
 ?>
