@@ -98,10 +98,6 @@ ItemForm::location_javascript();
                     <section class="adpost-author border">
                         <h3 class="bg-darker"><?php _e('Author', 'matrix'); ?></h3>
                         <label><?php _e('Your contact info', 'matrix'); ?></label>
-                        <div class="mtx-form-group">
-                        </div>
-                        <div class="mtx-form-group">
-                        </div>
                         <div class="mtx-form-row">
                             <div class="col-4">
                                 <?php FormMatrix_Item::author(); ?>
@@ -114,55 +110,33 @@ ItemForm::location_javascript();
                             </div>
                         </div>
                     </section>
+
+                    <section class="adpost-plugins border">
+                        <h3 class="bg-darker"><?php _e('Details', 'matrix'); ?></h3>
+                        <label><?php _e('More info about the ad', 'matrix'); ?></label>
+                        <?php
+                        if($edit) {
+                            ItemForm::plugin_edit_item();
+                        } else {
+                            ItemForm::plugin_post_item();
+                        }
+                        ?>
+                    </section>
+
+                    <?php if(osc_recaptcha_items_enabled()) { ?>
+                        <div class="mtx-form-group form-captcha">
+                            <?php osc_show_recaptcha(); ?>
+                        </div>
+                    <?php } ?>
+
+                    <div class="mtx-form-group form-submit">
+                        <button type="submit" class="btn btn-mtx bg-accent"><?php echo (!$edit) ? __('Publish', 'matrix') : __('Save', 'matrix'); ?></button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-                <!-- seller info -->
-                <?php if(!osc_is_web_user_logged_in() ) { ?>
-                <div class="box seller_info">
-                    <h2><?php _e("Seller's information", 'matrix'); ?></h2>
-                    <div class="control-group">
-                        <label class="control-label" for="contactName"><?php _e('Name', 'matrix'); ?></label>
-                        <div class="controls">
-                            <?php ItemForm::contact_name_text(); ?>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label" for="contactEmail"><?php _e('E-mail', 'matrix'); ?></label>
-                        <div class="controls">
-                            <?php ItemForm::contact_email_text(); ?>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <div class="controls checkbox">
-                            <?php ItemForm::show_email_checkbox(); ?> <label for="showEmail"><?php _e('Show e-mail on the listing page', 'matrix'); ?></label>
-                        </div>
-                    </div>
-                </div>
-                <?php
-                }
-                if($edit) {
-                    ItemForm::plugin_edit_item();
-                } else {
-                    ItemForm::plugin_post_item();
-                }
-                ?>
-                <div class="control-group">
-                    <?php if( osc_recaptcha_items_enabled() ) { ?>
-                        <div class="controls">
-                            <?php osc_show_recaptcha(); ?>
-                        </div>
-                    <?php }?>
-                    <div class="controls">
-                        <button type="submit" class="ui-button ui-button-middle ui-button-main"><?php if($edit) { _e("Update", 'matrix'); } else { _e("Publish", 'matrix'); } ?></button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
-    </div>
-</div>
 <script type="text/javascript">
     $('#price').bind('hide-price', function(){
         $('.control-group-price').hide();
