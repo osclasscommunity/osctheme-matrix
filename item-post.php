@@ -67,8 +67,14 @@ ItemForm::location_javascript();
                     <section class="adpost-price border">
                         <h3 class="bg-darker"><?php _e('Location', 'matrix'); ?></h3>
                         <label><?php _e('Where are you located?', 'matrix'); ?></label>
-                        <div class="mtx-form-row single m-0">
+                        <div class="mtx-form-row">
                             <?php FormMatrix_Item::country(); ?>
+                        </div>
+                        <div class="mtx-form-row">
+                            <?php FormMatrix_Item::region(); ?>
+                        </div>
+                        <div class="mtx-form-row">
+                            <?php FormMatrix_Item::city(); ?>
                         </div>
                     </section>
                 </form>

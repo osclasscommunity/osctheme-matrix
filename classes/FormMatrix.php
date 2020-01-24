@@ -290,84 +290,61 @@ class FormMatrix_Item extends FormMatrix {
         }
     }
 
-    static public function country_text($item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('country') != "" ) {
-            $item['s_country'] = Session::newInstance()->_getForm('country');
-        }
-        $only_one = false;
-        if(!isset($item['s_country'])) {
-            $countries = osc_get_countries();
-            if(count($countries)==1) {
-                $item['s_country'] = $countries[0]['s_name'];
-                $item['fk_c_country_code'] = $countries[0]['pk_c_code'];
-                $only_one = true;
-            }
-        }
-        parent::generic_input_text('countryName', (isset($item['s_country'])) ? $item['s_country'] : null, null, $only_one);
-        parent::generic_input_hidden('countryId', (isset($item['fk_c_country_code']) && $item['fk_c_country_code']!=null)?$item['fk_c_country_code']:'');
-        return true;
-    }
-    static public function region_select($regions = null, $item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('countryId') != "" ) {
+    static public function region() {
+        $item = osc_item();
+        $required = mtx_pref('ad_required_region');
+        if(Session::newInstance()->_getForm('countryId') != '') {
             $regions = Region::newInstance()->findByCountry(Session::newInstance()->_getForm('countryId'));
-        } else if($regions==null) {
+        } else if($item['fk_c_country_code'] != null) {
             $regions = Region::newInstance()->findByCountry($item['fk_c_country_code']);
-        }
-        if( count($regions) >= 1 ) {
-            if( Session::newInstance()->_getForm('regionId') != "" ) {
-                $item['fk_i_region_id'] = Session::newInstance()->_getForm('regionId');
-            }
-            parent::generic_select('regionId', $regions, 'pk_i_id', 's_name', __('Select a region...'), (isset($item['fk_i_region_id'])) ? $item['fk_i_region_id'] : null);
-            return true;
         } else {
-            if( Session::newInstance()->_getForm('region') != "" ) {
-                $item['s_region'] = Session::newInstance()->_getForm('region');
-            }
-            parent::generic_input_text('region', (isset($item['s_region'])) ? $item['s_region'] : null);
-            return true;
+            $regions = Region::newInstance()->findByCountry(osc_get_countries()[0]['pk_c_code']); // mtx_def_country_code() !!!
         }
-    }
-    static public function city_select($cities = null, $item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('regionId') != "" ) {
-            $cities = City::newInstance()->findByRegion( Session::newInstance()->_getForm('regionId') );
-        } else if($cities==null) {
-            $cities = City::newInstance()->findByRegion( $item['fk_i_region_id'] );
+
+        if(Session::newInstance()->_getForm('regionId') != '') {
+            $item['fk_i_region_id'] = Session::newInstance()->_getForm('regionId');
         }
-        if( count($cities) >= 1 ) {
-            if( Session::newInstance()->_getForm('cityId') != "" ) {
-                $item['fk_i_city_id'] = Session::newInstance()->_getForm('cityId');
-            }
-            parent::generic_select('cityId', $cities, 'pk_i_id', 's_name', __('Select a city...'), (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null);
-            return true;
-        } else {
-            if( Session::newInstance()->_getForm('city') != "" ) {
-                $item['s_city'] = Session::newInstance()->_getForm('city');
-            }
-            parent::generic_input_text('city', (isset($item['s_city'])) ? $item['s_city'] : null);
-            return true;
-        }
-    }
-    static public function region_text($item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('region') != "" ) {
+        if(Session::newInstance()->_getForm('region') != '') {
             $item['s_region'] = Session::newInstance()->_getForm('region');
         }
-        parent::generic_input_text('region', (isset($item['s_region'])) ? $item['s_region'] : null, false, false);
-        parent::generic_input_hidden('regionId', (isset($item['fk_i_region_id']) && $item['fk_i_region_id']!=null)?$item['fk_i_region_id']:'');
-        return true;
+
+        if(count($regions) == 1) {
+            parent::input('hidden', 'regionId', 'regionId', (isset($item['fk_i_region_id'])) ? $item['fk_i_region_id'] : null);
+        } else if(count($regions) > 1) {
+            parent::select('regionId', 'regionId', $regions, 'pk_i_id', 's_name', (isset($item['fk_i_region_id'])) ? $item['fk_i_region_id'] : null, __('Region', 'matrix'), $required);
+        } else {
+            parent::input('text', 'region', 'region', (isset($item['s_region'])) ? $item['s_region'] : null, __('Region', 'matrix'), $required);
+        }
     }
-    static public function city_text($item = null) {
-        if($item==null) { $item = osc_item(); };
-        if( Session::newInstance()->_getForm('city') != "" ) {
+
+    static public function city() {
+        $item = osc_item();
+        $required = mtx_pref('ad_required_city');
+        if(Session::newInstance()->_getForm('regionId') != '') {
+            $cities = City::newInstance()->findByRegion(Session::newInstance()->_getForm('regionId'));
+        } else if($item['fk_i_region_id'] != null) {
+            $cities = City::newInstance()->findByRegion($item['fk_i_region_id']);
+        } else {
+            $cities = City::newInstance()->findByRegion(Region::newInstance()->findByCountry(osc_get_countries()[0]['pk_c_code'])[0]['pk_i_id']); // mtx_def_region_id() !!!
+        }
+
+        if(Session::newInstance()->_getForm('cityId') != '') {
+            $item['fk_i_city_id'] = Session::newInstance()->_getForm('cityId');
+        }
+        if(Session::newInstance()->_getForm('city') != '') {
             $item['s_city'] = Session::newInstance()->_getForm('city');
         }
-        parent::generic_input_text('city', (isset($item['s_city'])) ? $item['s_city'] : null, false, false);
-        parent::generic_input_hidden('cityId', (isset($item['fk_i_city_id']) && $item['fk_i_city_id']!=null)?$item['fk_i_city_id']:'');
-        return true;
+
+        // if(count($cities) == 1) {
+        //     parent::input('hidden', 'cityId', 'cityId', (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null);
+        // } else if(count($cities) > 1) {
+        //     parent::select('cityId', 'cityId', $cities, 'pk_i_id', 's_name', (isset($item['fk_i_city_id'])) ? $item['fk_i_city_id'] : null, __('City', 'matrix'), $required);
+        // } else {
+            parent::input('text', 'city', 'city', (isset($item['s_city'])) ? $item['s_city'] : null, __('City', 'matrix'), $required);
+        // }
     }
+
+
     static public function city_area_text($item = null) {
         if($item==null) { $item = osc_item(); };
         if( Session::newInstance()->_getForm('cityArea') != "" ) {
