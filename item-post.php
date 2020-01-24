@@ -60,15 +60,15 @@ ItemForm::location_javascript();
                             <h3 class="bg-darker"><?php _e('Photos', 'matrix'); ?></h3>
                             <label><?php _e('Price your product or service.', 'matrix'); ?></label>
                             <div class="mtx-form-row single">
-                                <?php FormMatrix_Item::country(); ?>
+                                <?php // ItemForm::ajax_photos(); ?>
                             </div>
                         </section>
                     <?php } ?>
                     <section class="adpost-price border">
                         <h3 class="bg-darker"><?php _e('Location', 'matrix'); ?></h3>
                         <label><?php _e('Where are you located?', 'matrix'); ?></label>
-                        <div class="mtx-form-row single">
-                            <?php // ItemForm::ajax_photos(); ?>
+                        <div class="mtx-form-row single m-0">
+                            <?php FormMatrix_Item::country(); ?>
                         </div>
                     </section>
                 </form>
@@ -107,7 +107,7 @@ ItemForm::location_javascript();
                         <label class="control-label" for="region"><?php _e('Region', 'matrix'); ?></label>
                         <div class="controls">
                           <?php
-                            if (mtx_default_location_show_as() == 'dropdown') {
+                            if (1 == 'dropdown') {
                                 if($edit) {
                                     ItemForm::region_select($aRegions, osc_item());
                                 } else {
@@ -129,7 +129,7 @@ ItemForm::location_javascript();
                         <label class="control-label" for="city"><?php _e('City', 'matrix'); ?></label>
                         <div class="controls">
                             <?php
-                            if (mtx_default_location_show_as() == 'dropdown') {
+                            if (1 == 'dropdown') {
                                 if($edit) {
                                     ItemForm::city_select(null, osc_item());
                                 } else { // add new item

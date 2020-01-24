@@ -3,15 +3,21 @@ if(!defined('ABS_PATH')) exit('ABS_PATH is not loaded. Direct access is not allo
 
 class FormMatrix {
     static function input($type, $name, $id = '', $value = '', $label = '', $required = false, $inputmode = '', $attributes = '') {
-        $id_ = ($id_ != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $id_ = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
         $value = ($value != '') ? 'value="'.osc_esc_html($value).'"' : '';
         $required = ($required) ? 'required' : '';
         $inputmode = ($inputmode != '') ? 'inputmode="'.osc_esc_html($inputmode).'"' : '';
         $placeholder = 'placeholder="'.__('Fill me...', 'matrix').'"'; // mtx_pref('input_placeholder');
 
-        self::label($label, $id);
+        if($type != 'hidden') {
+            self::label($label, $id);
+        }
+
         echo '<input type="'.osc_esc_html($type).'" name="'.osc_esc_html($name).'" '.$value.' '.$id_.' '.$required.' '.$inputmode.' '.$attributes.' '.$placeholder.'>';
-        self::line();
+
+        if($type != 'hidden') {
+            self::line();
+        }
     }
 
     static function textarea($name, $id = '', $value = '', $label = '', $required = false, $attributes = '') {
@@ -266,18 +272,20 @@ class FormMatrix_Item extends FormMatrix {
         $countries = osc_get_countries();
         $required = mtx_pref('ad_required_country');
 
-        if(count($countries) >= 1) {
-            if(count($countries) == 1) {
-                $item['fk_c_country_code'] = $countries[0]['pk_c_code'];
-            } else if(Session::newInstance()->_getForm('countryId') != '') {
-                $item['fk_c_country_code'] = Session::newInstance()->_getForm('countryId');
-            }
+        if(count($countries) == 1) {
+            $item['fk_c_country_code'] = $countries[0]['pk_c_code'];
+        } else if(Session::newInstance()->_getForm('countryId') != '') {
+            $item['fk_c_country_code'] = Session::newInstance()->_getForm('countryId');
+        }
+        if(Session::newInstance()->_getForm('country') != '') {
+            $item['s_country'] = Session::newInstance()->_getForm('country');
+        }
 
+        if(count($countries) == 1) {
+            parent::input('hidden', 'countryId', 'countryId', (isset($item['fk_c_country_code'])) ? $item['fk_c_country_code'] : null);
+        } else if(count($countries) > 1) {
             parent::select('countryId', 'countryId', $countries, 'pk_c_code', 's_name', (isset($item['fk_c_country_code'])) ? $item['fk_c_country_code'] : null, __('Country', 'matrix'), $required);
         } else {
-            if(Session::newInstance()->_getForm('country') != '') {
-                $item['s_country'] = Session::newInstance()->_getForm('country');
-            }
             parent::input('text', 'country', 'country', (isset($item['s_country'])) ? $item['s_country'] : null, __('Country', 'matrix'), $required);
         }
     }
