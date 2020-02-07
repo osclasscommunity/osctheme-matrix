@@ -190,6 +190,8 @@
                             <textarea name="body" class="form-control" id="message" required minlength="15"></textarea>
                         </div>
 
+                        <?php osc_run_hook('advcaptcha_hook_comment'); ?>
+
                         <button type="submit" class="submit d-none"></button>
                     </form>
                 </div>
