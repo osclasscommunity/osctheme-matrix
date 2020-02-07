@@ -14,6 +14,11 @@ if(Params::getParam('action') == 'item_add') {
 osc_current_web_theme_path('header.php');
 
 ItemForm::location_javascript();
+
+// captcha hook
+ob_start();
+osc_run_hook('advcaptcha_hook_item');
+$captcha = ob_get_clean();
 ?>
 <section class="login bg-lighter">
     <div class="container">
@@ -127,6 +132,13 @@ ItemForm::location_javascript();
                         <div class="mtx-form-group form-captcha">
                             <?php osc_show_recaptcha(); ?>
                         </div>
+                    <?php } ?>
+
+                    <?php if($captcha != '') { ?>
+                        <section class="adpost-plugins border">
+                            <h3 class="bg-darker"><?php _e('CAPTCHA', 'matrix'); ?></h3>
+                            <?php echo $captcha; ?>
+                        </section>
                     <?php } ?>
 
                     <div class="mtx-form-group form-submit">
