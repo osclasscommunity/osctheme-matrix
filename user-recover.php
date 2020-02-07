@@ -18,6 +18,7 @@ osc_current_web_theme_path('header.php');
                     <div class="mtx-form-group">
                         <?php FormMatrix::input('email', 's_email', 'mail', '', __('E-mail', 'matrix'), true); ?>
                     </div>
+                    <?php osc_run_hook('advcaptcha_hook_recover'); ?>
                     <div class="mtx-form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Submit', 'matrix'); ?></button>
                     </div>

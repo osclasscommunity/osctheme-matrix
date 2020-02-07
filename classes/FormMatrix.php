@@ -46,7 +46,8 @@ class FormMatrix {
     }
 
     static function checkbox($name, $id = '', $checked = false, $label = '', $required = false, $attributes = '') {
-        $id_ = ($id_ != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $id_ = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $for = ($id != '') ? 'for="'.osc_esc_html($id).'"' : '';
         $checked = ($checked) ? 'checked' : '';
         $required = ($required) ? 'required' : '';
 
