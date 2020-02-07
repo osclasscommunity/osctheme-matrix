@@ -15,16 +15,16 @@ osc_current_web_theme_path('header.php');
                     <input type="hidden" name="action" value="contact_post" />
 
                     <div class="mtx-form-group">
-                        <?php FormMatrix::input('text', 'yourName', 'name', Session::newInstance()->_get('yourName'), __('Name (optional)', 'matrix')); ?>
+                        <?php FormMatrix::input('text', 'yourName', 'name', Session::newInstance()->_getForm('yourName'), __('Name (optional)', 'matrix')); ?>
                     </div>
                     <div class="mtx-form-group">
-                        <?php FormMatrix::input('email', 'yourEmail', 'mail', Session::newInstance()->_get('yourEmail'), __('E-mail', 'matrix'), true); ?>
+                        <?php FormMatrix::input('email', 'yourEmail', 'mail', Session::newInstance()->_getForm('yourEmail'), __('E-mail', 'matrix'), true); ?>
                     </div>
                     <div class="mtx-form-group">
-                        <?php FormMatrix::input('text', 'subject', 'subject', Session::newInstance()->_get('subject'), __('Subject (optional)', 'matrix')); ?>
+                        <?php FormMatrix::input('text', 'subject', 'subject', Session::newInstance()->_getForm('subject'), __('Subject (optional)', 'matrix')); ?>
                     </div>
                     <div class="mtx-form-group">
-                        <?php FormMatrix::textarea('message_body', 'message', Session::newInstance()->_get('message'), __('Message', 'matrix'), true, 'minlength="15"'); ?>
+                        <?php FormMatrix::textarea('message', 'message', Session::newInstance()->_getForm('message_body'), __('Message', 'matrix'), true, 'minlength="15"'); ?>
                     </div>
 
                     <?php osc_run_hook('contact_form'); ?>

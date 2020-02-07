@@ -23,6 +23,7 @@ osc_current_web_theme_path('header.php');
                     <div class="mtx-form-group-cs custom-control custom-checkbox">
                         <?php FormMatrix::checkbox('remember', 'remember', false, __('Stay logged in', 'matrix')); ?>
                     </div>
+                    <?php osc_run_hook('advcaptcha_hook_login'); ?>
                     <div class="mtx-form-group form-submit">
                         <button type="submit" class="btn btn-mtx bg-accent"><?php _e('Login', 'matrix'); ?></button>
                     </div>
