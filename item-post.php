@@ -66,9 +66,9 @@ $captcha = ob_get_clean();
                     <?php if(osc_images_enabled_at_items()) { ?>
                         <section class="adpost-photos border">
                             <h3 class="bg-darker"><?php _e('Photos', 'matrix'); ?></h3>
-                            <label><?php _e('Still not sure what I will do with photo uploader. Perhaps a custom uploader is too much. Fineuploader 3.8 sucks tho.', 'matrix'); ?></label>
+                            <label><?php _e('Upload photos of your product or service.', 'matrix'); ?></label>
                             <div class="mtx-form-row single">
-                                <?php // ItemForm::ajax_photos(); ?>
+                                <?php przi_ajax_photos(); ?>
                             </div>
                         </section>
                     <?php } ?>
@@ -149,33 +149,13 @@ $captcha = ob_get_clean();
         </div>
     </div>
 </section>
-<script type="text/javascript">
+<script>
     $('#price').bind('hide-price', function(){
-        $('.control-group-price').hide();
+        $('.adpost-price').hide();
     });
 
     $('#price').bind('show-price', function(){
-        $('.control-group-price').show();
+        $('.adpost-price').show();
     });
-
-    <?php if(osc_locale_thousands_sep()!='' || osc_locale_dec_point() != '') { ?>
-        $().ready(function(){
-            $("#price").blur(function(event) {
-                var price = $("#price").prop("value");
-                <?php if(osc_locale_thousands_sep()!='') { ?>
-                while(price.indexOf('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>')!=-1) {
-                    price = price.replace('<?php echo osc_esc_js(osc_locale_thousands_sep());  ?>', '');
-                }
-                <?php }; ?>
-                <?php if(osc_locale_dec_point()!='') { ?>
-                var tmp = price.split('<?php echo osc_esc_js(osc_locale_dec_point())?>');
-                if(tmp.length>2) {
-                    price = tmp[0]+'<?php echo osc_esc_js(osc_locale_dec_point())?>'+tmp[1];
-                }
-                <?php }; ?>
-                $("#price").prop("value", price);
-            });
-        });
-    <?php }; ?>
 </script>
 <?php osc_current_web_theme_path('footer.php'); ?>

@@ -21,7 +21,7 @@ class FormMatrix {
     }
 
     static function textarea($name, $id = '', $value = '', $label = '', $required = false, $attributes = '') {
-        $id_ = ($id_ != '') ? 'id="'.osc_esc_html($id).'"' : '';
+        $id_ = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
         $value = ($value != '') ? osc_esc_html($value) : '';
         $required = ($required) ? 'required' : '';
 
@@ -30,16 +30,24 @@ class FormMatrix {
         self::line();
     }
 
-    static function select($name, $id = '', $items, $i_key, $i_val, $i_sel = '', $label = '', $required = false, $attributes = '') {
-        $id_ = ($id_ != '') ? 'id="'.osc_esc_html($id).'"' : '';
+    static function select($name, $id = '', $items, $i_key, $i_val, $i_sel = '', $label = '', $required = false, $attributes = '', $assoc = true) {
+        $id_ = ($id != '') ? 'id="'.osc_esc_html($id).'"' : '';
         $required = ($required) ? 'required' : '';
 
         self::label($label, $id);
         echo '<select name="'.osc_esc_html($name).'" '.$id_.' '.$required.' '.$attributes.'>';
         echo '<option value="">'.__('Select a option', 'matrix').'</option>';
-        foreach($items as $item) {
-            $selected = ($i_sel == $item[$i_key]) ? 'selected' : '';
-            echo '<option value="'.osc_esc_html($item[$i_key]).'" '.$selected.'>'.$item[$i_val].'</option>';
+
+        if($assoc) {
+            foreach($items as $item) {
+                $selected = ($i_sel == $item[$i_key]) ? 'selected' : '';
+                echo '<option value="'.osc_esc_html($item[$i_key]).'" '.$selected.'>'.$item[$i_val].'</option>';
+            }
+        } else {
+            foreach($items as $item) {
+                $selected = ($i_sel == $item) ? 'selected' : '';
+                echo '<option value="'.osc_esc_html($item).'" '.$selected.'>'.$item.'</option>';
+            }
         }
         echo '</select>';
         self::line();
@@ -405,7 +413,7 @@ class FormMatrix_Item extends FormMatrix {
             $attributes = 'disabled';
         }
 
-        parent::input('text', 'contactEmail', 'contactEmail', (isset($item['s_contact_email'])) ? $item['s_contact_email'] : null, __('Phone', 'matrix'), $required, '', $attributes);
+        parent::input('text', 'contactPhone', 'contactPhone', (isset($item['s_contact_email'])) ? $item['s_contact_email'] : null, __('Phone', 'matrix'), $required, '', $attributes);
     }
 
     static public function email() {
@@ -420,6 +428,126 @@ class FormMatrix_Item extends FormMatrix {
         }
 
         parent::input('text', 'contactEmail', 'contactEmail', (isset($item['s_contact_email'])) ? $item['s_contact_email'] : null, __('E-mail', 'matrix'), $required, '', $attributes);
+    }
+
+    static public function meta($cat = null, $item = null) {
+        $fields = Field::newInstance()->findByCategoryItem($cat, $item);
+        if(count($fields) > 0) {
+            echo '<div class="col meta">';
+            foreach($fields as $field) {
+                $class = ($field['e_type'] === 'CHECKBOX') ? 'mtx-form-group-cs custom-control custom-checkbox' : 'mtx-form-group';
+                echo '<div class="'.$class.'">';
+                self::metaField($field);
+                echo '</div>';
+            }
+            echo '</div>';
+        }
+    }
+
+    static public function metaField($field = null, $search = null) {
+        if($field != null) {
+            if($field['e_type'] === 'DATEINTERVAL') {
+                $field['s_value'] = array('from' => '', 'to' => '');
+
+                if(!$search) {
+                    $aInterval = Field::newInstance()->getDateIntervalByPrimaryKey($field['fk_i_item_id'], $field['pk_i_id']);
+                    if(is_array($aInterval) && !empty($aInterval) ) {
+                        $temp['from'] = @$aInterval['from'];
+                        $temp['to'] = @$aInterval['to'];
+                        $field['s_value'] = $temp;
+                    }
+                } else {
+                    $_meta = Params::getParam('meta');
+                    $temp['from']= @(int) $_meta[$field['pk_i_id']]['from'];
+                    $temp['to'] = @(int) $_meta[$field['pk_i_id']]['to'];
+                    $field['s_value'] = $temp;
+                }
+            }
+
+            if(Session::newInstance()->_getForm('meta_'.$field['pk_i_id']) != ''){
+                $field['s_value'] = Session::newInstance()->_getForm('meta_'.$field['pk_i_id']);
+            } else if(!isset($field['s_value']) || $field['s_value']=='') {
+                $s_value = Params::getParam('meta');
+                $field['s_value'] = '';
+                if(isset($s_value[$field['pk_i_id']])) {
+                    $field['s_value'] = $s_value[$field['pk_i_id']];
+                }
+            }
+
+            switch($field['e_type']) {
+                case 'TEXTAREA':
+                    $field_textarea_value = isset($field['s_value']) ? $field['s_value'] : '';
+                    $field_textarea_value = osc_apply_filter('osc_item_edit_meta_textarea_value_filter', $field_textarea_value, $field);
+                    parent::textarea('meta['.$field['pk_i_id'].']', 'meta_'.$field['s_slug'], $field_textarea_value, $field['s_name'], $field['b_required']);
+                break;
+                case 'DROPDOWN':
+                    parent::select('meta['.$field['pk_i_id'].']', 'meta_'.$field['s_slug'], explode(',', $field['s_options']), '', '', $field['s_value'], $field['s_name'], $field['b_required'], '', false);
+                break;
+                case 'RADIO':
+                    if($search) {
+                        // echo '<h6>'.$field['s_name'].'</h6>';
+                        // if(isset($field) && isset($field['s_options'])) {
+                        //     $options = explode( ',' , $field['s_options']);
+                        //     if(count($options)>0) {
+                        //         foreach($options as $key => $option) {
+                        //             echo '<label for="meta_' . $field['s_slug'] . '_'.$key.'"><input type="radio" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '_'.$key.'" value="'.osc_esc_html($option).'"'.($field['s_value']==$option?' checked="checked"':'').' />'.$option.'</label><br/>';
+                        //         }
+                        //     }
+                        // }
+                    } else {
+                        // echo '<label for="meta_'.$field['s_slug'].'">'.$field['s_name'].': </label>';
+                        // if(isset($field) && isset($field['s_options'])) {
+                        //     $options = explode( ',' , $field['s_options']);
+                        //     if(count($options)>0) {
+                        //         echo '<ul>';
+                        //         foreach($options as $key => $option) {
+                        //             echo '<li><input type="radio" name="meta['.$field['pk_i_id'].']" id="meta_' . $field['s_slug'] . '_'.$key.'" value="'.osc_esc_html($option).'"'.($field['s_value']==$option?' checked="checked"':'').' /><label for="meta_' . $field['s_slug'] . '_'.$key.'">'.$option.'</label></li>';
+                        //         }
+                        //         echo '</ul>';
+                        //     }
+                        // }
+                    }
+                break;
+                case 'CHECKBOX':
+                    parent::checkbox('meta['.$field['pk_i_id'].']', 'meta_'.$field['s_slug'], $field['s_value'], $field['s_name'], $field['b_required']);
+                break;
+                case 'DATE':
+                    /*
+                    if($search) {
+                        echo '<h6>'.$field['s_name'].'</h6>';
+                    } else {
+                        echo '<label for="meta_'.$field['s_slug'].'">'.$field['s_name'].': </label>';
+                    }
+                    // timestamp/1000 (javascript timestamp)
+                    echo '<input type="hidden" id="meta_'.$field['s_slug'].'" name="meta['.$field['pk_i_id'].']" value="" />';
+                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].' cf_date" value="" />';
+                    self::initDatePicker( 'meta_' . $field[ 's_slug' ] , osc_date_format() , $field[ 's_value' ] );
+                    */
+                break;
+                case 'DATEINTERVAL':
+                    /*
+                    if($search) {
+                        echo '<h6>'.$field['s_name'].'</h6>';
+                    } else {
+                        echo '<label for="meta_'.$field['s_slug'].'">'.$field['s_name'].': </label>';
+                    }
+
+                    echo __('from'). ' ';
+                    echo '<input type="hidden" id="meta_'.$field['s_slug'].'_from" name="meta['.$field['pk_i_id'].'][from]" value="'.$field['s_value']['from'].'" />';
+                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].'_from cf_date_interval" value="" />';
+                    self::initDatePicker( 'meta_' . $field[ 's_slug' ] . '_from' , osc_date_format() , $field[ 's_value' ][ 'from' ] , 'from' );
+
+                    echo ' ' . __('to'). ' ';
+                    echo '<input type="hidden" id="meta_'.$field['s_slug'].'_to" name="meta['.$field['pk_i_id'].'][to]" value="'.$field['s_value']['to'].'" />';
+                    echo '<input type="text" id="" class="meta_'.$field['s_slug'].'_to cf_date_interval" value="" />';
+                    self::initDatePicker( 'meta_' . $field[ 's_slug' ] . '_to' , osc_date_format() , $field[ 's_value' ][ 'to' ] , 'to' );
+                    */
+                break;
+                default:
+                    parent::input('text', 'meta['.$field['pk_i_id'].']', 'meta_'.$field['s_slug'].'', $field['s_value'], $field['s_name'], $field['b_required']);
+                break;
+            }
+        }
     }
 }
 ?>

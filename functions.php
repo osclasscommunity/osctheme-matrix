@@ -1,14 +1,11 @@
 <?php
 define('MTX_VERSION', '100');
 
+include 'classes/BodyClassMatrix.php';
+include 'classes/BreadcrumbMatrix.php';
+include 'classes/FormMatrix.php';
 include 'classes/ModelMatrix.php';
-spl_autoload_register(function($class) {
-    if(strpos($class, '_') !== false) {
-        $class = explode('_', $class)[0];
-    }
-
-    include 'classes/'.$class.'.php';
-});
+include 'classes/przi/index.php';
 
 if(!OC_ADMIN) {
     osc_register_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js');
@@ -32,6 +29,15 @@ if(!OC_ADMIN) {
     osc_enqueue_style('bxslider', 'https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css');
     osc_enqueue_style('lightgallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.12/css/lightgallery.min.css');
     osc_enqueue_style('matrix', osc_current_web_theme_url('assets/css/main.css'));
+
+    if(osc_is_publish_page() || osc_is_edit_page()) {
+        osc_register_script('fineuploader', osc_current_web_theme_url('assets/js/fineuploader.min.js'));
+        osc_register_script('pica', osc_current_web_theme_url('assets/js/pica.min.js'), 'fineuploader');
+        osc_register_script('touch-punch', osc_current_web_theme_url('assets/js/touch-punch.min.js'), 'jquery-ui');
+        osc_enqueue_script('fineuploader');
+        osc_enqueue_script('pica');
+        osc_enqueue_script('touch-punch');
+    }
 }
 osc_enqueue_script('php-date');
 
@@ -41,11 +47,11 @@ osc_enqueue_script('php-date');
  * ad_markas - BOOLEAN - Show Mark As form on ad page. Default 1.
  * ad_contact_form - BOOLEAN - Show contact form on ad page. Default 1.
  * ad_required_country - BOOLEAN - Country required on item post. Default 0.
+ * przi_size - INTEGER - . Default max(explode('x', osc_normal_dimensions())) * 2.
 */
-
 function mtx_pref($key) {
-    return 1;
-    // return osc_get_preference($key, 'matrix');
+    $pref = osc_get_preference($key, 'matrix');
+    return ($pref != '') ? $pref : 1;
 }
 
 function mtx_set_pref($key, $value) {
@@ -748,3 +754,22 @@ function mtx_item_meta_value() {
 function mtx_item_phone() {
     return '000 111 222';
 }
+
+function mtx_meta_add($cat = null) {
+    osc_enqueue_script('php-date');
+    echo '<div class="row">';
+    FormMatrix_Item::meta($cat);
+    echo '</div>';
+}
+osc_add_hook('item_form', 'mtx_meta_add');
+
+function mtx_meta_edit($cat = null, $item = nuill) {
+    osc_enqueue_script('php-date');
+    echo '<div class="row">';
+    FormMatrix_Item::meta($cat, $item);
+    echo '</div>';
+}
+osc_add_hook('item_edit', 'mtx_meta_edit');
+
+osc_remove_hook('item_form', 'osc_meta_publish');
+osc_remove_hook('item_edit', 'osc_meta_edit');
