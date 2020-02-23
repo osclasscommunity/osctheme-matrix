@@ -21,6 +21,10 @@ section {
 .btn-mtx {
     &.bg-accent, &.bg-accent-dark, &.bg-darker {
         color: $white;
+
+        &:not([href]) {
+            color: $white;
+        }
     }
 }
 
@@ -143,5 +147,11 @@ section {
                 }
             }
         }
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
     }
 }

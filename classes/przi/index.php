@@ -62,28 +62,26 @@ function przi_ajax_photos($resources = null) {
                 if($isResource) $img =$order[0]['pk_i_id'] . '.' . $order[0]['s_extension'];
                 else $img = $order['order']; ?>
 
-                <li class="qq-upload-success col-3">
-                    <span class="qq-upload-file"><?php echo $img;
-                        $img = osc_esc_html($img); ?></span>
-                    <a class="qq-upload-delete"
+                <li class="qq-upload-success">
+                    <span class="qq-upload-file"><?php echo $img; $img = osc_esc_html($img); ?></span>
                     <?php if($isResource) { ?>
-                    href="#" photoid="<?php echo $order[0]['pk_i_id']; ?>"
-                       itemid="<?php echo $order[0]['fk_i_item_id']; ?>" photoname="<?php echo $order[0]['s_name']; ?>"
-                       photosecret="<?php echo Params::getParam('secret'); ?>" style="display: inline; cursor:pointer;"><?php _e('Delete'); ?></a>
-                    <div class="ajax_preview_img"><img src="<?php echo osc_apply_filter('resource_path', osc_base_url() . $order[0]['s_path']) . $order[0]['pk_i_id'] . '_thumbnail.' . $order[0]['s_extension']; ?>" alt="<?php echo osc_esc_html($img); ?>"></div>
-                    <input type="hidden" name="order_photos[]" value="<?php echo $order[0]['pk_i_id']; ?>">
+                        <a class="qq-upload-delete" href="#" photoid="<?php echo $order[0]['pk_i_id']; ?>" itemid="<?php echo $order[0]['fk_i_item_id']; ?>" photoname="<?php echo $order[0]['s_name']; ?>" photosecret="<?php echo Params::getParam('secret'); ?>"><?php _e('Delete'); ?></a>
+                        <div class="ajax_preview_img"><img src="<?php echo osc_apply_filter('resource_path', osc_base_url() . $order[0]['s_path']) . $order[0]['pk_i_id'] . '_thumbnail.' . $order[0]['s_extension']; ?>" alt="<?php echo osc_esc_html($img); ?>"></div>
+                        <input type="hidden" name="order_photos[]" value="<?php echo $order[0]['pk_i_id']; ?>">
                     <?php } else { ?>
-                        <a href="#" ajaxfile="<?php echo $img; ?>" style="display: inline; cursor:pointer;"><?php _e('Delete'); ?></a>
+                        <a class="qq-upload-delete" href="#" ajaxfile="<?php echo $img; ?>"><?php _e('Delete'); ?></a>
                         <div class="ajax_preview_img"><img src="<?php echo osc_base_url(); ?>oc-content/uploads/temp/<?php echo $img; ?>" alt="<?php echo $img; ?>"></div>
                         <input type="hidden" name="ajax_photos[]" value="<?php echo $img; ?>">
                         <input type="hidden" name="order_photos[]" value="<?php echo $img; ?>">
                     <?php } ?>
-
-                    <div class="primary_image"><a class="qq-upload-link" title="<?php echo osc_esc_html(__('Make primary image')); ?>"><?php echo osc_esc_html(__('Make primary image')); ?></a></div>
+                    <div class="qq-upload-actions">
+                        <a class="primary_image btn btn-mtx bg-accent w-100" title="<?php echo osc_esc_js(__('Make primary image', 'matrix')); ?>"><?php echo osc_esc_js(__('Primary', 'matrix')); ?></a>
+                    </div>
                 </li>
             <?php }; ?>
         </ul>
     <?php } ?>
+
     <div style="clear:both;" class="qq-upload-delete"></div>
 
     <script type="text/template" id="qq-template">
@@ -94,12 +92,12 @@ function przi_ajax_photos($resources = null) {
             <div class="qq-upload-drop-area-selector qq-upload-drop-area">
                 <span><?php _e('Drop images here', 'matrix'); ?></span>
             </div>
-            <div class="qq-upload-button-selector qq-upload-button">
-                <div><?php echo osc_esc_js(__('Click or Drop for upload images') . ($maxImages ? ' ' . sprintf(__('(%s max)', 'preResize_images'), $maxImages) : '')); ?></div>
-                <div class="reorder_text"><?php _e('Drag thumbnails to reorder images', 'preResize_images'); ?></div>
+            <div class="qq-upload-button-selector qq-upload-button bg-accent">
+                <div><?php echo osc_esc_js(__('Click here or drop images to upload.', 'matrix').($maxImages ? ' '.sprintf(__('(%s max)', 'matrix'), $maxImages) : '')); ?></div>
+                <div class="reorder_text"><?php _e('Drag thumbnails to reorder images', 'matrix'); ?></div>
             </div>
                 <span class="qq-drop-processing-selector qq-drop-processing">
-                    <span><?php _e('Processing...'); ?></span>
+                    <span><?php _e('Uploading...', 'matrix'); ?></span>
                     <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
                 </span>
             <ul class="qq-upload-list-selector qq-upload-list">
@@ -108,13 +106,11 @@ function przi_ajax_photos($resources = null) {
                         <div class="qq-progress-bar-selector qq-progress-bar"></div>
                     </div>
                     <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
-                    <span class="qq-edit-filename-icon-selector qq-edit-filename-icon"></span>
-                    <span class="qq-upload-file-selector qq-upload-file"></span>
-                    <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
-                    <span class="qq-upload-size-selector qq-upload-size"></span>
-                    <a class="qq-upload-cancel-selector qq-upload-cancel" href="#"><?php _e('Cancel'); ?></a>
-                    <a class="qq-upload-retry-selector qq-upload-retry" href="#"><?php _e('Retry'); ?></a>
-                    <a class="qq-upload-delete-selector qq-upload-delete" href="#"><?php _e('Delete'); ?></a>
+                    <div class="qq-upload-actions">
+                        <a class="qq-upload-cancel-selector qq-upload-cancel btn btn-mtx bg-accent" href="#"><?php _e('Cancel'); ?></a>
+                        <a class="qq-upload-retry-selector qq-upload-retry btn btn-mtx bg-accent" href="#"><?php _e('Retry'); ?></a>
+                        <a class="qq-upload-delete-selector qq-upload-delete btn btn-mtx bg-accent" href="#"><?php _e('Delete'); ?></a>
+                    </div>
                     <span class="qq-upload-status-text-selector qq-upload-status-text"></span>
                 </li>
             </ul>
@@ -126,128 +122,18 @@ function przi_ajax_photos($resources = null) {
     }
 
     $allowedExtensions = join(',', $aExt); ?>
-    <style>
-        /* .qq-hide {
-            display: none !important;
-        }
-        .qq-upload-list li {
-            width: 162px;
-            max-width: 162px;
-            height: auto;
-            vertical-align: top;
-        }
-        .ajax_preview_img {
-            cursor: move;
-        }
-        .primary_image {
-            display: block;
-            width: 100%;
-            height: auto;
-            top: initial;
-            bottom: 8px;
-            padding-top: 2px;
-            padding-bottom: 8px;
-            overflow: hidden;
-        }
-        .primary_image a {
-            display: inline;
-            width: 100%;
-            right: initial;
-            cursor: pointer;
-            text-align: center;
-        }
-        .reorder_text {
-            display: none;
-        } */
-        .qq-uploader {
-    width: 100%;
-    min-height: 240px;
-    padding: 80px 10px 10px 10px;
-}
-
-.qq-upload-drop-area {
-    background: #f0f0f0;
-    color: rgba(0,0,0,0.25);
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-}
-
-.qq-upload-button {
-    z-index: 1;
-    color: #fff;
-    font-size: .8rem;
-    position: absolute !important;
-    left: 1rem;
-    top: 1rem;
-    width: calc(100% - 2rem);
-    padding: .8rem 1rem;
-    text-align: center;
-}
-
-.qq-upload-list {
-    width: 100%;
-    clear: both;
-    position: relative;
-    z-index: 1;
-    margin-block-end: 0;
-    margin-block-start: 0;
-    padding-inline-start: 0;
-    list-style: none;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-top: 1rem;
-    padding: 0.36rem;
-}
-
-.qq-upload-list li {
-    position: relative;
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    background: #fff;
-    -ms-flex: 0 0 25%;
-    flex: 0 0 25%;
-    max-width: 25%;
-}
-
-.qq-upload-list li .ajax_preview_img {
-    display: inline-block;
-    width: 100%;
-    float: left;
-    clear: both;
-}
-
-.qq-upload-list li .ajax_preview_img img {
-    max-width: 100%;
-    width: 100%;
-    height: auto;
-}
-
-    </style>
-
     <script>
         $(document).ready(function () {
-            $("<style type='text/css'> .qq-upload-link{ font-family:" + $('.qq-upload-delete').css('font-family') + "; font-size:" + $('.qq-upload-delete').css('font-size') + "; font-weight:" + $('.qq-upload-delete').css('font-weight') + "; color:" + $('.qq-upload-delete').css('color') + "} </style>").appendTo("head");
-
             function makeSortable() {
                 $(".reorder_text").show();
-                $("ul.qq-upload-list li:first").find('.primary_image').css('visibility', 'hidden');
+                $("ul.qq-upload-list li:first").find('.primary_image').css('display', 'none');
                 $("#restricted-fine-uploader ul.qq-upload-list").sortable({
                     containment: '#restricted-fine-uploader',
                     distance: 5,
                     handle: '.ajax_preview_img',
                         stop: function (event, ui) {
-                        $("ul.qq-upload-list li:first").find('.primary_image').css('visibility', 'hidden');
-                        $("ul.qq-upload-list li").not(':first').find('.primary_image').css('visibility', 'visible');
+                        $("ul.qq-upload-list li:first").find('.primary_image').css('display', 'none');
+                        $("ul.qq-upload-list li").not(':first').find('.primary_image').css('display', 'block');
                     }
                 });
             }
@@ -277,15 +163,15 @@ function przi_ajax_photos($resources = null) {
             });
 
             fineUploaderContainer.on('click', '.primary_image', function (event) {
-                $(this).parent().prependTo('ul.qq-upload-list');
-                $("ul.qq-upload-list li:first").find('.primary_image').css('visibility', 'hidden');
-                $("ul.qq-upload-list li").not(':first').find('.primary_image').css('visibility', 'visible');
+                $(this).parent().parent().prependTo('ul.qq-upload-list');
+                $("ul.qq-upload-list li:first").find('.primary_image').css('display', 'none');
+                $("ul.qq-upload-list li").not(':first').find('.primary_image').css('display', 'block');
             });
 
             fineUploaderContainer.on('click', 'a.qq-upload-delete', function (event) {
                 $('#restricted-fine-uploader .flashmessage-error').remove();
                 setTimeout(function() {
-                    $("ul.qq-upload-list li:first").find('.primary_image').css('visibility', 'hidden');
+                    $("ul.qq-upload-list li:first").find('.primary_image').css('display', 'none');
                 }, 400);
             });
 
@@ -358,8 +244,7 @@ function przi_ajax_photos($resources = null) {
                     $(li).append('<div class="ajax_preview_img"><img src="<?php echo osc_base_url(); ?>oc-content/uploads/temp/' + responseJSON.uploadName + '" alt="auto_' + responseJSON.uploadName + '"></div>');
                     $(li).append('<input type="hidden" name="ajax_photos[]" value="' + responseJSON.uploadName + '"></input>');
                     $(li).append('<input type="hidden" name="order_photos[]" value="' + responseJSON.uploadName + '"></input>');
-
-                    $(li).append('<div class="primary_image"><a class="qq-upload-link" style="" title="<?php echo osc_esc_js(osc_esc_html(__('Make primary image'))); ?>"><?php echo osc_esc_js(osc_esc_html(__('Make primary image'))); ?></a></div>');
+                    $(li).find('.qq-upload-actions').append('<a class="primary_image btn btn-mtx bg-accent" title="<?php echo osc_esc_js(__('Make primary image', 'matrix')); ?>"><?php echo osc_esc_js(__('Primary', 'matrix')); ?></a>');
                 }
 
                 makeSortable();
@@ -405,7 +290,7 @@ function przi_ajax_photos($resources = null) {
 
             makeSortable();
 
-            $(".qq-upload-success:first .primary_image").css('visibility', 'hidden');
+            $(".qq-upload-success:first .primary_image").css('display', 'none');
             $(".qq-upload-success").prependTo('.qq-upload-list-selector');
         })
     </script>
