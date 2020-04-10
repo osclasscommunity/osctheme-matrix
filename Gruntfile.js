@@ -49,9 +49,9 @@ module.exports = function(grunt) {
         ]
     });
 
-    var archive = '../packages/matrix_' + pkg.version + '.zip';
+    var archive = 'matrix_' + pkg.version + '.zip';
     grunt.config('shell.compress_matrix', {
-        command : 'cd build/; zip -r ' + archive + ' matrix/;',
+        command: 'cd build/ && zip -r ' + archive + ' matrix/',
         options: {
             stdout: false
         }
