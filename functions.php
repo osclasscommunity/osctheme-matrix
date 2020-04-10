@@ -96,7 +96,6 @@ function mtx_add_body_class($class) {
 function mtx_nofollow_construct() {
     echo '<meta name="robots" content="noindex, nofollow, noarchive" />' . PHP_EOL;
     echo '<meta name="googlebot" content="noindex, nofollow, noarchive" />' . PHP_EOL;
-
 }
 
 function mtx_follow_construct() {
@@ -115,7 +114,7 @@ function mtx_logo($position = 'header') {
 
 function mtx_draw_item($class = '', $admin = false, $premium = false) {
     $filename = 'loop-single';
-    if($premium){
+    if($premium) {
         $filename .= '-premium';
     }
 
@@ -138,9 +137,7 @@ if(!function_exists('osc_is_contact_page') ) {
     }
 }
 
-
 check_install_mtx_theme();
-
 
 function mtx_sidebar_category_search($catId = null) {
     $aCategories = array();

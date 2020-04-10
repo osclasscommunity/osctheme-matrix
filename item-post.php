@@ -1,7 +1,7 @@
 <?php
 osc_add_hook('header', 'mtx_follow_construct');
 mtx_add_body_class('ad ad-post');
-
+osc_add_hook('footer', function() { FormMatrix_Item::locationJS(); });
 
 if(Params::getParam('action') == 'item_add') {
     $action = 'item_add_post';
@@ -12,8 +12,6 @@ if(Params::getParam('action') == 'item_add') {
 }
 
 osc_current_web_theme_path('header.php');
-
-ItemForm::location_javascript();
 
 // captcha hook
 ob_start();
@@ -68,7 +66,7 @@ $captcha = ob_get_clean();
                             <h3 class="bg-darker"><?php _e('Photos', 'matrix'); ?></h3>
                             <label><?php _e('Upload photos of your product or service.', 'matrix'); ?></label>
                             <div class="mtx-form-row single">
-                                <?php przi_ajax_photos(); ?>
+                                <?php FormMatrix_Item::photos(); ?>
                             </div>
                         </section>
                     <?php } ?>
@@ -149,13 +147,4 @@ $captcha = ob_get_clean();
         </div>
     </div>
 </section>
-<script>
-    $('#price').bind('hide-price', function(){
-        $('.adpost-price').hide();
-    });
-
-    $('#price').bind('show-price', function(){
-        $('.adpost-price').show();
-    });
-</script>
 <?php osc_current_web_theme_path('footer.php'); ?>

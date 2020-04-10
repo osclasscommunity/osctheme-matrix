@@ -41,6 +41,17 @@ $(function() {
         var url = $(this).attr('href');
         window.open(url, '_blank', 'width=600, height=400');
     });
+
+    /*
+     * Show/hide price field.
+    */
+    $('#price').bind('hide-price', function() {
+        $('.adpost-price').hide();
+    });
+
+    $('#price').bind('show-price', function() {
+        $('.adpost-price').show();
+    });
 });
 
 $(function() {
