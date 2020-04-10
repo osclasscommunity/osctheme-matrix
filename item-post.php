@@ -21,8 +21,8 @@ $captcha = ob_get_clean();
 <section class="login bg-lighter">
     <div class="container">
         <div class="row">
-            <h1 class="title cl-accent-dark"><?php _e('Post an ad', 'matrix'); ?></h1>
-            <p class="subtitle cl-darker"><?php _e('Publish your ad on our site and get hundreds of views.', 'matrix'); ?></p>
+            <h1 class="title cl-accent-dark"><?php echo (!$edit) ? __('Post an ad', 'matrix') :  __('Edit an ad', 'matrix'); ?></h1>
+            <p class="subtitle cl-darker"><?php echo (!$edit) ? __('Publish your ad on our site and get hundreds of views.', 'matrix') : sprintf(__('Editing %s'), osc_item_title()); ?></p>
         </div>
 
         <div class="row justify-content-center">

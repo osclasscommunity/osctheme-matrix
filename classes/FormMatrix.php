@@ -257,7 +257,7 @@ class FormMatrix_Item extends FormMatrix {
         }
 
         echo '<div class="col-10">';
-        parent::input('text', 'price', 'price', $item['i_price'], __('Price', 'matrix'), osc_price_enabled_at_items(), 'numeric');
+        parent::input('text', 'price', 'price', $item['i_price'] / 1000000, __('Price', 'matrix'), osc_price_enabled_at_items(), 'numeric');
         echo '</div>';
 
         echo '<div class="col-2">';
@@ -427,7 +427,7 @@ class FormMatrix_Item extends FormMatrix {
         if(Session::newInstance()->_getForm('contactEmail') != '') {
             $item['s_contact_email'] = Session::newInstance()->_getForm('contactEmail');
         } else if(osc_is_web_user_logged_in()) {
-            $item['s_contact_email'] = osc_logged_user_name();
+            $item['s_contact_email'] = osc_logged_user_email();
             $attributes = 'disabled';
         }
 

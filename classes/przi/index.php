@@ -59,24 +59,27 @@ function przi_ajax_photos($resources = null) {
         <ul>
             <?php foreach($currentOrder as $key => $order) {
                 $isResource = is_numeric($order['order']);
-                if($isResource) $img =$order[0]['pk_i_id'] . '.' . $order[0]['s_extension'];
+                if($isResource) $img = $order[0]['pk_i_id'] . '.' . $order[0]['s_extension'];
                 else $img = $order['order']; ?>
 
                 <li class="qq-upload-success">
-                    <span class="qq-upload-file"><?php echo $img; $img = osc_esc_html($img); ?></span>
+                    <span class="qq-upload-file qq-hide"><?php echo $img; $img = osc_esc_html($img); ?></span>
+                    <div class="qq-upload-actions">
+                        <?php if($isResource) { ?>
+                            <a class="qq-upload-delete btn btn-mtx bg-accent" href="#" photoid="<?php echo $order[0]['pk_i_id']; ?>" itemid="<?php echo $order[0]['fk_i_item_id']; ?>" photoname="<?php echo $order[0]['s_name']; ?>" photosecret="<?php echo Params::getParam('secret'); ?>"><?php _e('Delete'); ?></a>
+                        <?php } else { ?>
+                            <a class="qq-upload-delete btn btn-mtx bg-accent" href="#" ajaxfile="<?php echo $img; ?>"><?php _e('Delete'); ?></a>
+                        <?php } ?>
+                        <a class="primary_image btn btn-mtx bg-accent" title="<?php echo osc_esc_js(__('Make primary image', 'matrix')); ?>"><?php echo osc_esc_js(__('Primary', 'matrix')); ?></a>
+                    </div>
                     <?php if($isResource) { ?>
-                        <a class="qq-upload-delete" href="#" photoid="<?php echo $order[0]['pk_i_id']; ?>" itemid="<?php echo $order[0]['fk_i_item_id']; ?>" photoname="<?php echo $order[0]['s_name']; ?>" photosecret="<?php echo Params::getParam('secret'); ?>"><?php _e('Delete'); ?></a>
                         <div class="ajax_preview_img"><img src="<?php echo osc_apply_filter('resource_path', osc_base_url() . $order[0]['s_path']) . $order[0]['pk_i_id'] . '_thumbnail.' . $order[0]['s_extension']; ?>" alt="<?php echo osc_esc_html($img); ?>"></div>
                         <input type="hidden" name="order_photos[]" value="<?php echo $order[0]['pk_i_id']; ?>">
                     <?php } else { ?>
-                        <a class="qq-upload-delete" href="#" ajaxfile="<?php echo $img; ?>"><?php _e('Delete'); ?></a>
                         <div class="ajax_preview_img"><img src="<?php echo osc_base_url(); ?>oc-content/uploads/temp/<?php echo $img; ?>" alt="<?php echo $img; ?>"></div>
                         <input type="hidden" name="ajax_photos[]" value="<?php echo $img; ?>">
                         <input type="hidden" name="order_photos[]" value="<?php echo $img; ?>">
                     <?php } ?>
-                    <div class="qq-upload-actions">
-                        <a class="primary_image btn btn-mtx bg-accent w-100" title="<?php echo osc_esc_js(__('Make primary image', 'matrix')); ?>"><?php echo osc_esc_js(__('Primary', 'matrix')); ?></a>
-                    </div>
                 </li>
             <?php }; ?>
         </ul>

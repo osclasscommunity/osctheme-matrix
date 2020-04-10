@@ -758,6 +758,7 @@ function mtx_meta_add($cat = null) {
     FormMatrix_Item::meta($cat);
     echo '</div>';
 }
+osc_remove_hook('item_form', 'osc_meta_publish');
 osc_add_hook('item_form', 'mtx_meta_add');
 
 function mtx_meta_edit($cat = null, $item = nuill) {
@@ -766,7 +767,5 @@ function mtx_meta_edit($cat = null, $item = nuill) {
     FormMatrix_Item::meta($cat, $item);
     echo '</div>';
 }
-osc_add_hook('item_edit', 'mtx_meta_edit');
-
-osc_remove_hook('item_form', 'osc_meta_publish');
 osc_remove_hook('item_edit', 'osc_meta_edit');
+osc_add_hook('item_edit', 'mtx_meta_edit');
